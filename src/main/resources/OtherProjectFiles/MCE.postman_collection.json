@@ -1,0 +1,143 @@
+{
+  "info": {
+    "_postman_id": "3a050721-c9f2-408a-8720-9303b6f1c389",
+    "name": "MCE",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "18927470"
+  },
+  "item": [
+    {
+      "name": "State",
+      "item": [
+        {
+          "name": "GetAll",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8081/state",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "state"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8081/state/2",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "state",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Insert",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"آذربایجان شرقی\",\r\n    \"telCode\": \"41\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8081/state",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "state"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": 48,\r\n    \"name\": \"آذربایجان خیلی شرقی\",\r\n    \"telCode\": \"41\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8081/state",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "state"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:8081/state/1",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "state",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Hello World....",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8081/",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
