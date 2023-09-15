@@ -5,6 +5,7 @@ import ir.pajoohan.mce.entity.State;
 import ir.pajoohan.mce.service.Impl.StateServiceImpl;
 import ir.pajoohan.mce.service.StateService;
 import jakarta.persistence.NoResultException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,13 +43,13 @@ public class StateController {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<State> insert(@RequestBody State state) {
+    public ResponseEntity<State> insert(@RequestBody @Valid State state) {
         return ResponseEntity.ok().body(stateService.save(state));
     }
 
     @PutMapping
     @ResponseBody
-    public ResponseEntity<State> update(@RequestBody State state) {
+    public ResponseEntity<State> update(@RequestBody @Valid State state) {
         return ResponseEntity.ok().body(stateService.update(state));
     }
 

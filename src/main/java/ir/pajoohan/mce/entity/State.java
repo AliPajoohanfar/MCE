@@ -1,20 +1,24 @@
 package ir.pajoohan.mce.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import static ir.pajoohan.mce.entity.State.SCHEMA_MCE;
+import static ir.pajoohan.mce.entity.State.TABLE_STATE;
 
 @Setter
 @Getter
 @Entity
 @Component
-@Table(name = "STATE", schema = SCHEMA_MCE)
+@Table(name = TABLE_STATE, schema = SCHEMA_MCE)
 public class State {
 
     public static final String SCHEMA_MCE = "MCE";
+    public static final String TABLE_STATE = "STATE";
 
     @Id
     @Column(name = "ID")
@@ -22,9 +26,13 @@ public class State {
     @SequenceGenerator(name = "state_generator", sequenceName = "sq_state", schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
+    @NotBlank(message = "Enter name.")
+    @Size(min = 2, max = 100, message = "state name must between 2 to 100 characters.")
     @Column(name = "NAME", length = 100)
     private String name;
 
+    @NotBlank(message = "Enter state telephone code.")
+    @Size(min = 2, max = 3, message = "state telephone code must between 2 to 3 characters.")
     @Column(name = "TEL_CODE", length = 3)
     private String telCode;
 }
