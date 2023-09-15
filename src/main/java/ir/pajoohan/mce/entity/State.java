@@ -28,7 +28,7 @@ public class State {
 
     @NotBlank(message = "Enter name.")
     @Size(min = 2, max = 100, message = "state name must between 2 to 100 characters.")
-    @Column(name = "NAME", length = 100)
+    @Column(name = "NAME", unique = true, length = 100)
     private String name;
 
     @NotBlank(message = "Enter state telephone code.")

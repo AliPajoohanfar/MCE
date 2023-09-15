@@ -1,19 +1,18 @@
 package ir.pajoohan.mce.service;
 
-import ir.pajoohan.mce.entity.State;
+import ir.pajoohan.mce.Dto.StateDto;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface StateService {
 
-    List<State> getAll();
+    List<StateDto> getAll();
 
-    Optional<State> get(Long Id);
+    StateDto get(Long Id);
 
-    State save(State state);
+    StateDto save(StateDto stateDto);
 
-    State update(State state);
+    StateDto update(StateDto stateDto);
 
-    void delete(State state);
+    void delete(StateDto stateDto);
 }

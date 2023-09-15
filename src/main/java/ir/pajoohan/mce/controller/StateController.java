@@ -1,10 +1,8 @@
 package ir.pajoohan.mce.controller;
 
-import ir.pajoohan.mce.confiuration.Messages;
-import ir.pajoohan.mce.entity.State;
+import ir.pajoohan.mce.Dto.StateDto;
 import ir.pajoohan.mce.service.Impl.StateServiceImpl;
 import ir.pajoohan.mce.service.StateService;
-import jakarta.persistence.NoResultException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/state")
@@ -29,38 +26,34 @@ public class StateController {
 
     @GetMapping
     @ResponseBody
-    public ResponseEntity<List<State>> getAll() {
+    public ResponseEntity<List<StateDto>> getAll() {
         return ResponseEntity.ok().body(stateService.getAll());
     }
 
     @GetMapping("/{stateId}")
     @ResponseBody
-    public ResponseEntity<State> get(@PathVariable("stateId") Long stateId) {
+    public ResponseEntity<StateDto> get(@PathVariable("stateId") Long stateId) {
         return ResponseEntity.ok().body(
-                stateService.get(stateId).orElseThrow(
-                        () -> new NoResultException(Messages.get("ex.noDataFound"))));
+                stateService.get(stateId));
     }
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<State> insert(@RequestBody @Valid State state) {
-        return ResponseEntity.ok().body(stateService.save(state));
+    public ResponseEntity<StateDto> insert(@RequestBody @Valid StateDto stateDto) {
+        return ResponseEntity.ok().body(stateService.save(stateDto));
     }
 
     @PutMapping
     @ResponseBody
-    public ResponseEntity<State> update(@RequestBody @Valid State state) {
-        return ResponseEntity.ok().body(stateService.update(state));
+    public ResponseEntity<StateDto> update(@RequestBody @Valid StateDto stateDto) {
+        return ResponseEntity.ok().body(stateService.update(stateDto));
     }
 
     @DeleteMapping("/{stateId}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("stateId") Long stateId) {
-        Optional<State> optionalState = stateService.get(stateId);
-        if (optionalState.isPresent()) {
-            stateService.delete(optionalState.get());
-        } else
-            throw new NoResultException(Messages.get("ex.objectNotFoundToDelete"));
+        StateDto stateDto = stateService.get(stateId);
+        stateService.delete(stateDto);
     }
 
 }
