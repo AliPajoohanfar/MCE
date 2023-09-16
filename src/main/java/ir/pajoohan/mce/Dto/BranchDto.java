@@ -7,8 +7,12 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @Component
-public class StateDto {
+public class BranchDto {
     private Long id;
+    private Long parentId;
+    private String code;
     private String name;
-    private String telCode;
+    private Long stateId;
+    private Boolean McDocPrintPermission;
+    private Integer branchTyp;
 }

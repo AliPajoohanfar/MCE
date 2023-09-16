@@ -1,19 +1,20 @@
 package ir.pajoohan.mce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 import static ir.pajoohan.mce.entity.State.SCHEMA_MCE;
 import static ir.pajoohan.mce.entity.State.TABLE_STATE;
 
-@Setter
 @Getter
+@Setter
 @Entity
-@Component
 @Table(name = TABLE_STATE, schema = SCHEMA_MCE)
 public class State {
 
@@ -35,5 +36,11 @@ public class State {
     @Size(min = 2, max = 3, message = "state telephone code must between 2 to 3 characters.")
     @Column(name = "TEL_CODE", length = 3)
     private String telCode;
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "state", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Branch> branchList;
 }
 

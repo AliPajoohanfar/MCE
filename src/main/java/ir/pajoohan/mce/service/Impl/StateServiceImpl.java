@@ -28,6 +28,8 @@ public class StateServiceImpl implements StateService {
         this.stateRepository = stateRepository;
     }
 
+    /*----------------------------------------------------------------------------------------------------------------*/
+
     /**
      * Methods
      */

@@ -8,7 +8,7 @@ public interface StateService {
 
     List<StateDto> getAll();
 
-    StateDto get(Long Id);
+    StateDto get(Long id);
 
     StateDto save(StateDto stateDto);
 

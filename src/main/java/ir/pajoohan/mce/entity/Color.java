@@ -7,8 +7,8 @@ import lombok.Setter;
 import static ir.pajoohan.mce.entity.State.SCHEMA_MCE;
 import static ir.pajoohan.mce.entity.State.TABLE_STATE;
 
-@Setter
 @Getter
+@Setter
 @Entity
 @Table(name = TABLE_STATE, schema = SCHEMA_MCE)
 public class Color {
