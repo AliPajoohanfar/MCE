@@ -1,19 +1,21 @@
 package ir.pajoohan.mce.controller;
 
-import ir.pajoohan.mce.Dto.BranchDto;
+import ir.pajoohan.mce.dto.BranchDto;
 import ir.pajoohan.mce.service.BranchService;
 import ir.pajoohan.mce.service.Impl.BranchServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/branch")
-public class BranchController {
+@RequestMapping("/v1/branch")
+@Validated
+public class BranchRestController {
 
     BranchService branchService;
 

@@ -1,4 +1,4 @@
-package ir.pajoohan.mce.Dto;
+package ir.pajoohan.mce.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +13,7 @@ public class BranchDto {
     private String code;
     private String name;
     private Long stateId;
+    private Long personId;
     private Boolean McDocPrintPermission;
     private Integer branchTyp;
 }

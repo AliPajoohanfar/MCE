@@ -1,19 +1,21 @@
 package ir.pajoohan.mce.controller;
 
-import ir.pajoohan.mce.Dto.StateDto;
+import ir.pajoohan.mce.dto.StateDto;
 import ir.pajoohan.mce.service.Impl.StateServiceImpl;
 import ir.pajoohan.mce.service.StateService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/state")
-public class StateController {
+@RequestMapping("/v1/state")
+@Validated
+public class StateRestController {
 
     StateService stateService;
 

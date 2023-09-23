@@ -1,4 +1,4 @@
-package ir.pajoohan.mce.confiuration;
+package ir.pajoohan.mce.util;
 
 import java.io.FileInputStream;
 import java.io.IOException;

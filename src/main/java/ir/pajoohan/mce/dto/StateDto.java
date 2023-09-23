@@ -1,4 +1,4 @@
-package ir.pajoohan.mce.Dto;
+package ir.pajoohan.mce.dto;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -2,6 +2,7 @@ package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,13 +25,17 @@ public class Branch {
     private Long id;
 
     //TODO FK
-    @Column(name = "PARENT_ID")
-    private Long parentId;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PARENT_ID")
+    private Branch parent;
 
-    @Column(name = "CODE")
+    @Column(name = "CODE", unique = true)
+    @Size(min = 2, max = 10, message = "branch code must between 2 to 10 characters.")
     private String code;
 
     @Column(name = "NAME")
+    @Size(min = 2, max = 100, message = "branch name must between 2 to 100 characters.")
     private String name;
 
     //TODO FK
@@ -39,9 +44,14 @@ public class Branch {
     @JoinColumn(name = "STATE_ID", nullable = false)
     private State state;
 
+    //TODO FK
+    @Column(name = "PERSON_ID")
+    private Long personId;
+
     @Column(name = "MC_DOC_PRINT_PERMISSION")
     private Boolean McDocPrintPermission;
 
     @Column(name = "BRANCH_TYP")
     private Integer branchTyp;
+
 }

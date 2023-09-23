@@ -1,4 +1,4 @@
-package ir.pajoohan.mce.Dto;
+package ir.pajoohan.mce.dto;
 
 import ir.pajoohan.mce.entity.State;
 import org.mapstruct.Mapper;
