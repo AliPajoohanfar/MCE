@@ -32,12 +32,12 @@ public class Branch {
 
     @NotBlank(message = "Enter BRANCH'S CODE.")
     @Size(min = 2, max = 10, message = "BRANCH'S CODE must between 2 to 10 characters.")
-    @Column(name = "CODE", unique = true)
+    @Column(name = "CODE", nullable = false, length = 10, unique = true)
     private String code;
 
     @NotBlank(message = "Enter BRANCH'S NAME.")
     @Size(min = 2, max = 100, message = "BRANCH'S NAME must between 2 to 100 characters.")
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false, length = 100)
     private String name;
 
     @JsonIgnore
@@ -51,11 +51,11 @@ public class Branch {
     private Long personId;
 
     @NotBlank(message = "Enter BRANCH'S MC_DOC_PRINT_PERMISSION.")
-    @Column(name = "MC_DOC_PRINT_PERMISSION")
+    @Column(name = "MC_DOC_PRINT_PERMISSION", nullable = false)
     private Boolean mcDocPrintPermission;
 
     @NotBlank(message = "Enter BRANCH'S BRANCH_TYP.")
-    @Column(name = "BRANCH_TYP")
+    @Column(name = "BRANCH_TYP", nullable = false)
     private Integer branchTyp;
 
 }

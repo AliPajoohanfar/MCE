@@ -29,12 +29,12 @@ public class State {
 
     @NotBlank(message = "Enter STATE'S NAME.")
     @Size(min = 2, max = 100, message = "STATE'S NAME must between 2 to 100 characters.")
-    @Column(name = "NAME", unique = true, length = 100)
+    @Column(name = "NAME", unique = true, length = 100, nullable = false)
     private String name;
 
     @NotBlank(message = "Enter STATE'S TEL_CODE.")
     @Size(min = 2, max = 3, message = "STATE'S TEL_CODE must between 2 to 3 characters.")
-    @Column(name = "TEL_CODE", length = 3)
+    @Column(name = "TEL_CODE", length = 3, nullable = false)
     private String telCode;
 
     /*----------------------------------------------------------------------------------------------------------------*/
