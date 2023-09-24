@@ -1,6 +1,6 @@
 ﻿prompt
 PL/SQL Developer Export User Objects for user MCE@XE
-prompt Created by Ali on جمعه, 15 سپتامبر 2023
+prompt Created by Ali on يكشنبه, 24 سپتامبر 2023
 set define off
 spool DB-Export.log
 
@@ -15,7 +15,7 @@ create table MCE.PERSON
     name           VARCHAR2(200) not null,
     family         VARCHAR2(300) not null,
     father_name    VARCHAR2(200),
-    birthdate      DATE,
+    birthdate      TIMESTAMP(6),
     identifire_num VARCHAR2(10),
     issuance_place VARCHAR2(200),
     postal_code    VARCHAR2(10),
@@ -185,10 +185,10 @@ create table MCE.BRANCH
 (
     id                      NUMBER(20) not null,
     parent_id               NUMBER(20),
-    code                    VARCHAR2(10) not null,
-    name                    VARCHAR2(100) not null,
+    code                    VARCHAR2(10 CHAR) not null,
+    name                    VARCHAR2(100 CHAR) not null,
     state_id                NUMBER(20) not null,
-    person_id               NUMBER(20) not null,
+    person_id               NUMBER(20),
     mc_doc_print_permission NUMBER(1) not null,
     branch_typ              NUMBER(1) not null
 ) tablespace SYSTEM
@@ -548,9 +548,9 @@ create table MCE.STATUS
     id           NUMBER(20) not null,
     status_flow  VARCHAR2(4) not null,
     order_num    NUMBER(3),
-    code         VARCHAR2(5),
+    code         VARCHAR2(5) not null,
     desc_persian VARCHAR2(100),
-    desc_english VARCHAR2(100)
+    desc_english VARCHAR2(10 CHAR)
 ) tablespace SYSTEM
   pctfree 10
   pctused 40
@@ -1465,7 +1465,7 @@ prompt
 create sequence MCE.SQ_BRANCH
     minvalue 1
     maxvalue 99999999999999999999
-    start with 1
+    start with 61
     increment by 1 cache 20;
 
 prompt
@@ -1475,7 +1475,7 @@ prompt
 create sequence MCE.SQ_COLOR
     minvalue 1
     maxvalue 99999999999999999999
-    start with 1
+    start with 41
     increment by 1 cache 20;
 
 prompt
@@ -1575,7 +1575,7 @@ prompt
 create sequence MCE.SQ_STATE
     minvalue 1
     maxvalue 99999999999999999999
-    start with 81
+    start with 101
     increment by 1 cache 20;
 
 prompt

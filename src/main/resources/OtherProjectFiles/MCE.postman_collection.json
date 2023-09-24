@@ -15,12 +15,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8081/state",
+							"raw": "localhost:8081/v1/state",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
+								"v1",
 								"state"
 							]
 						}
@@ -33,12 +34,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8081/state/5",
+							"raw": "localhost:8081/v1/state/5",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
+								"v1",
 								"state",
 								"5"
 							]
@@ -53,7 +55,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \" شمالی اردبیل\",\r\n    \"telCode\": \"45\"\r\n}",
+							"raw": "{\r\n    \"name\": \"3اردبیل\",\r\n    \"telCode\": \"4\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -61,12 +63,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8081/state",
+							"raw": "localhost:8081/v1/state",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
+								"v1",
 								"state"
 							]
 						}
@@ -88,12 +91,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8081/state",
+							"raw": "localhost:8081/v1/state",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
+								"v1",
 								"state"
 							]
 						}
@@ -106,12 +110,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8081/state/65",
+							"raw": "localhost:8081/v1/state/65",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
+								"v1",
 								"state",
 								"65"
 							]
@@ -130,12 +135,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8081/branch",
+							"raw": "localhost:8081/v1/branch",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
+								"v1",
 								"branch"
 							]
 						}
@@ -148,14 +154,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8081/branch/1",
+							"raw": "localhost:8081/v1/branch/100",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
+								"v1",
 								"branch",
-								"1"
+								"100"
 							]
 						}
 					},
@@ -168,7 +175,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"parentId\": null,\r\n    \"code\": \"AKB\",\r\n    \"name\": \"شعبه اکبری\",\r\n    \"stateId\": 3,\r\n    \"branchTyp\": 1,\r\n    \"mcDocPrintPermission\": true\r\n}",
+							"raw": "{\r\n    \"parentId\": 100,\r\n    \"code\": \"ISF_SUB1\",\r\n    \"name\": \"آتشگاه اصلی اصفهان\",\r\n    \"stateId\": 8,\r\n    \"personId\": null,\r\n    \"branchTyp\": 1,\r\n    \"mcDocPrintPermission\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -176,12 +183,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8081/branch",
+							"raw": "localhost:8081/v1/branch",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
+								"v1",
 								"branch"
 							]
 						}
@@ -193,13 +201,23 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 21,\r\n    \"parentId\": null,\r\n    \"code\": \"FAT\",\r\n    \"name\": \"شعبه فتاحی\",\r\n    \"stateId\": 3,\r\n    \"branchTyp\": 1,\r\n    \"mcDocPrintPermission\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:8081/branch",
+							"raw": "localhost:8081/v1/branch",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
+								"v1",
 								"branch"
 							]
 						}
@@ -212,14 +230,135 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8081/branch/65",
+							"raw": "localhost:8081/v1/branch/21",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
+								"v1",
 								"branch",
-								"65"
+								"21"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Color",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/v1/color",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"color"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/v1/color/100",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"color",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"parentId\": 100,\r\n    \"code\": \"ISF_SUB1\",\r\n    \"name\": \"آتشگاه اصلی اصفهان\",\r\n    \"stateId\": 8,\r\n    \"personId\": null,\r\n    \"branchTyp\": 1,\r\n    \"mcDocPrintPermission\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/v1/color",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"color"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 21,\r\n    \"parentId\": null,\r\n    \"code\": \"FAT\",\r\n    \"name\": \"شعبه فتاحی\",\r\n    \"stateId\": 3,\r\n    \"branchTyp\": 1,\r\n    \"mcDocPrintPermission\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/v1/color",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"color"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/v1/color/21",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"color",
+								"21"
 							]
 						}
 					},
@@ -233,12 +372,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8081/",
+					"raw": "localhost:8081/v1/",
 					"host": [
 						"localhost"
 					],
 					"port": "8081",
 					"path": [
+						"v1",
 						""
 					]
 				}
