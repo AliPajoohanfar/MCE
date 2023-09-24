@@ -13,7 +13,7 @@ import static ir.pajoohan.mce.entity.Color.TABLE_COLOR;
 @Setter
 @Entity
 @Table(name = TABLE_COLOR, schema = SCHEMA_MCE,
-        uniqueConstraints = {@UniqueConstraint(name = "COLOR_2_UK", columnNames = {"r", "g", "b"})})
+        uniqueConstraints = {@UniqueConstraint(name = "COLOR_2_UK", columnNames = {"R", "G", "B"})})
 public class Color {
 
     public static final String SCHEMA_MCE = "MCE";

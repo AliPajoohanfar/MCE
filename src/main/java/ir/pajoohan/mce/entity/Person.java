@@ -8,10 +8,13 @@ import lombok.Setter;
 
 import java.util.Date;
 
+import static ir.pajoohan.mce.entity.Person.SCHEMA_MCE;
+import static ir.pajoohan.mce.entity.Person.TABLE_PERSON;
+
 @Getter
 @Setter
 @Entity
-@Table
+@Table(name = TABLE_PERSON, schema = SCHEMA_MCE)
 public class Person {
 
     public static final String SCHEMA_MCE = "MCE";
