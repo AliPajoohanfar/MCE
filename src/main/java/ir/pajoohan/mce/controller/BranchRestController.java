@@ -2,7 +2,7 @@ package ir.pajoohan.mce.controller;
 
 import ir.pajoohan.mce.dto.BranchDto;
 import ir.pajoohan.mce.service.BranchService;
-import ir.pajoohan.mce.service.Impl.BranchServiceImpl;
+import ir.pajoohan.mce.service.impl.BranchServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,7 +41,7 @@ public class BranchRestController {
     @PostMapping
     @ResponseBody
     public ResponseEntity<BranchDto> insert(@RequestBody @Valid BranchDto branchDto) {
-        return ResponseEntity.ok().body(branchService.save(branchDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(branchService.save(branchDto));
     }
 
     @PutMapping

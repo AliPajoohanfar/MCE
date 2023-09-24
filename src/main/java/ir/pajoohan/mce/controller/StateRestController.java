@@ -1,8 +1,8 @@
 package ir.pajoohan.mce.controller;
 
 import ir.pajoohan.mce.dto.StateDto;
-import ir.pajoohan.mce.service.Impl.StateServiceImpl;
 import ir.pajoohan.mce.service.StateService;
+import ir.pajoohan.mce.service.impl.StateServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,7 +42,7 @@ public class StateRestController {
     @PostMapping
     @ResponseBody
     public ResponseEntity<StateDto> insert(@RequestBody @Valid StateDto stateDto) {
-        return ResponseEntity.ok().body(stateService.save(stateDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(stateService.save(stateDto));
     }
 
     @PutMapping

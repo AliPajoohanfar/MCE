@@ -1,22 +1,23 @@
 package ir.pajoohan.mce.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
-import static ir.pajoohan.mce.entity.State.SCHEMA_MCE;
-import static ir.pajoohan.mce.entity.State.TABLE_STATE;
+import static ir.pajoohan.mce.entity.Color.SCHEMA_MCE;
+import static ir.pajoohan.mce.entity.Color.TABLE_COLOR;
 
 @Getter
 @Setter
 @Entity
-@Table(name = TABLE_STATE, schema = SCHEMA_MCE)
+@Table(name = TABLE_COLOR, schema = SCHEMA_MCE,
+        uniqueConstraints = {@UniqueConstraint(name = "COLOR_2_UK", columnNames = {"r", "g", "b"})})
 public class Color {
 
     public static final String SCHEMA_MCE = "MCE";
-    public static final String TABLE_STATE = "COLOR";
-
+    public static final String TABLE_COLOR = "COLOR";
 
     @Id
     @Column(name = "ID")
@@ -24,25 +25,26 @@ public class Color {
     @SequenceGenerator(name = "color_generator", sequenceName = "sq_color", schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
-    @Size(min = 2, max = 10, message = "color code must between 2 to 10 characters.")
-    @Column(name = "CODE")
-    String code;
+    @Size(min = 2, max = 10, message = "COLOR'S CODE must between 2 to 10 characters.")
+    @Column(name = "CODE", unique = true)
+    private String code;
 
-    @Size(min = 2, max = 100, message = "color persianName must between 2 to 100 characters.")
+    @NotBlank(message = "Enter COLOR'S PERSIAN_NAME.")
+    @Size(min = 2, max = 100, message = "COLOR'S PERSIAN_NAME must between 2 to 100 characters.")
     @Column(name = "PERSIAN_NAME")
-    String persianName;
+    private String persianName;
 
-    @Size(min = 2, max = 100, message = "color englishName must between 2 to 100 characters.")
+    @Size(min = 2, max = 100, message = "COLOR'S ENGLISH_NAME must between 2 to 100 characters.")
     @Column(name = "ENGLISH_NAME")
-    String englishName;
+    private String englishName;
 
     @Column(name = "R")
-    Integer r;
+    private Integer r;
 
     @Column(name = "G")
-    Integer g;
+    private Integer g;
 
     @Column(name = "B")
-    Integer b;
+    private Integer b;
 
 }

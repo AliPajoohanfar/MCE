@@ -27,13 +27,13 @@ public class State {
     @SequenceGenerator(name = "state_generator", sequenceName = "sq_state", schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
-    @NotBlank(message = "Enter name.")
-    @Size(min = 2, max = 100, message = "state name must between 2 to 100 characters.")
+    @NotBlank(message = "Enter STATE'S NAME.")
+    @Size(min = 2, max = 100, message = "STATE'S NAME must between 2 to 100 characters.")
     @Column(name = "NAME", unique = true, length = 100)
     private String name;
 
-    @NotBlank(message = "Enter state telephone code.")
-    @Size(min = 2, max = 3, message = "state telephone code must between 2 to 3 characters.")
+    @NotBlank(message = "Enter STATE'S TEL_CODE.")
+    @Size(min = 2, max = 3, message = "STATE'S TEL_CODE must between 2 to 3 characters.")
     @Column(name = "TEL_CODE", length = 3)
     private String telCode;
 

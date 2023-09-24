@@ -14,6 +14,6 @@ public class BranchDto {
     private String name;
     private Long stateId;
     private Long personId;
-    private Boolean McDocPrintPermission;
+    private Boolean mcDocPrintPermission;
     private Integer branchTyp;
 }
