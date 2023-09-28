@@ -1,5 +1,5 @@
 ﻿prompt PL/SQL Developer Export User Objects for user MCE@XE
-prompt Created by Ali on يكشنبه, 24 سپتامبر 2023
+prompt Created by Ali on پنجشنبه, 28 سپتامبر 2023
 set define off
 spool DB-Export.log
 
@@ -260,7 +260,7 @@ create table MCE.CUSTOMER
   name           VARCHAR2(200) not null,
   family         VARCHAR2(300) not null,
   father_name    VARCHAR2(200),
-  birthdate      DATE,
+  birthdate      TIMESTAMP(6),
   identifire_num VARCHAR2(10),
   issuance_place VARCHAR2(200),
   postal_code    VARCHAR2(10),
@@ -345,27 +345,28 @@ prompt =========================
 prompt
 create table MCE.ATTACHMENT
 (
-  id             NUMBER(20) not null,
-  attach_file_1  BLOB not null,
-  attach_desc_1  VARCHAR2(200),
-  attach_file_2  BLOB,
-  attach_desc_2  VARCHAR2(200),
-  attach_file_3  BLOB,
-  attach_desc_3  VARCHAR2(200),
-  attach_file_4  BLOB,
-  attach_desc_4  VARCHAR2(200),
-  attach_file_5  BLOB,
-  attach_desc_5  VARCHAR2(200),
-  attach_file_6  BLOB,
-  attach_desc_6  VARCHAR2(200),
-  attach_file_7  BLOB,
-  attach_desc_7  VARCHAR2(200),
-  attach_file_8  BLOB,
-  attach_desc_8  VARCHAR2(200),
-  attach_file_9  BLOB,
-  attach_desc_9  VARCHAR2(200),
-  attach_file_10 BLOB,
-  attach_desc_10 VARCHAR2(200)
+  id               NUMBER(20) not null,
+  attach_file_1    BLOB not null,
+  attach_desc_1    VARCHAR2(200),
+  attach_file_2    BLOB,
+  attach_desc_2    VARCHAR2(200),
+  attach_file_3    BLOB,
+  attach_desc_3    VARCHAR2(200),
+  attach_file_4    BLOB,
+  attach_desc_4    VARCHAR2(200),
+  attach_file_5    BLOB,
+  attach_desc_5    VARCHAR2(200),
+  attach_file_6    BLOB,
+  attach_desc_6    VARCHAR2(200),
+  attach_file_7    BLOB,
+  attach_desc_7    VARCHAR2(200),
+  attach_file_8    BLOB,
+  attach_desc_8    VARCHAR2(200),
+  attach_file_9    BLOB,
+  attach_desc_9    VARCHAR2(200),
+  attach_file_10   BLOB,
+  attach_desc_10   VARCHAR2(200),
+  "attach_desc_6)" VARCHAR2(200 CHAR)
 )
 tablespace SYSTEM
   pctfree 10
@@ -446,8 +447,8 @@ create table MCE.MOTORCYCLE_TYPE
 (
   id                    NUMBER(20) not null,
   information_attach_id NUMBER(20),
-  code                  VARCHAR2(20),
-  name                  VARCHAR2(200)
+  code                  VARCHAR2(10 CHAR) not null,
+  name                  VARCHAR2(100 CHAR) not null
 )
 tablespace SYSTEM
   pctfree 10
@@ -1048,12 +1049,12 @@ prompt
 create table MCE.CUSTOMER_SUPPORT
 (
   id                  NUMBER(20) not null,
-  customer_criticism  CLOB,
-  customer_suggestion CLOB,
-  customer_complaint  CLOB,
-  response            CLOB,
-  customer_pol        CLOB,
-  parent_id           NUMBER(20)
+  parent_id           NUMBER(20),
+  customer_criticism  VARCHAR2(2000 CHAR),
+  customer_suggestion VARCHAR2(2000 CHAR),
+  customer_complaint  VARCHAR2(2000 CHAR),
+  response            VARCHAR2(2000 CHAR),
+  customer_pol        VARCHAR2(2000 CHAR)
 )
 tablespace SYSTEM
   pctfree 10
@@ -1071,6 +1072,8 @@ comment on table MCE.CUSTOMER_SUPPORT
   is 'سامانه نظرسنجی از مشتریان';
 comment on column MCE.CUSTOMER_SUPPORT.id
   is 'کلید اصلی';
+comment on column MCE.CUSTOMER_SUPPORT.parent_id
+  is 'کلید خارجی - پیگیری مجدد درخواست';
 comment on column MCE.CUSTOMER_SUPPORT.customer_criticism
   is 'انتقاد مشترسی';
 comment on column MCE.CUSTOMER_SUPPORT.customer_suggestion
@@ -1081,8 +1084,6 @@ comment on column MCE.CUSTOMER_SUPPORT.response
   is 'پاسخ به انتقادات، شکایات و پیشنهادات';
 comment on column MCE.CUSTOMER_SUPPORT.customer_pol
   is 'نظرسنجی از مشتری';
-comment on column MCE.CUSTOMER_SUPPORT.parent_id
-  is 'کلید خارجی - پیگیری مجدد درخواست';
 alter table MCE.CUSTOMER_SUPPORT
   add constraint CUSUP_PK primary key (ID)
   using index 
