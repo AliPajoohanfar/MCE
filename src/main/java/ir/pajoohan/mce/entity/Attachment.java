@@ -1,11 +1,13 @@
 package ir.pajoohan.mce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Blob;
+import java.util.List;
 
 import static ir.pajoohan.mce.entity.Attachment.SCHEMA_MCE;
 import static ir.pajoohan.mce.entity.Attachment.TABLE_ATTACHMENT;
@@ -123,4 +125,10 @@ public class Attachment {
     @Column(name = "ATTACH_DESC_10")
     @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must les than 200 characters.")
     private String attachDesc10;
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "attachment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<MotorcycleType> motorcycleTypes;
 }
