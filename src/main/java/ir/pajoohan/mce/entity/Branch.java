@@ -22,7 +22,7 @@ public class Branch {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "branch_generator")
-    @SequenceGenerator(name = "branch_generator", sequenceName = "sq_branch", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "branch_generator", sequenceName = "SQ_BRANCH", schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @JsonIgnore

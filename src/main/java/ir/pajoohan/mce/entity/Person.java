@@ -23,7 +23,7 @@ public class Person {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_generator")
-    @SequenceGenerator(name = "person_generator", sequenceName = "sq_person", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "person_generator", sequenceName = "SQ_PERSON", schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @NotBlank(message = "Enter PERSON'S NATIONAL_CODE.")

@@ -24,7 +24,7 @@ public class State {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "state_generator")
-    @SequenceGenerator(name = "state_generator", sequenceName = "sq_state", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "state_generator", sequenceName = "SQ_STATE", schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @NotBlank(message = "Enter STATE'S NAME.")

@@ -25,7 +25,7 @@ public class Status {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "status_generator")
-    @SequenceGenerator(name = "status_generator", sequenceName = "sq_status", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "status_generator", sequenceName = "SQ_STATUS", schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @NotBlank(message = "Enter STATUS'S STATUS_FLOW.")

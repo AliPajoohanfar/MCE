@@ -22,7 +22,7 @@ public class Color {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "color_generator")
-    @SequenceGenerator(name = "color_generator", sequenceName = "sq_color", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "color_generator", sequenceName = "SQ_COLOR", schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @Size(min = 2, max = 10, message = "COLOR'S CODE must between 2 to 10 characters.")
