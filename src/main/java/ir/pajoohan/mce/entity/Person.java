@@ -1,5 +1,6 @@
 package ir.pajoohan.mce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -7,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 import static ir.pajoohan.mce.entity.Person.SCHEMA_MCE;
 import static ir.pajoohan.mce.entity.Person.TABLE_PERSON;
@@ -73,4 +75,9 @@ public class Person {
     @Column(name = "PHONE_NUMBER", length = 10, nullable = false)
     private String phoneNumber;
 
+    /*----------------------------------------------------------------------------------------------------------------*/
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Branch> branchList;
 }

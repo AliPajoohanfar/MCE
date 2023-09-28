@@ -46,9 +46,9 @@ public class Branch {
     @JoinColumn(name = "STATE_ID", nullable = false)
     private State state;
 
-    //TODO FK
-    @Column(name = "PERSON_ID")
-    private Long personId;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "PERSON_ID")
+    private Person person;
 
     @NotBlank(message = "Enter BRANCH'S MC_DOC_PRINT_PERMISSION.")
     @Column(name = "MC_DOC_PRINT_PERMISSION", nullable = false)

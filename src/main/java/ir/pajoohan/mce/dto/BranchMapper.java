@@ -11,10 +11,12 @@ public interface BranchMapper {
     BranchMapper INSTANCE = Mappers.getMapper(BranchMapper.class);
 
     @Mapping(target = "stateId", source = "branch.state.id")
+    @Mapping(target = "personId", source = "branch.person.id")
     @Mapping(target = "parentId", source = "branch.parent.id")
     BranchDto branchToBranchDto(Branch branch);
 
     @Mapping(target = "state.id", source = "branchDto.stateId")
+    @Mapping(target = "person.id", source = "branchDto.personId")
     @Mapping(target = "parent.id", source = "branchDto.parentId")
     Branch branchDtoToBranch(BranchDto branchDto);
 }
