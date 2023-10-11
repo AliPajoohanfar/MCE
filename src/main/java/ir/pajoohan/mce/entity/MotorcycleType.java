@@ -36,7 +36,7 @@ public class MotorcycleType {
     private String name;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "INFORMATION_ATTACH_ID")
     private Attachment attachment;
 }

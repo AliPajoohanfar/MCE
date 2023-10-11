@@ -87,4 +87,12 @@ public class Person {
     @JsonIgnore
     @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Branch> branchList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "controllerPerson", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<WarehouseInput> warehouseInputsControllerList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "prodPermissionPerson", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<WarehouseInput> warehouseInputsProdPermList;
 }

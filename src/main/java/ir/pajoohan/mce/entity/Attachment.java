@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Blob;
-import java.util.List;
 
 import static ir.pajoohan.mce.entity.Attachment.SCHEMA_MCE;
 import static ir.pajoohan.mce.entity.Attachment.TABLE_ATTACHMENT;
@@ -129,6 +128,18 @@ public class Attachment {
     /*----------------------------------------------------------------------------------------------------------------*/
 
     @JsonIgnore
-    @OneToMany(mappedBy = "attachment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<MotorcycleType> motorcycleTypes;
+    @OneToOne(mappedBy = "attachment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private MotorcycleType motorcycleType;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "identifiersAttach", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private WarehouseInput warehouseInputsIdentifiers;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "receiptsAttach", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private WarehouseInput warehouseInputsReceipts;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "reportsAttach", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private WarehouseInput warehouseInputsReports;
 }

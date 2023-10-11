@@ -1,6 +1,7 @@
 package ir.pajoohan.mce.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -8,6 +9,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 import static ir.pajoohan.mce.entity.EngineType.SCHEMA_MCE;
 import static ir.pajoohan.mce.entity.EngineType.TABLE_ENGINE_TYPE;
@@ -50,4 +53,11 @@ public class EngineType {
     @Max(value = 1, message = "ENGINE_TYPE'S FUEL must be between 0 to 1.")
     @Column(name = "FUEL")
     private Integer fuel;
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "engineType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<WarehouseInput> warehouseInputList;
+
 }
