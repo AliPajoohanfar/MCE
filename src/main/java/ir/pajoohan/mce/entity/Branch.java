@@ -2,6 +2,8 @@ package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -55,6 +57,8 @@ public class Branch {
     private Boolean mcDocPrintPermission;
 
     @NotBlank(message = "Enter BRANCH'S BRANCH_TYP.")
+    @Min(value = 0, message = "BRANCH'S BRANCH_TYP must be between 0 to 1.")
+    @Max(value = 1, message = "BRANCH'S BRANCH_TYP must be between 0 to 1.")
     @Column(name = "BRANCH_TYP", nullable = false)
     private Integer branchTyp;
 

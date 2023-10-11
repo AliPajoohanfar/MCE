@@ -1,6 +1,8 @@
 package ir.pajoohan.mce.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -33,6 +35,8 @@ public class Status {
     @Column(name = "STATUS_FLOW", length = 4, nullable = false)
     private String statusFlow;
 
+    @Min(value = 0, message = "STATUS'S ORDER_NUM must be between 0 to 999.")
+    @Max(value = 999, message = "STATUS'S ORDER_NUM must be between 0 to 999.")
     @Column(name = "ORDER_NUM")
     private Integer orderNum;
 

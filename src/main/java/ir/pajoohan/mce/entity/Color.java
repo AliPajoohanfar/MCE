@@ -1,6 +1,8 @@
 package ir.pajoohan.mce.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -38,12 +40,18 @@ public class Color {
     @Column(name = "ENGLISH_NAME", length = 100)
     private String englishName;
 
+    @Min(value = 0, message = "COLOR'S R must be between 0 to 255.")
+    @Max(value = 255, message = "COLOR'S R must be between 0 to 255.")
     @Column(name = "R")
     private Integer r;
 
+    @Min(value = 0, message = "COLOR'S G must be between 0 to 255.")
+    @Max(value = 255, message = "COLOR'S G must be between 0 to 255.")
     @Column(name = "G")
     private Integer g;
 
+    @Min(value = 0, message = "COLOR'S B must be between 0 to 255.")
+    @Max(value = 255, message = "COLOR'S B must be between 0 to 255.")
     @Column(name = "B")
     private Integer b;
 
