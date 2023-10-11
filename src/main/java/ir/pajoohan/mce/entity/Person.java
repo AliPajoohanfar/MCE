@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +32,7 @@ public class Person {
 
     @NotBlank(message = "Enter PERSON'S NATIONAL_CODE.")
     @Size(min = 2, max = 10, message = "PERSON'S NATIONAL_CODE must be between 2 to 10 characters.")
+    @Pattern(regexp = "^[0-9]\\d*$", message = "PERSON'S NATIONAL_CODE must be digits only")
     @Column(name = "NATIONAL_CODE", length = 10, nullable = false, unique = true)
     private String nationalCode;
 
@@ -48,19 +50,20 @@ public class Person {
     @Column(name = "FATHER_NAME")
     private String fatherName;
 
-    @PastOrPresent(message = "PERSON'S BIRTHDATE must be of past or present.")
+    @PastOrPresent(message = "PERSON'S BIRTHDATE must be past or present.")
     @Column(name = "BIRTHDATE")
     private Date birthDate;
 
     @Size(min = 2, max = 10, message = "PERSON'S IDENTIFIRE_NUM must be between 2 to 10 characters.")
     @Column(name = "IDENTIFIRE_NUM", length = 10)
-    private String identifierNumb;
+    private String identifierNum;
 
     @Size(min = 2, max = 200, message = "PERSON'S ISSUANCE_PLACE must be between 2 to 200 characters.")
     @Column(name = "ISSUANCE_PLACE", length = 200)
     private String issuancePlace;
 
     @Size(min = 2, max = 10, message = "PERSON'S POSTAL_CODE must be between 2 to 10 characters.")
+    @Pattern(regexp = "^[0-9]\\d*$", message = "PERSON'S POSTAL_CODE must be digits only")
     @Column(name = "POSTAL_CODE", length = 10)
     private String postalCode;
 
@@ -69,11 +72,13 @@ public class Person {
     private String homeAddress;
 
     @Size(min = 10, max = 10, message = "PERSON'S MOBILE_NUMBER must be 10 characters.")
+    @Pattern(regexp = "^[0-9]\\d*$", message = "PERSON'S MOBILE_NUMBER must be digits only")
     @Column(name = "MOBILE_NUMBER", length = 10, unique = true)
     private String mobileNumber;
 
     @NotBlank(message = "Enter PERSON'S PHONE_NUMBER.")
     @Size(min = 10, max = 10, message = "PERSON'S PHONE_NUMBER must be 10 characters.")
+    @Pattern(regexp = "^[0-9]\\d*$", message = "PERSON'S PHONE_NUMBER must be digits only")
     @Column(name = "PHONE_NUMBER", length = 10, nullable = false)
     private String phoneNumber;
 

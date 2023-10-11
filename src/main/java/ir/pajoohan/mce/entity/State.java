@@ -3,6 +3,7 @@ package ir.pajoohan.mce.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +35,7 @@ public class State {
 
     @NotBlank(message = "Enter STATE'S TEL_CODE.")
     @Size(min = 2, max = 3, message = "STATE'S TEL_CODE must be between 2 to 3 characters.")
+    @Pattern(regexp = "^[0-9]\\d*$", message = "State'S TEL_CODE must be digits only")
     @Column(name = "TEL_CODE", length = 3, nullable = false)
     private String telCode;
 

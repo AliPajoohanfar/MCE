@@ -3,6 +3,7 @@ package ir.pajoohan.mce.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +30,7 @@ public class Customer {
 
     @NotBlank(message = "Enter CUSTOMER'S NATIONAL_CODE.")
     @Size(min = 10, max = 10, message = "CUSTOMER'S NATIONAL_CODE must be 10 characters.")
+    @Pattern(regexp = "^[0-9]\\d*$", message = "CUSTOMER'S NATIONAL_CODE must be digits only")
     @Column(name = "NATIONAL_CODE", unique = true, nullable = false)
     private String nationalCode;
 
@@ -46,11 +48,12 @@ public class Customer {
     @Size(min = 2, max = 200, message = "CUSTOMER'S FAMILY must be between 2 to 100 characters.")
     private String fatherName;
 
-    @PastOrPresent(message = "CUSTOMER'S BIRTHDATE must be of past or present.")
+    @PastOrPresent(message = "CUSTOMER'S BIRTHDATE must be past or present.")
     @Column(name = "BIRTHDATE")
     private Date birthdate;
 
     @Size(min = 1, max = 10, message = "CUSTOMER'S IDENTIFIRE_NUM must be between 2 to 100 characters.")
+    @Pattern(regexp = "^[0-9]\\d*$", message = "CUSTOMER'S IDENTIFIRE_NUM must be digits only")
     @Column(name = "IDENTIFIRE_NUM")
     private String identifierNum;
 
@@ -59,6 +62,7 @@ public class Customer {
     private String issuancePlace;
 
     @Size(min = 10, max = 10, message = "CUSTOMER'S POSTAL_CODE must be 10 characters.")
+    @Pattern(regexp = "^[0-9]\\d*$", message = "CUSTOMER'S POSTAL_CODE must be digits only")
     @Column(name = "POSTAL_CODE")
     private String postalCode;
 
@@ -66,13 +70,14 @@ public class Customer {
     @Column(name = "HOME_ADDRESS")
     private String homeAddress;
 
-
     @NotBlank(message = "Enter CUSTOMER'S MOBILE_NUMBER.")
     @Size(min = 10, max = 10, message = "CUSTOMER'S MOBILE_NUMBER 10 characters.")
+    @Pattern(regexp = "^[0-9]\\d*$", message = "CUSTOMER'S MOBILE_NUMBER must be digits only")
     @Column(name = "MOBILE_NUMBER", nullable = false)
     private String mobileNumber;
 
     @Size(min = 10, max = 10, message = "CUSTOMER'S PHONE_NUMBER 10 characters.")
+    @Pattern(regexp = "^[0-9]\\d*$", message = "CUSTOMER'S PHONE_NUMBER must be digits only")
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
 
