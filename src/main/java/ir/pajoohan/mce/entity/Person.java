@@ -3,6 +3,7 @@ package ir.pajoohan.mce.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,6 +48,7 @@ public class Person {
     @Column(name = "FATHER_NAME")
     private String fatherName;
 
+    @PastOrPresent(message = "PERSON'S BIRTHDATE must be of past or present.")
     @Column(name = "BIRTHDATE")
     private Date birthDate;
 

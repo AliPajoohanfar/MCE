@@ -2,6 +2,7 @@ package ir.pajoohan.mce.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,6 +46,7 @@ public class Customer {
     @Size(min = 2, max = 200, message = "CUSTOMER'S FAMILY must be between 2 to 100 characters.")
     private String fatherName;
 
+    @PastOrPresent(message = "CUSTOMER'S BIRTHDATE must be of past or present.")
     @Column(name = "BIRTHDATE")
     private Date birthdate;
 
