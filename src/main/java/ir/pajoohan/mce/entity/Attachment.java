@@ -33,7 +33,7 @@ public class Attachment {
     private Blob attachFile1;
 
     @Column(name = "ATTACH_DESC_1")
-    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must les than 200 characters.")
+    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must be les than 200 characters.")
     private String attachDesc1;
 
 
@@ -43,7 +43,7 @@ public class Attachment {
     private Blob attachFile2;
 
     @Column(name = "ATTACH_DESC_2")
-    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must les than 200 characters.")
+    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must be les than 200 characters.")
     private String attachDesc2;
 
 
@@ -53,7 +53,7 @@ public class Attachment {
     private Blob attachFile3;
 
     @Column(name = "ATTACH_DESC_3")
-    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must les than 200 characters.")
+    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must be les than 200 characters.")
     private String attachDesc3;
 
 
@@ -63,7 +63,7 @@ public class Attachment {
     private Blob attachFile4;
 
     @Column(name = "ATTACH_DESC_4")
-    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must les than 200 characters.")
+    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must be les than 200 characters.")
     private String attachDesc4;
 
 
@@ -73,7 +73,7 @@ public class Attachment {
     private Blob attachFile5;
 
     @Column(name = "ATTACH_DESC_5")
-    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must les than 200 characters.")
+    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must be les than 200 characters.")
     private String attachDesc5;
 
 
@@ -83,7 +83,7 @@ public class Attachment {
     private Blob attachFile6;
 
     @Column(name = "ATTACH_DESC_6) ")
-    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must les than 200 characters.")
+    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must be les than 200 characters.")
     private String attachDesc6;
 
 
@@ -93,7 +93,7 @@ public class Attachment {
     private Blob attachFile7;
 
     @Column(name = "ATTACH_DESC_7")
-    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must les than 200 characters.")
+    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must be les than 200 characters.")
     private String attachDesc7;
 
 
@@ -103,7 +103,7 @@ public class Attachment {
     private Blob attachFile8;
 
     @Column(name = "ATTACH_DESC_8")
-    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must les than 200 characters.")
+    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must be les than 200 characters.")
     private String attachDesc8;
 
 
@@ -113,7 +113,7 @@ public class Attachment {
     private Blob attachFile9;
 
     @Column(name = "ATTACH_DESC_9")
-    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must les than 200 characters.")
+    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must be les than 200 characters.")
     private String attachDesc9;
 
 
@@ -123,7 +123,7 @@ public class Attachment {
     private Blob attachFile10;
 
     @Column(name = "ATTACH_DESC_10")
-    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must les than 200 characters.")
+    @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must be les than 200 characters.")
     private String attachDesc10;
 
     /*----------------------------------------------------------------------------------------------------------------*/

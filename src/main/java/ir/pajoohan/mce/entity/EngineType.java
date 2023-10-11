@@ -28,11 +28,11 @@ public class EngineType {
     private Long id;
 
     @NotBlank(message = "Enter ENGINE_TYPE'S CODE.")
-    @Size(min = 2, max = 20, message = "ENGINE_TYPE'S CODE must between 2 to 20 characters.")
+    @Size(min = 2, max = 20, message = "ENGINE_TYPE'S CODE must be between 2 to 20 characters.")
     @Column(name = "CODE", unique = true, length = 20, nullable = false)
     private String code;
 
-    @Size(min = 2, max = 200, message = "ENGINE_TYPE'S NAME must between 2 to 200 characters.")
+    @Size(min = 2, max = 200, message = "ENGINE_TYPE'S NAME must be between 2 to 200 characters.")
     @Column(name = "NAME", length = 200)
     private String name;
 

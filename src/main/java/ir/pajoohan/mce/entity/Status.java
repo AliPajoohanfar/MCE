@@ -31,7 +31,7 @@ public class Status {
     private Long id;
 
     @NotBlank(message = "Enter STATUS'S STATUS_FLOW.")
-    @Size(min = 2, max = 4, message = "STATUS'S STATUS_FLOW must between 2 to 5 characters.")
+    @Size(min = 2, max = 4, message = "STATUS'S STATUS_FLOW must be between 2 to 5 characters.")
     @Column(name = "STATUS_FLOW", length = 4, nullable = false)
     private String statusFlow;
 
@@ -41,15 +41,15 @@ public class Status {
     private Integer orderNum;
 
     @NotBlank(message = "Enter STATUS'S CODE.")
-    @Size(min = 2, max = 5, message = "STATUS'S code must between 2 to 5 characters.")
+    @Size(min = 2, max = 5, message = "STATUS'S code must be between 2 to 5 characters.")
     @Column(name = "CODE", length = 5, nullable = false)
     private String code;
 
-    @Size(min = 2, max = 10, message = "STATUS'S DESC_PERSIAN must between 2 to 100 characters.")
+    @Size(min = 2, max = 10, message = "STATUS'S DESC_PERSIAN must be between 2 to 100 characters.")
     @Column(name = "DESC_PERSIAN", length = 100)
     private String descPersian;
 
-    @Size(min = 2, max = 10, message = "STATUS'S DESC_ENGLISH must between 2 to 100 characters.")
+    @Size(min = 2, max = 10, message = "STATUS'S DESC_ENGLISH must be between 2 to 100 characters.")
     @Column(name = "DESC_ENGLISH", length = 100)
     private String descEnglish;
 

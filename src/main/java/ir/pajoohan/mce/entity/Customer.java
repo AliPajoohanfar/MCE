@@ -27,40 +27,40 @@ public class Customer {
     private Long id;
 
     @NotBlank(message = "Enter CUSTOMER'S NATIONAL_CODE.")
-    @Size(min = 10, max = 10, message = "CUSTOMER'S NATIONAL_CODE must 10 characters.")
+    @Size(min = 10, max = 10, message = "CUSTOMER'S NATIONAL_CODE must be 10 characters.")
     @Column(name = "NATIONAL_CODE", unique = true, nullable = false)
     private String nationalCode;
 
     @NotBlank(message = "Enter CUSTOMER'S NAME.")
-    @Size(min = 2, max = 200, message = "CUSTOMER'S NAME must between 2 to 100 characters.")
+    @Size(min = 2, max = 200, message = "CUSTOMER'S NAME must be between 2 to 100 characters.")
     @Column(name = "NAME", nullable = false)
     private String name;
 
     @NotBlank(message = "Enter CUSTOMER'S FAMILY.")
-    @Size(min = 2, max = 300, message = "CUSTOMER'S FAMILY must between 2 to 100 characters.")
+    @Size(min = 2, max = 300, message = "CUSTOMER'S FAMILY must be between 2 to 100 characters.")
     @Column(name = "FAMILY", nullable = false)
     private String family;
 
     @Column(name = "FATHER_NAME")
-    @Size(min = 2, max = 200, message = "CUSTOMER'S FAMILY must between 2 to 100 characters.")
+    @Size(min = 2, max = 200, message = "CUSTOMER'S FAMILY must be between 2 to 100 characters.")
     private String fatherName;
 
     @Column(name = "BIRTHDATE")
     private Date birthdate;
 
-    @Size(min = 1, max = 10, message = "CUSTOMER'S IDENTIFIRE_NUM must between 2 to 100 characters.")
+    @Size(min = 1, max = 10, message = "CUSTOMER'S IDENTIFIRE_NUM must be between 2 to 100 characters.")
     @Column(name = "IDENTIFIRE_NUM")
     private String identifierNum;
 
-    @Size(min = 2, max = 200, message = "CUSTOMER'S ISSUANCE_PLACE must between 2 to 100 characters.")
+    @Size(min = 2, max = 200, message = "CUSTOMER'S ISSUANCE_PLACE must be between 2 to 100 characters.")
     @Column(name = "ISSUANCE_PLACE")
     private String issuancePlace;
 
-    @Size(min = 10, max = 10, message = "CUSTOMER'S POSTAL_CODE must 10 characters.")
+    @Size(min = 10, max = 10, message = "CUSTOMER'S POSTAL_CODE must be 10 characters.")
     @Column(name = "POSTAL_CODE")
     private String postalCode;
 
-    @Size(min = 2, max = 500, message = "CUSTOMER'S ISSUANCE_PLACE must between 2 to 500 characters.")
+    @Size(min = 2, max = 500, message = "CUSTOMER'S ISSUANCE_PLACE must be between 2 to 500 characters.")
     @Column(name = "HOME_ADDRESS")
     private String homeAddress;
 
