@@ -1,6 +1,16 @@
 package ir.pajoohan.mce.entity;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
@@ -9,6 +19,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 import static ir.pajoohan.mce.entity.Customer.SCHEMA_MCE;
 import static ir.pajoohan.mce.entity.Customer.TABLE_CUSTOMER;
@@ -80,5 +91,11 @@ public class Customer {
     @Pattern(regexp = "^[0-9]\\d*$", message = "CUSTOMER'S PHONE_NUMBER must be digits only")
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Motorcycle> motorcycleList;
 
 }

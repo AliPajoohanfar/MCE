@@ -1,11 +1,24 @@
 package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 import static ir.pajoohan.mce.entity.MotorcycleType.SCHEMA_MCE;
 import static ir.pajoohan.mce.entity.MotorcycleType.TABLE_MOTORCYCLE_TYPE;
@@ -35,8 +48,15 @@ public class MotorcycleType {
     @Column(name = "NAME", nullable = false, length = 200)
     private String name;
 
+    /*----------------------------------------------------------------------------------------------------------------*/
+
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "INFORMATION_ATTACH_ID")
     private Attachment attachment;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "motorcycleType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Motorcycle> motorcycleList;
+
 }
