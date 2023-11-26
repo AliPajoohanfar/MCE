@@ -1,5 +1,5 @@
 ﻿prompt PL/SQL Developer Export User Objects for user MCE@XE
-prompt Created by Ali on پنجشنبه, 28 سپتامبر 2023
+prompt Created by Ali on يكشنبه, 26 نوامبر 2023
 set define off
 spool DB-Export.log
 
@@ -14,7 +14,7 @@ create table MCE.PERSON
   name           VARCHAR2(200) not null,
   family         VARCHAR2(300) not null,
   father_name    VARCHAR2(200),
-  birthdate      TIMESTAMP(6),
+  birthdate      DATE,
   identifire_num VARCHAR2(10),
   issuance_place VARCHAR2(200),
   postal_code    VARCHAR2(10),
@@ -260,7 +260,7 @@ create table MCE.CUSTOMER
   name           VARCHAR2(200) not null,
   family         VARCHAR2(300) not null,
   father_name    VARCHAR2(200),
-  birthdate      TIMESTAMP(6),
+  birthdate      DATE,
   identifire_num VARCHAR2(10),
   issuance_place VARCHAR2(200),
   postal_code    VARCHAR2(10),
@@ -487,6 +487,20 @@ alter table MCE.MOTORCYCLE_TYPE
     maxextents unlimited
   );
 alter table MCE.MOTORCYCLE_TYPE
+  add constraint MCT_UK unique (INFORMATION_ATTACH_ID)
+  using index 
+  tablespace SYSTEM
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+alter table MCE.MOTORCYCLE_TYPE
   add constraint MCT_ATTACH_FK foreign key (INFORMATION_ATTACH_ID)
   references MCE.ATTACHMENT (ID);
 
@@ -647,22 +661,22 @@ prompt
 create table MCE.WAREHOUSE_INPUT
 (
   id                    NUMBER(20) not null,
-  num                   NUMBER(6) not null,
-  engine_num_start      NUMBER(10) not null,
-  engine_num_stend      NUMBER(10) not null,
+  engine_num_start      NUMBER(18) not null,
+  engine_num_end        NUMBER(18) not null,
   input_date            DATE not null,
   control_date          DATE,
   prod_permission_date  DATE,
-  receipt_number        NUMBER(10),
+  receipt_number        VARCHAR2(10),
   controller_persn_id   NUMBER(20),
   identifiers_attach_id NUMBER(20),
   receipts_attach_id    NUMBER(20),
   reports_attach_id     NUMBER(20),
   prod_perm_persn_id    NUMBER(20),
-  bom_link              VARCHAR2(300),
+  bom_link_url          VARCHAR2(400),
   year                  NUMBER(4) not null,
   engine_type_id        NUMBER(20) not null,
-  kootaj_num            NUMBER(8) not null
+  kootaj_num            VARCHAR2(8) not null,
+  num                   NUMBER(6) not null
 )
 tablespace SYSTEM
   pctfree 10
@@ -680,11 +694,9 @@ comment on table MCE.WAREHOUSE_INPUT
   is 'موتور سیکلت های ورودی به انبار';
 comment on column MCE.WAREHOUSE_INPUT.id
   is 'کلید اصلی';
-comment on column MCE.WAREHOUSE_INPUT.num
-  is 'تعداد موتورهای ورودی ';
 comment on column MCE.WAREHOUSE_INPUT.engine_num_start
   is 'شروع شماره موتور';
-comment on column MCE.WAREHOUSE_INPUT.engine_num_stend
+comment on column MCE.WAREHOUSE_INPUT.engine_num_end
   is 'پایان شماره موتور';
 comment on column MCE.WAREHOUSE_INPUT.input_date
   is 'تاریخ ورود به انبار';
@@ -704,7 +716,7 @@ comment on column MCE.WAREHOUSE_INPUT.reports_attach_id
   is 'کلید خارجی - لینک گزارش ورودی به انبار';
 comment on column MCE.WAREHOUSE_INPUT.prod_perm_persn_id
   is 'کلید خارجی - شخص صادر کننده مجوز تولید';
-comment on column MCE.WAREHOUSE_INPUT.bom_link
+comment on column MCE.WAREHOUSE_INPUT.bom_link_url
   is 'BOM لینک';
 comment on column MCE.WAREHOUSE_INPUT.year
   is 'سال';
@@ -712,8 +724,52 @@ comment on column MCE.WAREHOUSE_INPUT.engine_type_id
   is 'کلید خارجی - نوع موتور';
 comment on column MCE.WAREHOUSE_INPUT.kootaj_num
   is 'شماره کوتاژ';
+comment on column MCE.WAREHOUSE_INPUT.num
+  is 'تعداد';
 alter table MCE.WAREHOUSE_INPUT
   add constraint WHIN_PK primary key (ID)
+  using index 
+  tablespace SYSTEM
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+alter table MCE.WAREHOUSE_INPUT
+  add constraint WHIN_1_UK unique (IDENTIFIERS_ATTACH_ID)
+  using index 
+  tablespace SYSTEM
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+alter table MCE.WAREHOUSE_INPUT
+  add constraint WHIN_2_UK unique (RECEIPTS_ATTACH_ID)
+  using index 
+  tablespace SYSTEM
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+alter table MCE.WAREHOUSE_INPUT
+  add constraint WHIN_3_UK unique (REPORTS_ATTACH_ID)
   using index 
   tablespace SYSTEM
   pctfree 10
@@ -829,6 +885,15 @@ alter table MCE.COLOR
     minextents 1
     maxextents unlimited
   );
+alter table MCE.COLOR
+  add constraint B
+  check (B<= 255);
+alter table MCE.COLOR
+  add constraint G
+  check (G <= 255);
+alter table MCE.COLOR
+  add constraint R
+  check (R <= 255);
 
 prompt
 prompt Creating table MOTORCYCLE
@@ -933,6 +998,20 @@ alter table MCE.MOTORCYCLE
   );
 alter table MCE.MOTORCYCLE
   add constraint MC_2_UK unique (CHASSIS_NUM)
+  using index 
+  tablespace SYSTEM
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+alter table MCE.MOTORCYCLE
+  add constraint MC_3_UK unique (MC_DOCS_ATTACH_ID)
   using index 
   tablespace SYSTEM
   pctfree 10
@@ -1086,6 +1165,20 @@ comment on column MCE.CUSTOMER_SUPPORT.customer_pol
   is 'نظرسنجی از مشتری';
 alter table MCE.CUSTOMER_SUPPORT
   add constraint CUSUP_PK primary key (ID)
+  using index 
+  tablespace SYSTEM
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+alter table MCE.CUSTOMER_SUPPORT
+  add constraint CUSUP_UK unique (PARENT_ID)
   using index 
   tablespace SYSTEM
   pctfree 10
