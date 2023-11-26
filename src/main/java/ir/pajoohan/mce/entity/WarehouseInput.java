@@ -100,6 +100,8 @@ public class WarehouseInput {
     @Column(name = "RECEIPT_NUMBER")
     private String receiptNumber;
 
+    /*----------------------------------------------------------------------------------------------------------------*/
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CONTROLLER_PERSN_ID")

@@ -40,11 +40,6 @@ public class Branch {
     @SequenceGenerator(name = "branch_generator", sequenceName = "SQ_BRANCH", schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PARENT_ID")
-    private Branch parent;
-
     @NotBlank(message = "Enter BRANCH'S CODE.")
     @Size(min = 2, max = 10, message = "BRANCH'S CODE must be between 2 to 10 characters.")
     @Column(name = "CODE", nullable = false, length = 10, unique = true)
@@ -54,16 +49,6 @@ public class Branch {
     @Size(min = 2, max = 100, message = "BRANCH'S NAME must be between 2 to 100 characters.")
     @Column(name = "NAME", nullable = false, length = 100)
     private String name;
-
-    @JsonIgnore
-    @NotBlank(message = "Enter BRANCH'S STATE_ID.")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "STATE_ID", nullable = false)
-    private State state;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "PERSON_ID")
-    private Person person;
 
     @NotBlank(message = "Enter BRANCH'S MC_DOC_PRINT_PERMISSION.")
     @Column(name = "MC_DOC_PRINT_PERMISSION", nullable = false)
@@ -78,6 +63,34 @@ public class Branch {
     /*----------------------------------------------------------------------------------------------------------------*/
 
     @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PARENT_ID")
+    private Branch parent;
+
+    @JsonIgnore
+    @NotBlank(message = "Enter BRANCH'S STATE_ID.")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "STATE_ID", nullable = false)
+    private State state;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "PERSON_ID")
+    private Person person;
+
+    /*----------------------------------------------------------------------------------------------------------------*/
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Branch> branchList;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "branch", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Motorcycle> motorcycleList;
+    private List<Motorcycle> branchMotorcycleList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "subBranch", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Motorcycle> subBranchMotorcycleList;
+
+
 }

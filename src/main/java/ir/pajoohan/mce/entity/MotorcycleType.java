@@ -55,6 +55,8 @@ public class MotorcycleType {
     @JoinColumn(name = "INFORMATION_ATTACH_ID")
     private Attachment attachment;
 
+    /*----------------------------------------------------------------------------------------------------------------*/
+
     @JsonIgnore
     @OneToMany(mappedBy = "motorcycleType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Motorcycle> motorcycleList;
