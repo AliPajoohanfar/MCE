@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -19,6 +20,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 import static ir.pajoohan.mce.entity.Motorcycle.SCHEMA_MCE;
 import static ir.pajoohan.mce.entity.Motorcycle.TABLE_MOTORCYCLE;
@@ -113,5 +115,10 @@ public class Motorcycle {
     private Attachment attachment;
 
     /*----------------------------------------------------------------------------------------------------------------*/
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<AftersalesService> aftersalesServiceList;
+
 
 }

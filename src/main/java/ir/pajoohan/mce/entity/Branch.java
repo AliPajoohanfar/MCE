@@ -92,5 +92,7 @@ public class Branch {
     @OneToMany(mappedBy = "subBranch", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Motorcycle> subBranchMotorcycleList;
 
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<AftersalesService> aftersalesServiceList;
 }
