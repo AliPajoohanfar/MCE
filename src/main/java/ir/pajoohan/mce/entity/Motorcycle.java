@@ -117,7 +117,7 @@ public class Motorcycle {
     /*----------------------------------------------------------------------------------------------------------------*/
 
     @JsonIgnore
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "motorcycle", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<AftersalesService> aftersalesServiceList;
 
 

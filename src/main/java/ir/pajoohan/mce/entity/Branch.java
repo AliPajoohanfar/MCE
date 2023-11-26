@@ -93,6 +93,6 @@ public class Branch {
     private List<Motorcycle> subBranchMotorcycleList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "branch", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<AftersalesService> aftersalesServiceList;
 }
