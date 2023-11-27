@@ -120,5 +120,8 @@ public class Motorcycle {
     @OneToMany(mappedBy = "motorcycle", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<AftersalesService> aftersalesServiceList;
 
+    @JsonIgnore
+    @OneToOne(mappedBy = "motorcycle", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private FinalControl finalControl;
 
 }

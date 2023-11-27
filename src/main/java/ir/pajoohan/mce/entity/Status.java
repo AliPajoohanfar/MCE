@@ -72,4 +72,7 @@ public class Status {
     @OneToMany(mappedBy = "status", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Motorcycle> motorcycleList;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "status", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<FinalControl> finalControlList;
 }
