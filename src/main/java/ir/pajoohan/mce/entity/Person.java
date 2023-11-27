@@ -108,4 +108,8 @@ public class Person {
     @JsonIgnore
     @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<FinalControl> finalControlList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PreDeliveryControl> preDeliveryControlList;
 }
