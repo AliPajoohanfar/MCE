@@ -112,4 +112,17 @@ public class Person {
     @JsonIgnore
     @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PreDeliveryControl> preDeliveryControlList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "qc1Person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<QualityControl> qc1QualityControlList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "qc2Person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<QualityControl> qc2QualityControlList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "qc3Person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<QualityControl> qc3QualityControlList;
+
 }

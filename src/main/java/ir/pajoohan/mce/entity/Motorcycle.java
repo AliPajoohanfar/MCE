@@ -128,4 +128,7 @@ public class Motorcycle {
     @OneToOne(mappedBy = "motorcycle", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private PreDeliveryControl preDeliveryControl;
 
+    @JsonIgnore
+    @OneToOne(mappedBy = "motorcycle", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private QualityControl qualityControl;
 }

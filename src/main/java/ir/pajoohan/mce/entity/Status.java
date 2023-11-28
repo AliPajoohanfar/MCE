@@ -79,4 +79,17 @@ public class Status {
     @JsonIgnore
     @OneToMany(mappedBy = "status", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PreDeliveryControl> preDeliveryControlList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "qc1Status", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<QualityControl> qc1QualityControlList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "qc2Status", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<QualityControl> qc2QualityControlList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "qc3Status", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<QualityControl> qc3QualityControlList;
+
 }
