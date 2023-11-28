@@ -1,5 +1,5 @@
 ﻿prompt PL/SQL Developer Export User Objects for user MCE@XE
-prompt Created by Ali on يكشنبه, 26 نوامبر 2023
+prompt Created by Ali on سهشنبه, 28 نوامبر 2023
 set define off
 spool DB-Export.log
 
@@ -1207,7 +1207,8 @@ create table MCE.FINAL_CONTROL
   failure_title     VARCHAR2(200),
   failure_desc      VARCHAR2(2000),
   corrective_action VARCHAR2(2000),
-  description       VARCHAR2(2000)
+  description       VARCHAR2(2000),
+  motorcycle_id     NUMBER(20) not null
 )
 tablespace SYSTEM
   pctfree 10
@@ -1237,6 +1238,8 @@ comment on column MCE.FINAL_CONTROL.corrective_action
   is 'اقدام اصلاحی';
 comment on column MCE.FINAL_CONTROL.description
   is 'توضیحات';
+comment on column MCE.FINAL_CONTROL.motorcycle_id
+  is 'کلید خارجی - موتورسیکلت کنترل شده';
 alter table MCE.FINAL_CONTROL
   add constraint FC_PK primary key (ID)
   using index 
@@ -1252,7 +1255,21 @@ alter table MCE.FINAL_CONTROL
     maxextents unlimited
   );
 alter table MCE.FINAL_CONTROL
-  add constraint FC_MC_FK foreign key (ID)
+  add constraint FC_UK unique (MOTORCYCLE_ID)
+  using index 
+  tablespace SYSTEM
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+alter table MCE.FINAL_CONTROL
+  add constraint FC_MC_FK foreign key (MOTORCYCLE_ID)
   references MCE.MOTORCYCLE (ID);
 alter table MCE.FINAL_CONTROL
   add constraint FC_PERSN_FK foreign key (PERSON_ID)
@@ -1272,7 +1289,8 @@ create table MCE.PRE_DELIVERY_CONTROL
   status_id         NUMBER(20) not null,
   failure_desc      VARCHAR2(2000),
   corrective_action VARCHAR2(2000),
-  description       VARCHAR2(2000)
+  description       VARCHAR2(2000),
+  motorcycle_id     NUMBER(20) not null
 )
 tablespace SYSTEM
   pctfree 10
@@ -1298,6 +1316,8 @@ comment on column MCE.PRE_DELIVERY_CONTROL.corrective_action
   is 'اقدام اصلاحی';
 comment on column MCE.PRE_DELIVERY_CONTROL.description
   is 'توضیحات';
+comment on column MCE.PRE_DELIVERY_CONTROL.motorcycle_id
+  is 'کلید خارجی - موتورسیکلت کنترل شده';
 alter table MCE.PRE_DELIVERY_CONTROL
   add constraint PDC_PK primary key (ID)
   using index 
@@ -1313,7 +1333,21 @@ alter table MCE.PRE_DELIVERY_CONTROL
     maxextents unlimited
   );
 alter table MCE.PRE_DELIVERY_CONTROL
-  add constraint PDC_MC_FK foreign key (ID)
+  add constraint PDC unique (MOTORCYCLE_ID)
+  using index 
+  tablespace SYSTEM
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+alter table MCE.PRE_DELIVERY_CONTROL
+  add constraint PDC_MC_FK foreign key (MOTORCYCLE_ID)
   references MCE.MOTORCYCLE (ID);
 alter table MCE.PRE_DELIVERY_CONTROL
   add constraint PDC_PERSN_FK foreign key (PERSON_ID)
@@ -1337,7 +1371,8 @@ create table MCE.QUALITY_CONTROL
   qc_2_comment   VARCHAR2(2000),
   qc_3_person_id NUMBER(20),
   qc_3_status_id NUMBER(20),
-  qc_3_comment   VARCHAR2(2000)
+  qc_3_comment   VARCHAR2(2000),
+  motorcycle_id  NUMBER(20) not null
 )
 tablespace SYSTEM
   pctfree 10
@@ -1373,6 +1408,8 @@ comment on column MCE.QUALITY_CONTROL.qc_3_status_id
   is 'QC3 وضعیت';
 comment on column MCE.QUALITY_CONTROL.qc_3_comment
   is 'QC3 توضیحات';
+comment on column MCE.QUALITY_CONTROL.motorcycle_id
+  is 'کلید خارجی - موتورسیکلت کنترل شده';
 alter table MCE.QUALITY_CONTROL
   add constraint QC_PK primary key (ID)
   using index 
@@ -1388,7 +1425,21 @@ alter table MCE.QUALITY_CONTROL
     maxextents unlimited
   );
 alter table MCE.QUALITY_CONTROL
-  add constraint QC_MC_FK foreign key (ID)
+  add constraint QC_UK unique (MOTORCYCLE_ID)
+  using index 
+  tablespace SYSTEM
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+alter table MCE.QUALITY_CONTROL
+  add constraint QC_MC_FK foreign key (MOTORCYCLE_ID)
   references MCE.MOTORCYCLE (ID);
 alter table MCE.QUALITY_CONTROL
   add constraint QC_PERSN_1_FK foreign key (QC_1_PERSON_ID)
