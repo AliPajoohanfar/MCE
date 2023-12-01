@@ -5,7 +5,6 @@ create user MCE identified by mce;
 GRANT DBA TO mce WITH ADMIN OPTION;
 
 -- 3 ------------------------------------
--- Go to CLI (cmd r Bash)
--- Change Directory to DB-Export.sql Directory.ALLOCATE
-sqlplus mce/mce
-@DB-Export.sql
+-- PLSQL Deveoper / Tools / Import Tables
+-- C:\Oracle\XE\app\oracle\product\11.2.0\server\bin\sqlplus.exe
+-- Import DB-Export.sql
