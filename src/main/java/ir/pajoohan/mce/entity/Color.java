@@ -1,6 +1,7 @@
 package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ir.pajoohan.mce.entity.baseModel.Auditable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,7 +30,7 @@ import static ir.pajoohan.mce.entity.Color.TABLE_COLOR;
 @Entity
 @Table(name = TABLE_COLOR, schema = SCHEMA_MCE,
         uniqueConstraints = {@UniqueConstraint(name = "COLOR_2_UK", columnNames = {"R", "G", "B"})})
-public class Color {
+public class Color extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
     public static final String TABLE_COLOR = "COLOR";

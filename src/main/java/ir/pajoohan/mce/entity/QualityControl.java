@@ -1,6 +1,7 @@
 package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ir.pajoohan.mce.entity.baseModel.Auditable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,7 +26,7 @@ import static ir.pajoohan.mce.entity.QualityControl.TABLE_QUALITY_CONTROL;
 @Setter
 @Entity
 @Table(name = TABLE_QUALITY_CONTROL, schema = SCHEMA_MCE)
-public class QualityControl {
+public class QualityControl extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
     public static final String TABLE_QUALITY_CONTROL = "QUALITY_CONTROL";

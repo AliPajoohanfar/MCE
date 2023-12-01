@@ -1,6 +1,7 @@
 package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ir.pajoohan.mce.entity.baseModel.Auditable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,7 +33,7 @@ import static ir.pajoohan.mce.entity.Status.TABLE_STATUS;
                 @UniqueConstraint(name = "STATUS_1_UK", columnNames = {"STATUS_FLOW", "CODE"}),
                 @UniqueConstraint(name = "STATUS_2_UK", columnNames = {"STATUS_FLOW", "ORDER_NUM"})})
 
-public class Status {
+public class Status extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
     public static final String TABLE_STATUS = "STATUS";

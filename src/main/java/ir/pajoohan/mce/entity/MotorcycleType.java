@@ -1,6 +1,7 @@
 package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ir.pajoohan.mce.entity.baseModel.Auditable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,7 +28,7 @@ import static ir.pajoohan.mce.entity.MotorcycleType.TABLE_MOTORCYCLE_TYPE;
 @Setter
 @Entity
 @Table(name = TABLE_MOTORCYCLE_TYPE, schema = SCHEMA_MCE)
-public class MotorcycleType {
+public class MotorcycleType extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
     public static final String TABLE_MOTORCYCLE_TYPE = "MOTORCYCLE_TYPE";

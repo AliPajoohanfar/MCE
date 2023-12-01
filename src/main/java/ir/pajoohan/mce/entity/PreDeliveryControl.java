@@ -1,6 +1,7 @@
 package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ir.pajoohan.mce.entity.baseModel.Auditable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,7 +26,7 @@ import static ir.pajoohan.mce.entity.PreDeliveryControl.TABLE_PRE_DELIVERY_CONTR
 @Setter
 @Entity
 @Table(name = TABLE_PRE_DELIVERY_CONTROL, schema = SCHEMA_MCE)
-public class PreDeliveryControl {
+public class PreDeliveryControl extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
     public static final String TABLE_PRE_DELIVERY_CONTROL = "PRE_DELIVERY_CONTROL";

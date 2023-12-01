@@ -1,6 +1,7 @@
 package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ir.pajoohan.mce.entity.baseModel.Auditable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,7 +30,7 @@ import static ir.pajoohan.mce.entity.AftersalesService.TABLE_AFTERSALES_SERVICE;
 @Setter
 @Entity
 @Table(name = TABLE_AFTERSALES_SERVICE, schema = SCHEMA_MCE)
-public class AftersalesService {
+public class AftersalesService extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
     public static final String TABLE_AFTERSALES_SERVICE = "AFTERSALES_SERVICE";
