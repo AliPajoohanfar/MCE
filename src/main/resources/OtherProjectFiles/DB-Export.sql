@@ -1,5 +1,5 @@
 ﻿prompt PL/SQL Developer Export User Objects for user MCE@XE
-prompt Created by Ali on سهشنبه, 28 نوامبر 2023
+prompt Created by Ali on جمعه, 1 دسامبر 2023
 set define off
 spool DB-Export.log
 
@@ -9,18 +9,22 @@ prompt =====================
 prompt
 create table MCE.PERSON
 (
-  id             NUMBER(20) not null,
-  national_code  VARCHAR2(10) not null,
-  name           VARCHAR2(200) not null,
-  family         VARCHAR2(300) not null,
-  father_name    VARCHAR2(200),
-  birthdate      DATE,
-  identifire_num VARCHAR2(10),
-  issuance_place VARCHAR2(200),
-  postal_code    VARCHAR2(10),
-  home_address   VARCHAR2(500),
-  mobile_number  VARCHAR2(10) not null,
-  phone_number   VARCHAR2(10)
+  id                 NUMBER(20) not null,
+  national_code      VARCHAR2(10) not null,
+  name               VARCHAR2(200) not null,
+  family             VARCHAR2(300) not null,
+  father_name        VARCHAR2(200),
+  birthdate          DATE,
+  identifire_num     VARCHAR2(10),
+  issuance_place     VARCHAR2(200),
+  postal_code        VARCHAR2(10),
+  home_address       VARCHAR2(500),
+  mobile_number      VARCHAR2(10) not null,
+  phone_number       VARCHAR2(10),
+  created_by         VARCHAR2(255 CHAR),
+  created_date       TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR),
+  last_modified_date TIMESTAMP(6)
 )
 tablespace SYSTEM
   pctfree 10
@@ -113,9 +117,13 @@ prompt ====================
 prompt
 create table MCE.STATE
 (
-  id       NUMBER(20) not null,
-  name     VARCHAR2(100) not null,
-  tel_code VARCHAR2(3) not null
+  id                 NUMBER(20) not null,
+  name               VARCHAR2(100) not null,
+  tel_code           VARCHAR2(3) not null,
+  created_by         VARCHAR2(255 CHAR),
+  created_date       TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR),
+  last_modified_date TIMESTAMP(6)
 )
 tablespace SYSTEM
   pctfree 10
@@ -179,7 +187,11 @@ create table MCE.BRANCH
   state_id                NUMBER(20) not null,
   person_id               NUMBER(20),
   mc_doc_print_permission NUMBER(1) not null,
-  branch_typ              NUMBER(1) not null
+  branch_typ              NUMBER(1) not null,
+  created_by              VARCHAR2(255 CHAR),
+  created_date            TIMESTAMP(6),
+  last_modified_by        VARCHAR2(255 CHAR),
+  last_modified_date      TIMESTAMP(6)
 )
 tablespace SYSTEM
   pctfree 10
@@ -255,18 +267,22 @@ prompt =======================
 prompt
 create table MCE.CUSTOMER
 (
-  id             NUMBER(20) not null,
-  national_code  VARCHAR2(10) not null,
-  name           VARCHAR2(200) not null,
-  family         VARCHAR2(300) not null,
-  father_name    VARCHAR2(200),
-  birthdate      DATE,
-  identifire_num VARCHAR2(10),
-  issuance_place VARCHAR2(200),
-  postal_code    VARCHAR2(10),
-  home_address   VARCHAR2(500),
-  mobile_number  VARCHAR2(10) not null,
-  phone_number   VARCHAR2(10)
+  id                 NUMBER(20) not null,
+  national_code      VARCHAR2(10) not null,
+  name               VARCHAR2(200) not null,
+  family             VARCHAR2(300) not null,
+  father_name        VARCHAR2(200),
+  birthdate          DATE,
+  identifire_num     VARCHAR2(10),
+  issuance_place     VARCHAR2(200),
+  postal_code        VARCHAR2(10),
+  home_address       VARCHAR2(500),
+  mobile_number      VARCHAR2(10) not null,
+  phone_number       VARCHAR2(10),
+  created_by         VARCHAR2(255 CHAR),
+  created_date       TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR),
+  last_modified_date TIMESTAMP(6)
 )
 tablespace SYSTEM
   pctfree 10
@@ -345,28 +361,32 @@ prompt =========================
 prompt
 create table MCE.ATTACHMENT
 (
-  id               NUMBER(20) not null,
-  attach_file_1    BLOB not null,
-  attach_desc_1    VARCHAR2(200),
-  attach_file_2    BLOB,
-  attach_desc_2    VARCHAR2(200),
-  attach_file_3    BLOB,
-  attach_desc_3    VARCHAR2(200),
-  attach_file_4    BLOB,
-  attach_desc_4    VARCHAR2(200),
-  attach_file_5    BLOB,
-  attach_desc_5    VARCHAR2(200),
-  attach_file_6    BLOB,
-  attach_desc_6    VARCHAR2(200),
-  attach_file_7    BLOB,
-  attach_desc_7    VARCHAR2(200),
-  attach_file_8    BLOB,
-  attach_desc_8    VARCHAR2(200),
-  attach_file_9    BLOB,
-  attach_desc_9    VARCHAR2(200),
-  attach_file_10   BLOB,
-  attach_desc_10   VARCHAR2(200),
-  "attach_desc_6)" VARCHAR2(200 CHAR)
+  id                 NUMBER(20) not null,
+  attach_file_1      BLOB not null,
+  attach_desc_1      VARCHAR2(200),
+  attach_file_2      BLOB,
+  attach_desc_2      VARCHAR2(200),
+  attach_file_3      BLOB,
+  attach_desc_3      VARCHAR2(200),
+  attach_file_4      BLOB,
+  attach_desc_4      VARCHAR2(200),
+  attach_file_5      BLOB,
+  attach_desc_5      VARCHAR2(200),
+  attach_file_6      BLOB,
+  attach_desc_6      VARCHAR2(200),
+  attach_file_7      BLOB,
+  attach_desc_7      VARCHAR2(200),
+  attach_file_8      BLOB,
+  attach_desc_8      VARCHAR2(200),
+  attach_file_9      BLOB,
+  attach_desc_9      VARCHAR2(200),
+  attach_file_10     BLOB,
+  attach_desc_10     VARCHAR2(200),
+  "attach_desc_6)"   VARCHAR2(200 CHAR),
+  created_by         VARCHAR2(255 CHAR),
+  created_date       TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR),
+  last_modified_date TIMESTAMP(6)
 )
 tablespace SYSTEM
   pctfree 10
@@ -448,7 +468,11 @@ create table MCE.MOTORCYCLE_TYPE
   id                    NUMBER(20) not null,
   information_attach_id NUMBER(20),
   code                  VARCHAR2(10 CHAR) not null,
-  name                  VARCHAR2(100 CHAR) not null
+  name                  VARCHAR2(100 CHAR) not null,
+  created_by            VARCHAR2(255 CHAR),
+  created_date          TIMESTAMP(6),
+  last_modified_by      VARCHAR2(255 CHAR),
+  last_modified_date    TIMESTAMP(6)
 )
 tablespace SYSTEM
   pctfree 10
@@ -510,12 +534,16 @@ prompt =====================
 prompt
 create table MCE.STATUS
 (
-  id           NUMBER(20) not null,
-  status_flow  VARCHAR2(4) not null,
-  order_num    NUMBER(3),
-  code         VARCHAR2(5) not null,
-  desc_persian VARCHAR2(100),
-  desc_english VARCHAR2(10 CHAR)
+  id                 NUMBER(20) not null,
+  status_flow        VARCHAR2(4) not null,
+  order_num          NUMBER(3),
+  code               VARCHAR2(5) not null,
+  desc_persian       VARCHAR2(100),
+  desc_english       VARCHAR2(10 CHAR),
+  created_by         VARCHAR2(255 CHAR),
+  created_date       TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR),
+  last_modified_date TIMESTAMP(6)
 )
 tablespace SYSTEM
   pctfree 10
@@ -592,12 +620,16 @@ prompt ==========================
 prompt
 create table MCE.ENGINE_TYPE
 (
-  id     NUMBER(20) not null,
-  code   VARCHAR2(20) not null,
-  name   VARCHAR2(200),
-  volume NUMBER(4),
-  power  NUMBER(4),
-  fuel   NUMBER(1)
+  id                 NUMBER(20) not null,
+  code               VARCHAR2(20) not null,
+  name               VARCHAR2(200),
+  volume             NUMBER(4),
+  power              NUMBER(4),
+  fuel               NUMBER(1),
+  created_by         VARCHAR2(255 CHAR),
+  created_date       TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR),
+  last_modified_date TIMESTAMP(6)
 )
 tablespace SYSTEM
   pctfree 10
@@ -676,7 +708,11 @@ create table MCE.WAREHOUSE_INPUT
   year                  NUMBER(4) not null,
   engine_type_id        NUMBER(20) not null,
   kootaj_num            VARCHAR2(8) not null,
-  num                   NUMBER(6) not null
+  num                   NUMBER(6) not null,
+  created_by            VARCHAR2(255 CHAR),
+  created_date          TIMESTAMP(6),
+  last_modified_by      VARCHAR2(255 CHAR),
+  last_modified_date    TIMESTAMP(6)
 )
 tablespace SYSTEM
   pctfree 10
@@ -807,13 +843,17 @@ prompt ====================
 prompt
 create table MCE.COLOR
 (
-  id           NUMBER(20) not null,
-  code         VARCHAR2(10),
-  persian_name VARCHAR2(100) not null,
-  english_name VARCHAR2(100),
-  r            NUMBER(3),
-  g            NUMBER(3),
-  b            NUMBER(3)
+  id                 NUMBER(20) not null,
+  code               VARCHAR2(10),
+  persian_name       VARCHAR2(100) not null,
+  english_name       VARCHAR2(100),
+  r                  NUMBER(3),
+  g                  NUMBER(3),
+  b                  NUMBER(3),
+  created_by         VARCHAR2(255 CHAR),
+  created_date       TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR),
+  last_modified_date TIMESTAMP(6)
 )
 tablespace SYSTEM
   pctfree 10
@@ -901,23 +941,27 @@ prompt =========================
 prompt
 create table MCE.MOTORCYCLE
 (
-  id                NUMBER(20) not null,
-  mc_type_id        NUMBER(20) not null,
-  branch_id         NUMBER(20),
-  customer_id       NUMBER(20),
-  wh_input_id       NUMBER(20) not null,
-  engine_num        VARCHAR2(20) not null,
-  chassis_num       VARCHAR2(20) not null,
-  color_id          NUMBER(20) not null,
-  status_id         NUMBER(20) not null,
-  numbering_date    DATE,
-  exit_date         DATE,
-  license_plate     VARCHAR2(10),
-  waybill_num       VARCHAR2(10),
-  sub_branch_id     NUMBER(20),
-  state_id          NUMBER(20),
-  customer_buy_date DATE,
-  mc_docs_attach_id NUMBER(20)
+  id                 NUMBER(20) not null,
+  mc_type_id         NUMBER(20) not null,
+  branch_id          NUMBER(20),
+  customer_id        NUMBER(20),
+  wh_input_id        NUMBER(20) not null,
+  engine_num         VARCHAR2(20) not null,
+  chassis_num        VARCHAR2(20) not null,
+  color_id           NUMBER(20) not null,
+  status_id          NUMBER(20) not null,
+  numbering_date     DATE,
+  exit_date          DATE,
+  license_plate      VARCHAR2(10),
+  waybill_num        VARCHAR2(10),
+  sub_branch_id      NUMBER(20),
+  state_id           NUMBER(20),
+  customer_buy_date  DATE,
+  mc_docs_attach_id  NUMBER(20),
+  created_by         VARCHAR2(255 CHAR),
+  created_date       TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR),
+  last_modified_date TIMESTAMP(6)
 )
 tablespace SYSTEM
   pctfree 10
@@ -1058,14 +1102,18 @@ prompt =================================
 prompt
 create table MCE.AFTERSALES_SERVICE
 (
-  id            NUMBER(20) not null,
-  service_title VARCHAR2(200) not null,
-  service_desc  VARCHAR2(2000) not null,
-  service_date  DATE not null,
-  customer_id   NUMBER(20) not null,
-  motorcycle_id NUMBER(20) not null,
-  branch_id     NUMBER(20) not null,
-  kilometer     NUMBER(7) not null
+  id                 NUMBER(20) not null,
+  service_title      VARCHAR2(200) not null,
+  service_desc       VARCHAR2(2000) not null,
+  service_date       DATE not null,
+  customer_id        NUMBER(20) not null,
+  motorcycle_id      NUMBER(20) not null,
+  branch_id          NUMBER(20) not null,
+  kilometer          NUMBER(7) not null,
+  created_by         VARCHAR2(255 CHAR),
+  created_date       TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR),
+  last_modified_date TIMESTAMP(6)
 )
 tablespace SYSTEM
   pctfree 10
@@ -1133,7 +1181,11 @@ create table MCE.CUSTOMER_SUPPORT
   customer_suggestion VARCHAR2(2000 CHAR),
   customer_complaint  VARCHAR2(2000 CHAR),
   response            VARCHAR2(2000 CHAR),
-  customer_pol        VARCHAR2(2000 CHAR)
+  customer_pol        VARCHAR2(2000 CHAR),
+  created_by          VARCHAR2(255 CHAR),
+  created_date        TIMESTAMP(6),
+  last_modified_by    VARCHAR2(255 CHAR),
+  last_modified_date  TIMESTAMP(6)
 )
 tablespace SYSTEM
   pctfree 10
@@ -1201,14 +1253,18 @@ prompt ============================
 prompt
 create table MCE.FINAL_CONTROL
 (
-  id                NUMBER(20) not null,
-  person_id         NUMBER(20) not null,
-  status_id         NUMBER(20) not null,
-  failure_title     VARCHAR2(200),
-  failure_desc      VARCHAR2(2000),
-  corrective_action VARCHAR2(2000),
-  description       VARCHAR2(2000),
-  motorcycle_id     NUMBER(20) not null
+  id                 NUMBER(20) not null,
+  person_id          NUMBER(20) not null,
+  status_id          NUMBER(20) not null,
+  failure_title      VARCHAR2(200),
+  failure_desc       VARCHAR2(2000),
+  corrective_action  VARCHAR2(2000),
+  description        VARCHAR2(2000),
+  motorcycle_id      NUMBER(20) not null,
+  created_by         VARCHAR2(255 CHAR),
+  created_date       TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR),
+  last_modified_date TIMESTAMP(6)
 )
 tablespace SYSTEM
   pctfree 10
@@ -1284,13 +1340,17 @@ prompt ===================================
 prompt
 create table MCE.PRE_DELIVERY_CONTROL
 (
-  id                NUMBER(20) not null,
-  person_id         NUMBER(20) not null,
-  status_id         NUMBER(20) not null,
-  failure_desc      VARCHAR2(2000),
-  corrective_action VARCHAR2(2000),
-  description       VARCHAR2(2000),
-  motorcycle_id     NUMBER(20) not null
+  id                 NUMBER(20) not null,
+  person_id          NUMBER(20) not null,
+  status_id          NUMBER(20) not null,
+  failure_desc       VARCHAR2(2000),
+  corrective_action  VARCHAR2(2000),
+  description        VARCHAR2(2000),
+  motorcycle_id      NUMBER(20) not null,
+  created_by         VARCHAR2(255 CHAR),
+  created_date       TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR),
+  last_modified_date TIMESTAMP(6)
 )
 tablespace SYSTEM
   pctfree 10
@@ -1362,17 +1422,21 @@ prompt ==============================
 prompt
 create table MCE.QUALITY_CONTROL
 (
-  id             NUMBER(20) not null,
-  qc_1_person_id NUMBER(20) not null,
-  qc_1_status_id NUMBER(20) not null,
-  qc_1_comment   VARCHAR2(2000) not null,
-  qc_2_person_id NUMBER(20),
-  qc_2_status_id NUMBER(20),
-  qc_2_comment   VARCHAR2(2000),
-  qc_3_person_id NUMBER(20),
-  qc_3_status_id NUMBER(20),
-  qc_3_comment   VARCHAR2(2000),
-  motorcycle_id  NUMBER(20) not null
+  id                 NUMBER(20) not null,
+  qc_1_person_id     NUMBER(20) not null,
+  qc_1_status_id     NUMBER(20) not null,
+  qc_1_comment       VARCHAR2(2000) not null,
+  qc_2_person_id     NUMBER(20),
+  qc_2_status_id     NUMBER(20),
+  qc_2_comment       VARCHAR2(2000),
+  qc_3_person_id     NUMBER(20),
+  qc_3_status_id     NUMBER(20),
+  qc_3_comment       VARCHAR2(2000),
+  motorcycle_id      NUMBER(20) not null,
+  created_by         VARCHAR2(255 CHAR),
+  created_date       TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR),
+  last_modified_date TIMESTAMP(6)
 )
 tablespace SYSTEM
   pctfree 10
