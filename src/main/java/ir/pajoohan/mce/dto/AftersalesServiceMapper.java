@@ -1,5 +1,6 @@
 package ir.pajoohan.mce.dto;
 
+import ir.pajoohan.mce.dto.baseDto.AddAuditMapping;
 import ir.pajoohan.mce.entity.AftersalesService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -10,6 +11,7 @@ public interface AftersalesServiceMapper {
 
     AftersalesServiceMapper INSTANCE = Mappers.getMapper(AftersalesServiceMapper.class);
 
+    @AddAuditMapping
     @Mapping(target = "customerId", source = "aftersalesService.customer.id")
     @Mapping(target = "motorcycleId", source = "aftersalesService.motorcycle.id")
     @Mapping(target = "branchId", source = "aftersalesService.branch.id")

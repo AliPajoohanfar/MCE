@@ -1,5 +1,6 @@
 package ir.pajoohan.mce.dto;
 
+import ir.pajoohan.mce.dto.baseDto.AddAuditMapping;
 import ir.pajoohan.mce.entity.Branch;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -10,6 +11,7 @@ public interface BranchMapper {
 
     BranchMapper INSTANCE = Mappers.getMapper(BranchMapper.class);
 
+    @AddAuditMapping
     @Mapping(target = "stateId", source = "branch.state.id")
     @Mapping(target = "personId", source = "branch.person.id")
     @Mapping(target = "parentId", source = "branch.parent.id")

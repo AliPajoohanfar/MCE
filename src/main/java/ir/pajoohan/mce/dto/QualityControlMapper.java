@@ -1,5 +1,6 @@
 package ir.pajoohan.mce.dto;
 
+import ir.pajoohan.mce.dto.baseDto.AddAuditMapping;
 import ir.pajoohan.mce.entity.QualityControl;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -10,6 +11,7 @@ public interface QualityControlMapper {
 
     QualityControlMapper INSTANCE = Mappers.getMapper(QualityControlMapper.class);
 
+    @AddAuditMapping
     @Mapping(target = "qc1PersonId", source = "qc1Person.id")
     @Mapping(target = "qc2PersonId", source = "qc2Person.id")
     @Mapping(target = "qc3PersonId", source = "qc3Person.id")
