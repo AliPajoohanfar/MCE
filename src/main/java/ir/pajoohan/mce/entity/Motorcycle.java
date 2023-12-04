@@ -1,7 +1,7 @@
 package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import ir.pajoohan.mce.entity.baseModel.Auditable;
+import ir.pajoohan.mce.entity.baseModel.Effective;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,6 +19,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
 
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,8 @@ import static ir.pajoohan.mce.entity.Motorcycle.TABLE;
 @Setter
 @Entity
 @Table(name = TABLE, schema = SCHEMA_MCE)
-public class Motorcycle extends Auditable<String> {
+@SQLDelete(sql = "UPDATE " + State.TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ?")
+public class Motorcycle extends Effective {
 
     public static final String SCHEMA_MCE = "MCE";
     public static final String TABLE = "MOTORCYCLE";
