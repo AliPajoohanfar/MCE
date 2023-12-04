@@ -1,6 +1,6 @@
 package ir.pajoohan.mce.dto;
 
-import ir.pajoohan.mce.dto.baseDto.AddAuditMapping;
+import ir.pajoohan.mce.dto.baseDto.AddEffectiveMapping;
 import ir.pajoohan.mce.entity.PreDeliveryControl;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -11,13 +11,13 @@ public interface PreDeliveryControlMapper {
 
     PreDeliveryControlMapper INSTANCE = Mappers.getMapper(PreDeliveryControlMapper.class);
 
-    @AddAuditMapping
+    @AddEffectiveMapping
     @Mapping(target = "personId", source = "person.id")
     @Mapping(target = "statusId", source = "status.id")
     @Mapping(target = "motorcycleId", source = "motorcycle.id")
     PreDeliveryControlDto PreDeliveryControlToPreDeliveryControlDto(PreDeliveryControl preDeliveryControl);
 
-
+    @Mapping(target = "effectiveDate", source = "effectiveDate")
     @Mapping(target = "person.id", source = "personId")
     @Mapping(target = "status.id", source = "statusId")
     @Mapping(target = "motorcycle.id", source = "motorcycleId")

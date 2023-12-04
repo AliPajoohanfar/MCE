@@ -1,6 +1,6 @@
 package ir.pajoohan.mce.dto;
 
-import ir.pajoohan.mce.dto.baseDto.AddAuditMapping;
+import ir.pajoohan.mce.dto.baseDto.AddEffectiveMapping;
 import ir.pajoohan.mce.entity.Motorcycle;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -11,7 +11,7 @@ public interface MotorcycleMapper {
 
     MotorcycleMapper INSTANCE = Mappers.getMapper(MotorcycleMapper.class);
 
-    @AddAuditMapping
+    @AddEffectiveMapping
     @Mapping(target = "motorcycleTypeId", source = "motorcycle.motorcycleType.id")
     @Mapping(target = "branchId", source = "motorcycle.branch.id")
     @Mapping(target = "customerId", source = "motorcycle.customer.id")
@@ -23,6 +23,7 @@ public interface MotorcycleMapper {
     @Mapping(target = "attachmentId", source = "motorcycle.attachment.id")
     MotorcycleDto MotorcycleToMotorcycleDto(Motorcycle motorcycle);
 
+    @Mapping(target = "effectiveDate", source = "effectiveDate")
     @Mapping(target = "motorcycleType.id", source = "motorcycleTypeId")
     @Mapping(target = "branch.id", source = "branchId")
     @Mapping(target = "customer.id", source = "customerId")

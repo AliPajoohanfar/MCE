@@ -1,6 +1,6 @@
 package ir.pajoohan.mce.dto;
 
-import ir.pajoohan.mce.dto.baseDto.AddAuditMapping;
+import ir.pajoohan.mce.dto.baseDto.AddEffectiveMapping;
 import ir.pajoohan.mce.entity.WarehouseInput;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -11,7 +11,7 @@ public interface WarehouseInputMapper {
 
     WarehouseInputMapper INSTANCE = Mappers.getMapper(WarehouseInputMapper.class);
 
-    @AddAuditMapping
+    @AddEffectiveMapping
     @Mapping(target = "controllerPersonId", source = "warehouseInput.controllerPerson.id")
     @Mapping(target = "identifiersAttachId", source = "warehouseInput.identifiersAttach.id")
     @Mapping(target = "receiptsAttachId", source = "warehouseInput.receiptsAttach.id")
@@ -20,6 +20,7 @@ public interface WarehouseInputMapper {
     @Mapping(target = "engineTypeId", source = "warehouseInput.engineType.id")
     WarehouseInputDto warehouseInputToWarehouseInputDto(WarehouseInput warehouseInput);
 
+    @Mapping(target = "effectiveDate", source = "effectiveDate")
     @Mapping(target = "controllerPerson.id", source = "warehouseInputDto.controllerPersonId")
     @Mapping(target = "identifiersAttach.id", source = "warehouseInputDto.identifiersAttachId")
     @Mapping(target = "receiptsAttach.id", source = "warehouseInputDto.receiptsAttachId")
