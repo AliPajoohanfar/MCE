@@ -1,6 +1,6 @@
 package ir.pajoohan.mce.dto;
 
-import ir.pajoohan.mce.dto.baseDto.AuditDto;
+import ir.pajoohan.mce.dto.baseDto.EffectiveDto;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Component
-public class PersonDto extends AuditDto {
+public class PersonDto extends EffectiveDto {
     private Long id;
     private String nationalCode;
     private String name;

@@ -1,6 +1,6 @@
 package ir.pajoohan.mce.dto;
 
-import ir.pajoohan.mce.dto.baseDto.AuditDto;
+import ir.pajoohan.mce.dto.baseDto.EffectiveDto;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @Component
-public class BranchDto extends AuditDto {
+public class BranchDto extends EffectiveDto {
     private Long id;
     private Long parentId;
     private String code;
