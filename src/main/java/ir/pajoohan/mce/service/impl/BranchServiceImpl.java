@@ -8,6 +8,7 @@ import ir.pajoohan.mce.repository.BranchRepository;
 import ir.pajoohan.mce.repository.StateRepository;
 import ir.pajoohan.mce.service.BranchService;
 import ir.pajoohan.mce.util.Messages;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.NoResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,9 +49,7 @@ public class BranchServiceImpl implements BranchService {
 
     @Override
     public BranchDto get(Long id) {
-        Branch branch = branchRepository.findById(id).orElseThrow(() ->
-                new NoResultException(Messages.get("ex.noDataFound")));
-
+        Branch branch = branchRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         return BranchMapper.INSTANCE.branchToBranchDto(branch);
     }
 

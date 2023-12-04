@@ -5,8 +5,7 @@ import ir.pajoohan.mce.dto.ColorMapper;
 import ir.pajoohan.mce.entity.Color;
 import ir.pajoohan.mce.repository.ColorRepository;
 import ir.pajoohan.mce.service.ColorService;
-import ir.pajoohan.mce.util.Messages;
-import jakarta.persistence.NoResultException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +24,8 @@ public class ColorServiceImpl implements ColorService {
         this.colorRepository = colorRepository;
     }
 
+    /*----------------------------------------------------------------------------------------------------------------*/
+
     @Override
     public List<ColorDto> getAll() {
         List<Color> colorList = colorRepository.findAll();
@@ -37,9 +38,7 @@ public class ColorServiceImpl implements ColorService {
 
     @Override
     public ColorDto get(Long id) {
-        Color color = colorRepository.findById(id).orElseThrow(
-                () -> new NoResultException(Messages.get("ex.noDataFound")));
-
+        Color color = colorRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         return ColorMapper.INSTANCE.colorToColorDto(color);
     }
 

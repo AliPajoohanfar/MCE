@@ -5,8 +5,7 @@ import ir.pajoohan.mce.dto.StateMapper;
 import ir.pajoohan.mce.entity.State;
 import ir.pajoohan.mce.repository.StateRepository;
 import ir.pajoohan.mce.service.StateService;
-import ir.pajoohan.mce.util.Messages;
-import jakarta.persistence.NoResultException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,9 +44,7 @@ public class StateServiceImpl implements StateService {
 
     @Override
     public StateDto get(Long id) {
-        State state = stateRepository.findById(id).orElseThrow(
-                () -> new NoResultException(Messages.get("ex.noDataFound")));
-
+        State state = stateRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         return StateMapper.INSTANCE.stateToStateDto(state);
     }
 
