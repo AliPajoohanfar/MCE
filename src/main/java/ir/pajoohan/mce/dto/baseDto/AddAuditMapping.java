@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Target({ElementType.METHOD})
+@Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RUNTIME)
 @Mapping(target = "createdBy", source = "createdBy")
 @Mapping(target = "createdDate", source = "createdDate")
