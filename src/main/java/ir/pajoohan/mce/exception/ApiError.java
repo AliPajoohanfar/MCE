@@ -23,7 +23,7 @@ import java.util.Set;
 public class ApiError {
 
     private HttpStatus status;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss:SSS")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss.SSS")
     private LocalDateTime timestamp;
     private String message;
     private String debugMessage;
