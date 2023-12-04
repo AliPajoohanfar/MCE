@@ -20,21 +20,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 import static ir.pajoohan.mce.entity.FinalControl.SCHEMA_MCE;
-import static ir.pajoohan.mce.entity.FinalControl.TABLE_FINAL_CONTROL;
+import static ir.pajoohan.mce.entity.FinalControl.TABLE;
 
 @Getter
 @Setter
 @Entity
-@Table(name = TABLE_FINAL_CONTROL, schema = SCHEMA_MCE)
+@Table(name = TABLE, schema = SCHEMA_MCE)
 public class FinalControl extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
-    public static final String TABLE_FINAL_CONTROL = "FINAL_CONTROL";
+    public static final String TABLE = "FINAL_CONTROL";
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "finalControl_generator")
-    @SequenceGenerator(name = "finalControl_generator", sequenceName = "SQ_FINAL_CONTROL", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "finalControl_generator", sequenceName = "SQ_" + TABLE, schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @NotBlank(message = "Enter FINAL_CONTROL'S FAILURE_TITLE.")

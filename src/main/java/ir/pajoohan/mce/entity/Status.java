@@ -23,12 +23,12 @@ import lombok.Setter;
 import java.util.List;
 
 import static ir.pajoohan.mce.entity.Status.SCHEMA_MCE;
-import static ir.pajoohan.mce.entity.Status.TABLE_STATUS;
+import static ir.pajoohan.mce.entity.Status.TABLE;
 
 @Getter
 @Setter
 @Entity
-@Table(name = TABLE_STATUS, schema = SCHEMA_MCE,
+@Table(name = TABLE, schema = SCHEMA_MCE,
         uniqueConstraints = {
                 @UniqueConstraint(name = "STATUS_1_UK", columnNames = {"STATUS_FLOW", "CODE"}),
                 @UniqueConstraint(name = "STATUS_2_UK", columnNames = {"STATUS_FLOW", "ORDER_NUM"})})
@@ -36,12 +36,12 @@ import static ir.pajoohan.mce.entity.Status.TABLE_STATUS;
 public class Status extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
-    public static final String TABLE_STATUS = "STATUS";
+    public static final String TABLE = "STATUS";
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "status_generator")
-    @SequenceGenerator(name = "status_generator", sequenceName = "SQ_STATUS", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "status_generator", sequenceName = "SQ_" + TABLE, schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @NotBlank(message = "Enter STATUS'S STATUS_FLOW.")

@@ -31,21 +31,21 @@ import java.util.Date;
 import java.util.List;
 
 import static ir.pajoohan.mce.entity.WarehouseInput.SCHEMA_MCE;
-import static ir.pajoohan.mce.entity.WarehouseInput.TABLE_WAREHOUSE_INPUT;
+import static ir.pajoohan.mce.entity.WarehouseInput.TABLE;
 
 @Getter
 @Setter
 @Entity
-@Table(name = TABLE_WAREHOUSE_INPUT, schema = SCHEMA_MCE)
+@Table(name = TABLE, schema = SCHEMA_MCE)
 public class WarehouseInput extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
-    public static final String TABLE_WAREHOUSE_INPUT = "WAREHOUSE_INPUT";
+    public static final String TABLE = "WAREHOUSE_INPUT";
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "warehouseInput_generator")
-    @SequenceGenerator(name = "warehouseInput_generator", sequenceName = "SQ_WAREHOUSE_INPUT", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "warehouseInput_generator", sequenceName = "SQ_" + TABLE, schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @Size(min = 8, max = 400, message = "WAREHOUSE_INPUT'S BOM_LINK must be 8 characters.")

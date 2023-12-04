@@ -24,21 +24,21 @@ import lombok.Setter;
 import java.util.Date;
 
 import static ir.pajoohan.mce.entity.AftersalesService.SCHEMA_MCE;
-import static ir.pajoohan.mce.entity.AftersalesService.TABLE_AFTERSALES_SERVICE;
+import static ir.pajoohan.mce.entity.AftersalesService.TABLE;
 
 @Getter
 @Setter
 @Entity
-@Table(name = TABLE_AFTERSALES_SERVICE, schema = SCHEMA_MCE)
+@Table(name = TABLE, schema = SCHEMA_MCE)
 public class AftersalesService extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
-    public static final String TABLE_AFTERSALES_SERVICE = "AFTERSALES_SERVICE";
+    public static final String TABLE = "AFTERSALES_SERVICE";
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "aftersalesService_generator")
-    @SequenceGenerator(name = "aftersalesService_generator", sequenceName = "SQ_AFTERSALES_SERVICE", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "aftersalesService_generator", sequenceName = "SQ_" + TABLE, schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @NotBlank(message = "Enter AFTERSALES_SERVICE'S SERVICE_TITLE.")

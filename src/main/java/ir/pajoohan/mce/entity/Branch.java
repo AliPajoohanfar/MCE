@@ -24,21 +24,21 @@ import lombok.Setter;
 import java.util.List;
 
 import static ir.pajoohan.mce.entity.Branch.SCHEMA_MCE;
-import static ir.pajoohan.mce.entity.Branch.TABLE_BRANCH;
+import static ir.pajoohan.mce.entity.Branch.TABLE;
 
 @Getter
 @Setter
 @Entity
-@Table(name = TABLE_BRANCH, schema = SCHEMA_MCE)
+@Table(name = TABLE, schema = SCHEMA_MCE)
 public class Branch extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
-    public static final String TABLE_BRANCH = "BRANCH";
+    public static final String TABLE = "BRANCH";
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "branch_generator")
-    @SequenceGenerator(name = "branch_generator", sequenceName = "SQ_BRANCH", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "branch_generator", sequenceName = "SQ_" + TABLE, schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @NotBlank(message = "Enter BRANCH'S CODE.")

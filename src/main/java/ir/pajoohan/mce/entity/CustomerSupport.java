@@ -18,21 +18,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 import static ir.pajoohan.mce.entity.CustomerSupport.SCHEMA_MCE;
-import static ir.pajoohan.mce.entity.CustomerSupport.TABLE_CUSTOMER_SUPPORT;
+import static ir.pajoohan.mce.entity.CustomerSupport.TABLE;
 
 @Getter
 @Setter
 @Entity
-@Table(name = TABLE_CUSTOMER_SUPPORT, schema = SCHEMA_MCE)
+@Table(name = TABLE, schema = SCHEMA_MCE)
 public class CustomerSupport extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
-    public static final String TABLE_CUSTOMER_SUPPORT = "CUSTOMER_SUPPORT";
+    public static final String TABLE = "CUSTOMER_SUPPORT";
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customerSupport_generator")
-    @SequenceGenerator(name = "customerSupport_generator", sequenceName = "SQ_CUSTOMER_SUPPORT", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "customerSupport_generator", sequenceName = "SQ_" + TABLE, schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @Column(name = "CUSTOMER_CRITICISM")

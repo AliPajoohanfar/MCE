@@ -23,22 +23,22 @@ import lombok.Setter;
 import java.util.List;
 
 import static ir.pajoohan.mce.entity.Color.SCHEMA_MCE;
-import static ir.pajoohan.mce.entity.Color.TABLE_COLOR;
+import static ir.pajoohan.mce.entity.Color.TABLE;
 
 @Getter
 @Setter
 @Entity
-@Table(name = TABLE_COLOR, schema = SCHEMA_MCE,
+@Table(name = TABLE, schema = SCHEMA_MCE,
         uniqueConstraints = {@UniqueConstraint(name = "COLOR_2_UK", columnNames = {"R", "G", "B"})})
 public class Color extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
-    public static final String TABLE_COLOR = "COLOR";
+    public static final String TABLE = "COLOR";
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "color_generator")
-    @SequenceGenerator(name = "color_generator", sequenceName = "SQ_COLOR", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "color_generator", sequenceName = "SQ_" + TABLE, schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @Size(min = 2, max = 10, message = "COLOR'S CODE must be between 2 to 10 characters.")

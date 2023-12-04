@@ -21,21 +21,21 @@ import lombok.Setter;
 import java.sql.Blob;
 
 import static ir.pajoohan.mce.entity.Attachment.SCHEMA_MCE;
-import static ir.pajoohan.mce.entity.Attachment.TABLE_ATTACHMENT;
+import static ir.pajoohan.mce.entity.Attachment.TABLE;
 
 @Entity
 @Setter
 @Getter
-@Table(name = TABLE_ATTACHMENT, schema = SCHEMA_MCE)
+@Table(name = TABLE, schema = SCHEMA_MCE)
 public class Attachment extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
-    public static final String TABLE_ATTACHMENT = "ATTACHMENT";
+    public static final String TABLE = "ATTACHMENT";
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attachment_generator")
-    @SequenceGenerator(name = "attachment_generator", sequenceName = "SQ_ATTACHMENT", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "attachment_generator", sequenceName = "SQ_" + TABLE, schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @Lob

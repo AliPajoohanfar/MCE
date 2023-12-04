@@ -22,21 +22,21 @@ import lombok.Setter;
 import java.util.List;
 
 import static ir.pajoohan.mce.entity.MotorcycleType.SCHEMA_MCE;
-import static ir.pajoohan.mce.entity.MotorcycleType.TABLE_MOTORCYCLE_TYPE;
+import static ir.pajoohan.mce.entity.MotorcycleType.TABLE;
 
 @Getter
 @Setter
 @Entity
-@Table(name = TABLE_MOTORCYCLE_TYPE, schema = SCHEMA_MCE)
+@Table(name = TABLE, schema = SCHEMA_MCE)
 public class MotorcycleType extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
-    public static final String TABLE_MOTORCYCLE_TYPE = "MOTORCYCLE_TYPE";
+    public static final String TABLE = "MOTORCYCLE_TYPE";
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "motorcycleType_generator")
-    @SequenceGenerator(name = "motorcycleType_generator", sequenceName = "SQ_MOTORCYCLE_TYPE", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "motorcycleType_generator", sequenceName = "SQ_" + TABLE, schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @NotBlank(message = "Enter MOTORCYCLE_TYPE'S CODE.")

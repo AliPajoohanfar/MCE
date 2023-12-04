@@ -23,21 +23,21 @@ import java.util.Date;
 import java.util.List;
 
 import static ir.pajoohan.mce.entity.Customer.SCHEMA_MCE;
-import static ir.pajoohan.mce.entity.Customer.TABLE_CUSTOMER;
+import static ir.pajoohan.mce.entity.Customer.TABLE;
 
 @Getter
 @Setter
 @Entity
-@Table(name = TABLE_CUSTOMER, schema = SCHEMA_MCE)
+@Table(name = TABLE, schema = SCHEMA_MCE)
 public class Customer extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
-    public static final String TABLE_CUSTOMER = "CUSTOMER";
+    public static final String TABLE = "CUSTOMER";
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "branch_generator")
-    @SequenceGenerator(name = "branch_generator", sequenceName = "SQ_CUSTOMER", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "branch_generator", sequenceName = "SQ_" + TABLE, schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @NotBlank(message = "Enter CUSTOMER'S NATIONAL_CODE.")

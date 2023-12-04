@@ -21,21 +21,21 @@ import lombok.Setter;
 import java.util.List;
 
 import static ir.pajoohan.mce.entity.State.SCHEMA_MCE;
-import static ir.pajoohan.mce.entity.State.TABLE_STATE;
+import static ir.pajoohan.mce.entity.State.TABLE;
 
 @Getter
 @Setter
 @Entity
-@Table(name = TABLE_STATE, schema = SCHEMA_MCE)
+@Table(name = TABLE, schema = SCHEMA_MCE)
 public class State extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
-    public static final String TABLE_STATE = "STATE";
+    public static final String TABLE = "STATE";
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "state_generator")
-    @SequenceGenerator(name = "state_generator", sequenceName = "SQ_STATE", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "state_generator", sequenceName = "SQ_" + TABLE, schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @NotBlank(message = "Enter STATE'S NAME.")

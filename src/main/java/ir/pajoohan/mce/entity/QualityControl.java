@@ -20,21 +20,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 import static ir.pajoohan.mce.entity.QualityControl.SCHEMA_MCE;
-import static ir.pajoohan.mce.entity.QualityControl.TABLE_QUALITY_CONTROL;
+import static ir.pajoohan.mce.entity.QualityControl.TABLE;
 
 @Getter
 @Setter
 @Entity
-@Table(name = TABLE_QUALITY_CONTROL, schema = SCHEMA_MCE)
+@Table(name = TABLE, schema = SCHEMA_MCE)
 public class QualityControl extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
-    public static final String TABLE_QUALITY_CONTROL = "QUALITY_CONTROL";
+    public static final String TABLE = "QUALITY_CONTROL";
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "preDeliveryControl_generator")
-    @SequenceGenerator(name = "preDeliveryControl_generator", sequenceName = "SQ_PRE_DELIVERY_CONTROL", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "preDeliveryControl_generator", sequenceName = "SQ_" + TABLE, schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @NotBlank(message = "Enter QUALITY_CONTROL'S QC_1_COMMENT.")

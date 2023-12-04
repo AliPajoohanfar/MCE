@@ -23,21 +23,21 @@ import lombok.Setter;
 import java.util.List;
 
 import static ir.pajoohan.mce.entity.EngineType.SCHEMA_MCE;
-import static ir.pajoohan.mce.entity.EngineType.TABLE_ENGINE_TYPE;
+import static ir.pajoohan.mce.entity.EngineType.TABLE;
 
 @Getter
 @Setter
 @Entity
-@Table(name = TABLE_ENGINE_TYPE, schema = SCHEMA_MCE)
+@Table(name = TABLE, schema = SCHEMA_MCE)
 public class EngineType extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
-    public static final String TABLE_ENGINE_TYPE = "ENGINE_TYPE";
+    public static final String TABLE = "ENGINE_TYPE";
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "engineType_generator")
-    @SequenceGenerator(name = "engineType_generator", sequenceName = "SQ_ENGINE_TYPE", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "engineType_generator", sequenceName = "SQ_" + TABLE, schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @NotBlank(message = "Enter ENGINE_TYPE'S CODE.")

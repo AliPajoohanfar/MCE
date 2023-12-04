@@ -24,21 +24,21 @@ import java.util.Date;
 import java.util.List;
 
 import static ir.pajoohan.mce.entity.Motorcycle.SCHEMA_MCE;
-import static ir.pajoohan.mce.entity.Motorcycle.TABLE_MOTORCYCLE;
+import static ir.pajoohan.mce.entity.Motorcycle.TABLE;
 
 @Getter
 @Setter
 @Entity
-@Table(name = TABLE_MOTORCYCLE, schema = SCHEMA_MCE)
+@Table(name = TABLE, schema = SCHEMA_MCE)
 public class Motorcycle extends Auditable<String> {
 
     public static final String SCHEMA_MCE = "MCE";
-    public static final String TABLE_MOTORCYCLE = "MOTORCYCLE";
+    public static final String TABLE = "MOTORCYCLE";
 
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "motorcycle_generator")
-    @SequenceGenerator(name = "motorcycle_generator", sequenceName = "SQ_MOTORCYCLE", schema = SCHEMA_MCE, allocationSize = 1)
+    @SequenceGenerator(name = "motorcycle_generator", sequenceName = "SQ_" + TABLE, schema = SCHEMA_MCE, allocationSize = 1)
     private Long id;
 
     @NotBlank(message = "Enter MOTORCYCLE'S ENGINE_NUM.")
