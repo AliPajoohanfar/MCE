@@ -14,6 +14,6 @@ public interface BranchService {
 
     BranchDto update(BranchDto branchDto);
 
-    void delete(BranchDto branchDto);
+    void delete(Long id);
 
 }
