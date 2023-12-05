@@ -2,7 +2,6 @@ package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ir.pajoohan.mce.entity.baseModel.Effective;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -33,7 +32,7 @@ import static ir.pajoohan.mce.entity.Status.TABLE;
         uniqueConstraints = {
                 @UniqueConstraint(name = "STATUS_1_UK", columnNames = {"STATUS_FLOW", "CODE"}),
                 @UniqueConstraint(name = "STATUS_2_UK", columnNames = {"STATUS_FLOW", "ORDER_NUM"})})
-@SQLDelete(sql = "UPDATE " + State.TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
+@SQLDelete(sql = "UPDATE " + TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
 public class Status extends Effective {
 
     public static final String SCHEMA_MCE = "MCE";
@@ -71,27 +70,27 @@ public class Status extends Effective {
     /*----------------------------------------------------------------------------------------------------------------*/
 
     @JsonIgnore
-    @OneToMany(mappedBy = "status", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "status", fetch = FetchType.LAZY)
     private List<Motorcycle> motorcycleList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "status", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "status", fetch = FetchType.LAZY)
     private List<FinalControl> finalControlList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "status", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "status", fetch = FetchType.LAZY)
     private List<PreDeliveryControl> preDeliveryControlList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "qc1Status", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "qc1Status", fetch = FetchType.LAZY)
     private List<QualityControl> qc1QualityControlList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "qc2Status", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "qc2Status", fetch = FetchType.LAZY)
     private List<QualityControl> qc2QualityControlList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "qc3Status", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "qc3Status", fetch = FetchType.LAZY)
     private List<QualityControl> qc3QualityControlList;
 
 }

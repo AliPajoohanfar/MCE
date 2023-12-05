@@ -2,7 +2,6 @@ package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ir.pajoohan.mce.entity.baseModel.Effective;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,6 +13,7 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -31,7 +31,7 @@ import static ir.pajoohan.mce.entity.Person.TABLE;
 @Setter
 @Entity
 @Table(name = TABLE, schema = SCHEMA_MCE)
-@SQLDelete(sql = "UPDATE " + State.TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
+@SQLDelete(sql = "UPDATE " + TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
 public class Person extends Effective {
 
     public static final String SCHEMA_MCE = "MCE";
@@ -89,7 +89,7 @@ public class Person extends Effective {
     @Column(name = "MOBILE_NUMBER", length = 10, unique = true)
     private String mobileNumber;
 
-    @NotBlank(message = "Enter PERSON'S PHONE_NUMBER.")
+    @NotNull(message = "Enter PERSON'S PHONE_NUMBER.")
     @Size(min = 10, max = 10, message = "PERSON'S PHONE_NUMBER must be 10 characters.")
     @Pattern(regexp = "^[0-9]\\d*$", message = "PERSON'S PHONE_NUMBER must be digits only")
     @Column(name = "PHONE_NUMBER", length = 10, nullable = false)
@@ -101,35 +101,35 @@ public class Person extends Effective {
     /*----------------------------------------------------------------------------------------------------------------*/
 
     @JsonIgnore
-    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
     private List<Branch> branchList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "controllerPerson", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "controllerPerson", fetch = FetchType.LAZY)
     private List<WarehouseInput> warehouseInputsControllerList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "prodPermissionPerson", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "prodPermissionPerson", fetch = FetchType.LAZY)
     private List<WarehouseInput> warehouseInputsProdPermList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
     private List<FinalControl> finalControlList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
     private List<PreDeliveryControl> preDeliveryControlList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "qc1Person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "qc1Person", fetch = FetchType.LAZY)
     private List<QualityControl> qc1QualityControlList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "qc2Person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "qc2Person", fetch = FetchType.LAZY)
     private List<QualityControl> qc2QualityControlList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "qc3Person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "qc3Person", fetch = FetchType.LAZY)
     private List<QualityControl> qc3QualityControlList;
 
 }

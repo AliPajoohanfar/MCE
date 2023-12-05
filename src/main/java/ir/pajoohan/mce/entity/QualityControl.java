@@ -2,7 +2,6 @@ package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ir.pajoohan.mce.entity.baseModel.Effective;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -27,7 +26,7 @@ import static ir.pajoohan.mce.entity.QualityControl.TABLE;
 @Setter
 @Entity
 @Table(name = TABLE, schema = SCHEMA_MCE)
-@SQLDelete(sql = "UPDATE " + State.TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
+@SQLDelete(sql = "UPDATE " + TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
 public class QualityControl extends Effective {
 
     public static final String SCHEMA_MCE = "MCE";
@@ -57,37 +56,37 @@ public class QualityControl extends Effective {
     /*----------------------------------------------------------------------------------------------------------------*/
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "QC_1_PERSON_ID")
     private Person qc1Person;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "QC_1_STATUS_ID")
     private Status qc1Status;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "QC_2_PERSON_ID")
     private Person qc2Person;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "QC_2_STATUS_ID")
     private Status qc2Status;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "QC_3_PERSON_ID")
     private Person qc3Person;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "QC_3_STATUS_ID")
     private Status qc3Status;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MOTORCYCLE_ID")
     private Motorcycle motorcycle;
 

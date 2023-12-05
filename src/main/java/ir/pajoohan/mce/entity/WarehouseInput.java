@@ -3,7 +3,6 @@ package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ir.pajoohan.mce.entity.baseModel.Effective;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,7 +18,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
@@ -38,7 +37,7 @@ import static ir.pajoohan.mce.entity.WarehouseInput.TABLE;
 @Setter
 @Entity
 @Table(name = TABLE, schema = SCHEMA_MCE)
-@SQLDelete(sql = "UPDATE " + State.TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
+@SQLDelete(sql = "UPDATE " + TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
 public class WarehouseInput extends Effective {
 
     public static final String SCHEMA_MCE = "MCE";
@@ -67,25 +66,25 @@ public class WarehouseInput extends Effective {
     String kootajNum;
 
 
-    @NotBlank(message = "Enter WAREHOUSE_INPUT'S NUM.")
+    @NotNull(message = "Enter WAREHOUSE_INPUT'S NUM.")
     @Min(value = 0, message = "WAREHOUSE_INPUT'S NUM must be between 0 to 999999.")
     @Max(value = 999999, message = "WAREHOUSE_INPUT'S NUM must be between 0 to 999999.")
     @Column(name = "NUM", nullable = false)
     private Integer num;
 
-    @NotBlank(message = "Enter WAREHOUSE_INPUT'S ENGINE_NUM_START.")
+    @NotNull(message = "Enter WAREHOUSE_INPUT'S ENGINE_NUM_START.")
     @Positive(message = "WAREHOUSE_INPUT'S ENGINE_NUM_START must be positive number.")
     @Digits(integer = 18, fraction = 0, message = "WAREHOUSE_INPUT'S ENGINE_NUM_START must be less than 18 integer digits.")
     @Column(name = "ENGINE_NUM_START")
     private Long engineNumStart;
 
-    @NotBlank(message = "Enter WAREHOUSE_INPUT'S ENGINE_NUM_END.")
+    @NotNull(message = "Enter WAREHOUSE_INPUT'S ENGINE_NUM_END.")
     @Positive(message = "WAREHOUSE_INPUT'S ENGINE_NUM_END must be positive number.")
     @Digits(integer = 18, fraction = 0, message = "WAREHOUSE_INPUT'S ENGINE_NUM_END must be less than 18 integer digits.")
     @Column(name = "ENGINE_NUM_END")
     private Long engineNumEnd;
 
-    @NotBlank(message = "Enter WAREHOUSE_INPUT'S INPUT_DATE.")
+    @NotNull(message = "Enter WAREHOUSE_INPUT'S INPUT_DATE.")
     @PastOrPresent(message = "WAREHOUSE_INPUT'S INPUT_DATE must be past or present.")
     @Column(name = "INPUT_DATE", nullable = false)
     private Date inputDate;
@@ -138,7 +137,7 @@ public class WarehouseInput extends Effective {
     /*----------------------------------------------------------------------------------------------------------------*/
 
     @JsonIgnore
-    @OneToMany(mappedBy = "warehouseInput", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "warehouseInput", fetch = FetchType.LAZY)
     private List<Motorcycle> motorcycleList;
 
 }

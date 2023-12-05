@@ -2,7 +2,6 @@ package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ir.pajoohan.mce.entity.baseModel.Effective;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,7 +30,7 @@ import static ir.pajoohan.mce.entity.Motorcycle.TABLE;
 @Setter
 @Entity
 @Table(name = TABLE, schema = SCHEMA_MCE)
-@SQLDelete(sql = "UPDATE " + State.TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
+@SQLDelete(sql = "UPDATE " + TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
 public class Motorcycle extends Effective {
 
     public static final String SCHEMA_MCE = "MCE";
@@ -73,65 +72,65 @@ public class Motorcycle extends Effective {
     /*----------------------------------------------------------------------------------------------------------------*/
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MC_TYPE_ID")
     private MotorcycleType motorcycleType;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BRANCH_ID")
     private Branch branch;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CUSTOMER_ID")
     private Customer customer;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "WH_INPUT_ID")
     private WarehouseInput warehouseInput;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "COLOR_ID")
     private Color color;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STATUS_ID")
     private Status status;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SUB_BRANCH_ID")
     private Branch subBranch;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STATE_ID")
     private State state;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MC_DOCS_ATTACH_ID")
     private Attachment attachment;
 
     /*----------------------------------------------------------------------------------------------------------------*/
 
     @JsonIgnore
-    @OneToMany(mappedBy = "motorcycle", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "motorcycle", fetch = FetchType.LAZY)
     private List<AftersalesService> aftersalesServiceList;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "motorcycle", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "motorcycle", fetch = FetchType.LAZY)
     private FinalControl finalControl;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "motorcycle", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "motorcycle", fetch = FetchType.LAZY)
     private PreDeliveryControl preDeliveryControl;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "motorcycle", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "motorcycle", fetch = FetchType.LAZY)
     private QualityControl qualityControl;
 }

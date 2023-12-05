@@ -3,7 +3,6 @@ package ir.pajoohan.mce.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ir.pajoohan.mce.entity.baseModel.Effective;
 import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,7 +27,7 @@ import static ir.pajoohan.mce.entity.Attachment.TABLE;
 @Setter
 @Getter
 @Table(name = TABLE, schema = SCHEMA_MCE)
-@SQLDelete(sql = "UPDATE " + State.TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
+@SQLDelete(sql = "UPDATE " + TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
 public class Attachment extends Effective {
 
     public static final String SCHEMA_MCE = "MCE";
@@ -142,22 +141,22 @@ public class Attachment extends Effective {
     /*----------------------------------------------------------------------------------------------------------------*/
 
     @JsonIgnore
-    @OneToOne(mappedBy = "attachment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "attachment", fetch = FetchType.LAZY)
     private MotorcycleType motorcycleType;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "identifiersAttach", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "identifiersAttach", fetch = FetchType.LAZY)
     private WarehouseInput warehouseInputsIdentifiers;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "receiptsAttach", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "receiptsAttach", fetch = FetchType.LAZY)
     private WarehouseInput warehouseInputsReceipts;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "reportsAttach", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "reportsAttach", fetch = FetchType.LAZY)
     private WarehouseInput warehouseInputsReports;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "attachment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "attachment", fetch = FetchType.LAZY)
     private MotorcycleType motorcycle;
 }

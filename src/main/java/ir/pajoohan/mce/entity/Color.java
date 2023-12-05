@@ -2,7 +2,6 @@ package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ir.pajoohan.mce.entity.baseModel.Effective;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,7 +30,7 @@ import static ir.pajoohan.mce.entity.Color.TABLE;
 @Entity
 @Table(name = TABLE, schema = SCHEMA_MCE,
         uniqueConstraints = {@UniqueConstraint(name = "COLOR_2_UK", columnNames = {"R", "G", "B"})})
-@SQLDelete(sql = "UPDATE " + State.TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
+@SQLDelete(sql = "UPDATE " + TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
 public class Color extends Effective {
 
     public static final String SCHEMA_MCE = "MCE";
@@ -74,7 +73,7 @@ public class Color extends Effective {
     /*----------------------------------------------------------------------------------------------------------------*/
 
     @JsonIgnore
-    @OneToMany(mappedBy = "color", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "color", fetch = FetchType.LAZY)
     private List<Motorcycle> motorcycleList;
 
 }

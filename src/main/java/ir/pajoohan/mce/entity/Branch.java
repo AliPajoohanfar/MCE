@@ -2,7 +2,6 @@ package ir.pajoohan.mce.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ir.pajoohan.mce.entity.baseModel.Effective;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,6 +17,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +32,7 @@ import static ir.pajoohan.mce.entity.Branch.TABLE;
 @Setter
 @Entity
 @Table(name = TABLE, schema = SCHEMA_MCE)
-@SQLDelete(sql = "UPDATE " + State.TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
+@SQLDelete(sql = "UPDATE " + TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
 public class Branch extends Effective {
 
     public static final String SCHEMA_MCE = "MCE";
@@ -54,11 +54,11 @@ public class Branch extends Effective {
     @Column(name = "NAME", nullable = false, length = 100)
     private String name;
 
-    @NotBlank(message = "Enter BRANCH'S MC_DOC_PRINT_PERMISSION.")
+    @NotNull(message = "Enter BRANCH'S MC_DOC_PRINT_PERMISSION.")
     @Column(name = "MC_DOC_PRINT_PERMISSION", nullable = false)
     private Boolean mcDocPrintPermission;
 
-    @NotBlank(message = "Enter BRANCH'S BRANCH_TYP.")
+    @NotNull(message = "Enter BRANCH'S BRANCH_TYP.")
     @Min(value = 0, message = "BRANCH'S BRANCH_TYP must be between 0 to 1.")
     @Max(value = 1, message = "BRANCH'S BRANCH_TYP must be between 0 to 1.")
     @Column(name = "BRANCH_TYP", nullable = false)
@@ -75,31 +75,32 @@ public class Branch extends Effective {
     private Branch parent;
 
     @JsonIgnore
-    @NotBlank(message = "Enter BRANCH'S STATE_ID.")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @NotNull(message = "Enter BRANCH'S STATE_ID.")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "STATE_ID", nullable = false)
     private State state;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "PERSON_ID")
+    @NotNull(message = "Enter BRANCH'S PERSON_ID.")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PERSON_ID", nullable = false)
     private Person person;
 
     /*----------------------------------------------------------------------------------------------------------------*/
 
     @JsonIgnore
-    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     private List<Branch> branchList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "branch", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "branch", fetch = FetchType.LAZY)
     private List<Motorcycle> branchMotorcycleList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "subBranch", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "subBranch", fetch = FetchType.LAZY)
     private List<Motorcycle> subBranchMotorcycleList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "branch", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "branch", fetch = FetchType.LAZY)
     private List<AftersalesService> aftersalesServiceList;
 }
