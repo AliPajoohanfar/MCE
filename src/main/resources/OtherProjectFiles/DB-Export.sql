@@ -25,7 +25,9 @@ create table MCE.PERSON
   created_date       TIMESTAMP(6),
   last_modified_by   VARCHAR2(255 CHAR),
   last_modified_date TIMESTAMP(6),
-  email              VARCHAR2(250 CHAR)
+  email              VARCHAR2(250 CHAR),
+  disable_date       DATE,
+  effective_date     DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -70,7 +72,7 @@ comment on column MCE.PERSON.phone_number
   is 'شماره تماس ثابت
 ';
 comment on column MCE.PERSON.email
-    is 'آدرس پست الکترونیک';
+  is 'آدرس پست الکترونیک';
 alter table MCE.PERSON
   add constraint PERSN_PK primary key (ID)
   using index 
@@ -126,7 +128,9 @@ create table MCE.STATE
   created_by         VARCHAR2(255 CHAR),
   created_date       TIMESTAMP(6),
   last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6)
+  last_modified_date TIMESTAMP(6),
+  effective_date     DATE not null,
+  disable_date       DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -194,8 +198,10 @@ create table MCE.BRANCH
   created_by              VARCHAR2(255 CHAR),
   created_date            TIMESTAMP(6),
   last_modified_by        VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6),
-  email              VARCHAR2(250 CHAR)
+  last_modified_date      TIMESTAMP(6),
+  email                   VARCHAR2(250 CHAR),
+  disable_date            DATE,
+  effective_date          DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -228,7 +234,7 @@ comment on column MCE.BRANCH.mc_doc_print_permission
 comment on column MCE.BRANCH.branch_typ
   is 'نوع نمایندگی: ۰=فروش ۱=خدمات پس از فروش';
 comment on column MCE.BRANCH.email
-    is 'آدرس پست الکترونیک';
+  is 'آدرس پست الکترونیک';
 alter table MCE.BRANCH
   add constraint BRNCH_PK primary key (ID)
   using index 
@@ -289,7 +295,9 @@ create table MCE.CUSTOMER
   created_date       TIMESTAMP(6),
   last_modified_by   VARCHAR2(255 CHAR),
   last_modified_date TIMESTAMP(6),
-  email              VARCHAR2(250 CHAR)
+  email              VARCHAR2(250 CHAR),
+  disable_date       DATE,
+  effective_date     DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -334,7 +342,7 @@ comment on column MCE.CUSTOMER.phone_number
   is 'شماره تماس ثابت
 ';
 comment on column MCE.CUSTOMER.email
-    is 'آدرس پست الکترونیک';
+  is 'آدرس پست الکترونیک';
 alter table MCE.CUSTOMER
   add constraint CUSTOMER_PK primary key (ID)
   using index 
@@ -395,7 +403,9 @@ create table MCE.ATTACHMENT
   created_by         VARCHAR2(255 CHAR),
   created_date       TIMESTAMP(6),
   last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6)
+  last_modified_date TIMESTAMP(6),
+  disable_date       DATE,
+  effective_date     DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -481,7 +491,9 @@ create table MCE.MOTORCYCLE_TYPE
   created_by            VARCHAR2(255 CHAR),
   created_date          TIMESTAMP(6),
   last_modified_by      VARCHAR2(255 CHAR),
-  last_modified_date    TIMESTAMP(6)
+  last_modified_date    TIMESTAMP(6),
+  disable_date          DATE,
+  effective_date        DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -552,7 +564,9 @@ create table MCE.STATUS
   created_by         VARCHAR2(255 CHAR),
   created_date       TIMESTAMP(6),
   last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6)
+  last_modified_date TIMESTAMP(6),
+  disable_date       DATE,
+  effective_date     DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -638,7 +652,9 @@ create table MCE.ENGINE_TYPE
   created_by         VARCHAR2(255 CHAR),
   created_date       TIMESTAMP(6),
   last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6)
+  last_modified_date TIMESTAMP(6),
+  disable_date       DATE,
+  effective_date     DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -721,7 +737,9 @@ create table MCE.WAREHOUSE_INPUT
   created_by            VARCHAR2(255 CHAR),
   created_date          TIMESTAMP(6),
   last_modified_by      VARCHAR2(255 CHAR),
-  last_modified_date    TIMESTAMP(6)
+  last_modified_date    TIMESTAMP(6),
+  disable_date          DATE,
+  effective_date        DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -862,7 +880,9 @@ create table MCE.COLOR
   created_by         VARCHAR2(255 CHAR),
   created_date       TIMESTAMP(6),
   last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6)
+  last_modified_date TIMESTAMP(6),
+  disable_date       DATE,
+  effective_date     DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -970,7 +990,9 @@ create table MCE.MOTORCYCLE
   created_by         VARCHAR2(255 CHAR),
   created_date       TIMESTAMP(6),
   last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6)
+  last_modified_date TIMESTAMP(6),
+  disable_date       DATE,
+  effective_date     DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -1122,7 +1144,9 @@ create table MCE.AFTERSALES_SERVICE
   created_by         VARCHAR2(255 CHAR),
   created_date       TIMESTAMP(6),
   last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6)
+  last_modified_date TIMESTAMP(6),
+  disable_date       DATE,
+  effective_date     DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -1194,7 +1218,9 @@ create table MCE.CUSTOMER_SUPPORT
   created_by          VARCHAR2(255 CHAR),
   created_date        TIMESTAMP(6),
   last_modified_by    VARCHAR2(255 CHAR),
-  last_modified_date  TIMESTAMP(6)
+  last_modified_date  TIMESTAMP(6),
+  disable_date        DATE,
+  effective_date      DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -1273,7 +1299,9 @@ create table MCE.FINAL_CONTROL
   created_by         VARCHAR2(255 CHAR),
   created_date       TIMESTAMP(6),
   last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6)
+  last_modified_date TIMESTAMP(6),
+  disable_date       DATE,
+  effective_date     DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -1359,7 +1387,9 @@ create table MCE.PRE_DELIVERY_CONTROL
   created_by         VARCHAR2(255 CHAR),
   created_date       TIMESTAMP(6),
   last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6)
+  last_modified_date TIMESTAMP(6),
+  disable_date       DATE,
+  effective_date     DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -1445,7 +1475,9 @@ create table MCE.QUALITY_CONTROL
   created_by         VARCHAR2(255 CHAR),
   created_date       TIMESTAMP(6),
   last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6)
+  last_modified_date TIMESTAMP(6),
+  disable_date       DATE,
+  effective_date     DATE
 )
 tablespace SYSTEM
   pctfree 10
