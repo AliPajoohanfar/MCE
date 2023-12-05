@@ -31,7 +31,7 @@ import static ir.pajoohan.mce.entity.Color.TABLE;
 @Entity
 @Table(name = TABLE, schema = SCHEMA_MCE,
         uniqueConstraints = {@UniqueConstraint(name = "COLOR_2_UK", columnNames = {"R", "G", "B"})})
-@SQLDelete(sql = "UPDATE " + State.TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ?")
+@SQLDelete(sql = "UPDATE " + State.TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
 public class Color extends Effective {
 
     public static final String SCHEMA_MCE = "MCE";

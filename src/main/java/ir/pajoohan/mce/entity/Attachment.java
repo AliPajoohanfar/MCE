@@ -28,7 +28,7 @@ import static ir.pajoohan.mce.entity.Attachment.TABLE;
 @Setter
 @Getter
 @Table(name = TABLE, schema = SCHEMA_MCE)
-@SQLDelete(sql = "UPDATE " + State.TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ?")
+@SQLDelete(sql = "UPDATE " + State.TABLE + " SET DISABLE_DATE = TRUNC(CURRENT_DATE) WHERE id = ? and DISABLE_DATE is null")
 public class Attachment extends Effective {
 
     public static final String SCHEMA_MCE = "MCE";
