@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -63,6 +64,9 @@ public class Branch extends Effective {
     @Column(name = "BRANCH_TYP", nullable = false)
     private Integer branchTyp;
 
+    @Email(message = "Enter valid BRANCH'S EMAIL")
+    @Column(name = "EMAIL", length = 250)
+    private String email;
     /*----------------------------------------------------------------------------------------------------------------*/
 
     @JsonIgnore

@@ -1,5 +1,5 @@
 ﻿prompt PL/SQL Developer Export User Objects for user MCE@XE
-prompt Created by Ali on جمعه, 1 دسامبر 2023
+prompt Created by Ali on سهشنبه, 5 دسامبر 2023
 set define off
 spool DB-Export.log
 
@@ -24,7 +24,8 @@ create table MCE.PERSON
   created_by         VARCHAR2(255 CHAR),
   created_date       TIMESTAMP(6),
   last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6)
+  last_modified_date TIMESTAMP(6),
+  email              VARCHAR2(250 CHAR)
 )
 tablespace SYSTEM
   pctfree 10
@@ -68,6 +69,8 @@ comment on column MCE.PERSON.mobile_number
 comment on column MCE.PERSON.phone_number
   is 'شماره تماس ثابت
 ';
+comment on column MCE.PERSON.email
+    is 'آدرس پست الکترونیک';
 alter table MCE.PERSON
   add constraint PERSN_PK primary key (ID)
   using index 
@@ -191,7 +194,8 @@ create table MCE.BRANCH
   created_by              VARCHAR2(255 CHAR),
   created_date            TIMESTAMP(6),
   last_modified_by        VARCHAR2(255 CHAR),
-  last_modified_date      TIMESTAMP(6)
+  last_modified_date TIMESTAMP(6),
+  email              VARCHAR2(250 CHAR)
 )
 tablespace SYSTEM
   pctfree 10
@@ -223,6 +227,8 @@ comment on column MCE.BRANCH.mc_doc_print_permission
   is 'مجوز چاپ سند موتورسیکلت';
 comment on column MCE.BRANCH.branch_typ
   is 'نوع نمایندگی: ۰=فروش ۱=خدمات پس از فروش';
+comment on column MCE.BRANCH.email
+    is 'آدرس پست الکترونیک';
 alter table MCE.BRANCH
   add constraint BRNCH_PK primary key (ID)
   using index 
@@ -282,7 +288,8 @@ create table MCE.CUSTOMER
   created_by         VARCHAR2(255 CHAR),
   created_date       TIMESTAMP(6),
   last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6)
+  last_modified_date TIMESTAMP(6),
+  email              VARCHAR2(250 CHAR)
 )
 tablespace SYSTEM
   pctfree 10
@@ -326,6 +333,8 @@ comment on column MCE.CUSTOMER.mobile_number
 comment on column MCE.CUSTOMER.phone_number
   is 'شماره تماس ثابت
 ';
+comment on column MCE.CUSTOMER.email
+    is 'آدرس پست الکترونیک';
 alter table MCE.CUSTOMER
   add constraint CUSTOMER_PK primary key (ID)
   using index 

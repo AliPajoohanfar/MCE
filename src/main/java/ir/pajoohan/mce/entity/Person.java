@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Pattern;
@@ -94,6 +95,9 @@ public class Person extends Effective {
     @Column(name = "PHONE_NUMBER", length = 10, nullable = false)
     private String phoneNumber;
 
+    @Email(message = "Enter valid PERSON'S EMAIL")
+    @Column(name = "EMAIL", length = 250)
+    private String email;
     /*----------------------------------------------------------------------------------------------------------------*/
 
     @JsonIgnore
