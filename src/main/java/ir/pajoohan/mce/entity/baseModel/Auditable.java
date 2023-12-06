@@ -1,6 +1,7 @@
 package ir.pajoohan.mce.entity.baseModel;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Temporal;
@@ -23,9 +24,11 @@ import static jakarta.persistence.TemporalType.TIMESTAMP;
 public abstract class Auditable<U> {
 
     @CreatedBy
+    @Column(updatable = false)
     protected U createdBy;
 
     @CreatedDate
+    @Column(updatable = false)
     @Temporal(TIMESTAMP)
     protected Date createdDate;
 
