@@ -23,9 +23,9 @@ create table MCE.PERSON
   phone_number       VARCHAR2(10),
   email              VARCHAR2(250 CHAR),
   created_by         VARCHAR2(255 CHAR) not null,
-  created_date       TIMESTAMP(6) disable_date       DATE,
-  last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6),
+  created_date       TIMESTAMP(6) not null,
+  last_modified_by   VARCHAR2(255 CHAR) not null,
+  last_modified_date TIMESTAMP(6) not null,
   effective_date     DATE not null,
   disable_date       DATE
 )
@@ -127,8 +127,8 @@ create table MCE.STATE
   tel_code           VARCHAR2(3) not null,
   created_by         VARCHAR2(255 CHAR) not null,
   created_date       TIMESTAMP(6) not null,
-  last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR) not null,
+  last_modified_date TIMESTAMP(6) not null,
   effective_date     DATE not null,
   disable_date       DATE
 )
@@ -198,8 +198,8 @@ create table MCE.BRANCH
   email                   VARCHAR2(250 CHAR),
   created_by              VARCHAR2(255 CHAR) not null,
   created_date            TIMESTAMP(6) not null,
-  last_modified_by        VARCHAR2(255 CHAR),
-  last_modified_date      TIMESTAMP(6),
+  last_modified_by        VARCHAR2(255 CHAR) not null,
+  last_modified_date      TIMESTAMP(6) not null,
   effective_date          DATE not null,
   disable_date            DATE
 )
@@ -291,11 +291,11 @@ create table MCE.CUSTOMER
   home_address       VARCHAR2(500),
   mobile_number      VARCHAR2(10) not null,
   phone_number       VARCHAR2(10),
+  email              VARCHAR2(250 CHAR),
   created_by         VARCHAR2(255 CHAR) not null,
   created_date       TIMESTAMP(6) not null,
-  last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6),
-  email              VARCHAR2(250 CHAR),
+  last_modified_by   VARCHAR2(255 CHAR) not null,
+  last_modified_date TIMESTAMP(6) not null,
   effective_date     DATE not null,
   disable_date       DATE
 )
@@ -401,8 +401,8 @@ create table MCE.ATTACHMENT
   attach_desc_10     VARCHAR2(200),
   created_by         VARCHAR2(255 CHAR) not null,
   created_date       TIMESTAMP(6) not null,
-  last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR) not null,
+  last_modified_date TIMESTAMP(6) not null,
   effective_date     DATE not null,
   disable_date       DATE
 )
@@ -489,8 +489,8 @@ create table MCE.MOTORCYCLE_TYPE
   name                  VARCHAR2(100 CHAR) not null,
   created_by            VARCHAR2(255 CHAR) not null,
   created_date          TIMESTAMP(6) not null,
-  last_modified_by      VARCHAR2(255 CHAR),
-  last_modified_date    TIMESTAMP(6),
+  last_modified_by      VARCHAR2(255 CHAR) not null,
+  last_modified_date    TIMESTAMP(6) not null,
   effective_date        DATE not null,
   disable_date          DATE
 )
@@ -562,8 +562,8 @@ create table MCE.STATUS
   desc_english       VARCHAR2(10 CHAR),
   created_by         VARCHAR2(255 CHAR) not null,
   created_date       TIMESTAMP(6) not null,
-  last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR) not null,
+  last_modified_date TIMESTAMP(6) not null,
   effective_date     DATE not null,
   disable_date       DATE
 )
@@ -650,8 +650,8 @@ create table MCE.ENGINE_TYPE
   fuel               NUMBER(1),
   created_by         VARCHAR2(255 CHAR) not null,
   created_date       TIMESTAMP(6) not null,
-  last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR) not null,
+  last_modified_date TIMESTAMP(6) not null,
   effective_date     DATE not null,
   disable_date       DATE
 )
@@ -735,8 +735,8 @@ create table MCE.WAREHOUSE_INPUT
   num                   NUMBER(6) not null,
   created_by            VARCHAR2(255 CHAR) not null,
   created_date          TIMESTAMP(6) not null,
-  last_modified_by      VARCHAR2(255 CHAR),
-  last_modified_date    TIMESTAMP(6),
+  last_modified_by      VARCHAR2(255 CHAR) not null,
+  last_modified_date    TIMESTAMP(6) not null,
   effective_date        DATE not null,
   disable_date          DATE
 )
@@ -878,8 +878,8 @@ create table MCE.COLOR
   b                  NUMBER(3),
   created_by         VARCHAR2(255 CHAR) not null,
   created_date       TIMESTAMP(6) not null,
-  last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR) not null,
+  last_modified_date TIMESTAMP(6) not null,
   effective_date     DATE not null,
   disable_date       DATE
 )
@@ -988,8 +988,8 @@ create table MCE.MOTORCYCLE
   mc_docs_attach_id  NUMBER(20),
   created_by         VARCHAR2(255 CHAR) not null,
   created_date       TIMESTAMP(6) not null,
-  last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR) not null,
+  last_modified_date TIMESTAMP(6) not null,
   effective_date     DATE not null,
   disable_date       DATE
 )
@@ -1142,8 +1142,8 @@ create table MCE.AFTERSALES_SERVICE
   kilometer          NUMBER(7) not null,
   created_by         VARCHAR2(255 CHAR) not null,
   created_date       TIMESTAMP(6) not null,
-  last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR) not null,
+  last_modified_date TIMESTAMP(6) not null,
   effective_date     DATE not null,
   disable_date       DATE
 )
@@ -1216,8 +1216,8 @@ create table MCE.CUSTOMER_SUPPORT
   customer_pol        VARCHAR2(2000 CHAR),
   created_by          VARCHAR2(255 CHAR) not null,
   created_date        TIMESTAMP(6) not null,
-  last_modified_by    VARCHAR2(255 CHAR),
-  last_modified_date  TIMESTAMP(6),
+  last_modified_by    VARCHAR2(255 CHAR) not null,
+  last_modified_date  TIMESTAMP(6) not null,
   effective_date      DATE not null,
   disable_date        DATE
 )
@@ -1297,8 +1297,8 @@ create table MCE.FINAL_CONTROL
   motorcycle_id      NUMBER(20) not null,
   created_by         VARCHAR2(255 CHAR) not null,
   created_date       TIMESTAMP(6) not null,
-  last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR) not null,
+  last_modified_date TIMESTAMP(6) not null,
   effective_date     DATE not null,
   disable_date       DATE
 )
@@ -1385,8 +1385,8 @@ create table MCE.PRE_DELIVERY_CONTROL
   motorcycle_id      NUMBER(20) not null,
   created_by         VARCHAR2(255 CHAR) not null,
   created_date       TIMESTAMP(6) not null,
-  last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR) not null,
+  last_modified_date TIMESTAMP(6) not null,
   effective_date     DATE not null,
   disable_date       DATE
 )
@@ -1473,8 +1473,8 @@ create table MCE.QUALITY_CONTROL
   motorcycle_id      NUMBER(20) not null,
   created_by         VARCHAR2(255 CHAR) not null,
   created_date       TIMESTAMP(6) not null,
-  last_modified_by   VARCHAR2(255 CHAR),
-  last_modified_date TIMESTAMP(6),
+  last_modified_by   VARCHAR2(255 CHAR) not null,
+  last_modified_date TIMESTAMP(6) not null,
   effective_date     DATE not null,
   disable_date       DATE
 )
