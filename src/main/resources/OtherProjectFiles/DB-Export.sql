@@ -1,5 +1,5 @@
 ﻿prompt PL/SQL Developer Export User Objects for user MCE@XE
-prompt Created by Ali on سهشنبه, 5 دسامبر 2023
+prompt Created by Ali on پنجشنبه, 7 دسامبر 2023
 set define off
 spool DB-Export.log
 
@@ -21,13 +21,13 @@ create table MCE.PERSON
   home_address       VARCHAR2(500),
   mobile_number      VARCHAR2(10) not null,
   phone_number       VARCHAR2(10),
-  created_by         VARCHAR2(255 CHAR),
-  created_date       TIMESTAMP(6),
+  email              VARCHAR2(250 CHAR),
+  created_by         VARCHAR2(255 CHAR) not null,
+  created_date       TIMESTAMP(6) disable_date       DATE,
   last_modified_by   VARCHAR2(255 CHAR),
   last_modified_date TIMESTAMP(6),
-  email              VARCHAR2(250 CHAR),
-  disable_date       DATE,
-  effective_date     DATE
+  effective_date     DATE not null,
+  disable_date       DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -125,8 +125,8 @@ create table MCE.STATE
   id                 NUMBER(20) not null,
   name               VARCHAR2(100) not null,
   tel_code           VARCHAR2(3) not null,
-  created_by         VARCHAR2(255 CHAR),
-  created_date       TIMESTAMP(6),
+  created_by         VARCHAR2(255 CHAR) not null,
+  created_date       TIMESTAMP(6) not null,
   last_modified_by   VARCHAR2(255 CHAR),
   last_modified_date TIMESTAMP(6),
   effective_date     DATE not null,
@@ -192,16 +192,16 @@ create table MCE.BRANCH
   code                    VARCHAR2(10 CHAR) not null,
   name                    VARCHAR2(100 CHAR) not null,
   state_id                NUMBER(20) not null,
-  person_id               NUMBER(20),
+  person_id               NUMBER(20) not null,
   mc_doc_print_permission NUMBER(1) not null,
   branch_typ              NUMBER(1) not null,
-  created_by              VARCHAR2(255 CHAR),
-  created_date            TIMESTAMP(6),
+  email                   VARCHAR2(250 CHAR),
+  created_by              VARCHAR2(255 CHAR) not null,
+  created_date            TIMESTAMP(6) not null,
   last_modified_by        VARCHAR2(255 CHAR),
   last_modified_date      TIMESTAMP(6),
-  email                   VARCHAR2(250 CHAR),
-  disable_date            DATE,
-  effective_date          DATE
+  effective_date          DATE not null,
+  disable_date            DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -291,13 +291,13 @@ create table MCE.CUSTOMER
   home_address       VARCHAR2(500),
   mobile_number      VARCHAR2(10) not null,
   phone_number       VARCHAR2(10),
-  created_by         VARCHAR2(255 CHAR),
-  created_date       TIMESTAMP(6),
+  created_by         VARCHAR2(255 CHAR) not null,
+  created_date       TIMESTAMP(6) not null,
   last_modified_by   VARCHAR2(255 CHAR),
   last_modified_date TIMESTAMP(6),
   email              VARCHAR2(250 CHAR),
-  disable_date       DATE,
-  effective_date     DATE
+  effective_date     DATE not null,
+  disable_date       DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -399,13 +399,12 @@ create table MCE.ATTACHMENT
   attach_desc_9      VARCHAR2(200),
   attach_file_10     BLOB,
   attach_desc_10     VARCHAR2(200),
-  "attach_desc_6)"   VARCHAR2(200 CHAR),
-  created_by         VARCHAR2(255 CHAR),
-  created_date       TIMESTAMP(6),
+  created_by         VARCHAR2(255 CHAR) not null,
+  created_date       TIMESTAMP(6) not null,
   last_modified_by   VARCHAR2(255 CHAR),
   last_modified_date TIMESTAMP(6),
-  disable_date       DATE,
-  effective_date     DATE
+  effective_date     DATE not null,
+  disable_date       DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -488,12 +487,12 @@ create table MCE.MOTORCYCLE_TYPE
   information_attach_id NUMBER(20),
   code                  VARCHAR2(10 CHAR) not null,
   name                  VARCHAR2(100 CHAR) not null,
-  created_by            VARCHAR2(255 CHAR),
-  created_date          TIMESTAMP(6),
+  created_by            VARCHAR2(255 CHAR) not null,
+  created_date          TIMESTAMP(6) not null,
   last_modified_by      VARCHAR2(255 CHAR),
   last_modified_date    TIMESTAMP(6),
-  disable_date          DATE,
-  effective_date        DATE
+  effective_date        DATE not null,
+  disable_date          DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -561,12 +560,12 @@ create table MCE.STATUS
   code               VARCHAR2(5) not null,
   desc_persian       VARCHAR2(100),
   desc_english       VARCHAR2(10 CHAR),
-  created_by         VARCHAR2(255 CHAR),
-  created_date       TIMESTAMP(6),
+  created_by         VARCHAR2(255 CHAR) not null,
+  created_date       TIMESTAMP(6) not null,
   last_modified_by   VARCHAR2(255 CHAR),
   last_modified_date TIMESTAMP(6),
-  disable_date       DATE,
-  effective_date     DATE
+  effective_date     DATE not null,
+  disable_date       DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -649,12 +648,12 @@ create table MCE.ENGINE_TYPE
   volume             NUMBER(4),
   power              NUMBER(4),
   fuel               NUMBER(1),
-  created_by         VARCHAR2(255 CHAR),
-  created_date       TIMESTAMP(6),
+  created_by         VARCHAR2(255 CHAR) not null,
+  created_date       TIMESTAMP(6) not null,
   last_modified_by   VARCHAR2(255 CHAR),
   last_modified_date TIMESTAMP(6),
-  disable_date       DATE,
-  effective_date     DATE
+  effective_date     DATE not null,
+  disable_date       DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -734,12 +733,12 @@ create table MCE.WAREHOUSE_INPUT
   engine_type_id        NUMBER(20) not null,
   kootaj_num            VARCHAR2(8) not null,
   num                   NUMBER(6) not null,
-  created_by            VARCHAR2(255 CHAR),
-  created_date          TIMESTAMP(6),
+  created_by            VARCHAR2(255 CHAR) not null,
+  created_date          TIMESTAMP(6) not null,
   last_modified_by      VARCHAR2(255 CHAR),
   last_modified_date    TIMESTAMP(6),
-  disable_date          DATE,
-  effective_date        DATE
+  effective_date        DATE not null,
+  disable_date          DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -877,12 +876,12 @@ create table MCE.COLOR
   r                  NUMBER(3),
   g                  NUMBER(3),
   b                  NUMBER(3),
-  created_by         VARCHAR2(255 CHAR),
-  created_date       TIMESTAMP(6),
+  created_by         VARCHAR2(255 CHAR) not null,
+  created_date       TIMESTAMP(6) not null,
   last_modified_by   VARCHAR2(255 CHAR),
   last_modified_date TIMESTAMP(6),
-  disable_date       DATE,
-  effective_date     DATE
+  effective_date     DATE not null,
+  disable_date       DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -987,12 +986,12 @@ create table MCE.MOTORCYCLE
   state_id           NUMBER(20),
   customer_buy_date  DATE,
   mc_docs_attach_id  NUMBER(20),
-  created_by         VARCHAR2(255 CHAR),
-  created_date       TIMESTAMP(6),
+  created_by         VARCHAR2(255 CHAR) not null,
+  created_date       TIMESTAMP(6) not null,
   last_modified_by   VARCHAR2(255 CHAR),
   last_modified_date TIMESTAMP(6),
-  disable_date       DATE,
-  effective_date     DATE
+  effective_date     DATE not null,
+  disable_date       DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -1141,12 +1140,12 @@ create table MCE.AFTERSALES_SERVICE
   motorcycle_id      NUMBER(20) not null,
   branch_id          NUMBER(20) not null,
   kilometer          NUMBER(7) not null,
-  created_by         VARCHAR2(255 CHAR),
-  created_date       TIMESTAMP(6),
+  created_by         VARCHAR2(255 CHAR) not null,
+  created_date       TIMESTAMP(6) not null,
   last_modified_by   VARCHAR2(255 CHAR),
   last_modified_date TIMESTAMP(6),
-  disable_date       DATE,
-  effective_date     DATE
+  effective_date     DATE not null,
+  disable_date       DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -1215,12 +1214,12 @@ create table MCE.CUSTOMER_SUPPORT
   customer_complaint  VARCHAR2(2000 CHAR),
   response            VARCHAR2(2000 CHAR),
   customer_pol        VARCHAR2(2000 CHAR),
-  created_by          VARCHAR2(255 CHAR),
-  created_date        TIMESTAMP(6),
+  created_by          VARCHAR2(255 CHAR) not null,
+  created_date        TIMESTAMP(6) not null,
   last_modified_by    VARCHAR2(255 CHAR),
   last_modified_date  TIMESTAMP(6),
-  disable_date        DATE,
-  effective_date      DATE
+  effective_date      DATE not null,
+  disable_date        DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -1296,12 +1295,12 @@ create table MCE.FINAL_CONTROL
   corrective_action  VARCHAR2(2000),
   description        VARCHAR2(2000),
   motorcycle_id      NUMBER(20) not null,
-  created_by         VARCHAR2(255 CHAR),
-  created_date       TIMESTAMP(6),
+  created_by         VARCHAR2(255 CHAR) not null,
+  created_date       TIMESTAMP(6) not null,
   last_modified_by   VARCHAR2(255 CHAR),
   last_modified_date TIMESTAMP(6),
-  disable_date       DATE,
-  effective_date     DATE
+  effective_date     DATE not null,
+  disable_date       DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -1384,12 +1383,12 @@ create table MCE.PRE_DELIVERY_CONTROL
   corrective_action  VARCHAR2(2000),
   description        VARCHAR2(2000),
   motorcycle_id      NUMBER(20) not null,
-  created_by         VARCHAR2(255 CHAR),
-  created_date       TIMESTAMP(6),
+  created_by         VARCHAR2(255 CHAR) not null,
+  created_date       TIMESTAMP(6) not null,
   last_modified_by   VARCHAR2(255 CHAR),
   last_modified_date TIMESTAMP(6),
-  disable_date       DATE,
-  effective_date     DATE
+  effective_date     DATE not null,
+  disable_date       DATE
 )
 tablespace SYSTEM
   pctfree 10
@@ -1472,12 +1471,12 @@ create table MCE.QUALITY_CONTROL
   qc_3_status_id     NUMBER(20),
   qc_3_comment       VARCHAR2(2000),
   motorcycle_id      NUMBER(20) not null,
-  created_by         VARCHAR2(255 CHAR),
-  created_date       TIMESTAMP(6),
+  created_by         VARCHAR2(255 CHAR) not null,
+  created_date       TIMESTAMP(6) not null,
   last_modified_by   VARCHAR2(255 CHAR),
   last_modified_date TIMESTAMP(6),
-  disable_date       DATE,
-  effective_date     DATE
+  effective_date     DATE not null,
+  disable_date       DATE
 )
 tablespace SYSTEM
   pctfree 10
