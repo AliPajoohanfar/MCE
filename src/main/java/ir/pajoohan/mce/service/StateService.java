@@ -14,5 +14,5 @@ public interface StateService {
 
     StateDto update(StateDto stateDto);
 
-    void delete(StateDto stateDto);
+    void delete(Long id);
 }

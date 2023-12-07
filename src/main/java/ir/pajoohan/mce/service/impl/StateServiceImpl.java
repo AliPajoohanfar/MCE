@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -51,18 +52,27 @@ public class StateServiceImpl implements StateService {
     @Override
     public StateDto save(StateDto stateDto) {
         State state = StateMapper.INSTANCE.stateDtoToState(stateDto);
-        return StateMapper.INSTANCE.stateToStateDto(stateRepository.save(state));
+        state.setId(null);
+        State stateSaved = stateRepository.save(state);
+        return StateMapper.INSTANCE.stateToStateDto(stateSaved);
     }
 
     @Override
     public StateDto update(StateDto stateDto) {
-        State state = StateMapper.INSTANCE.stateDtoToState(stateDto);
-        return StateMapper.INSTANCE.stateToStateDto(stateRepository.save(state));
+        Optional<State> optionalState = stateRepository.findById(stateDto.getId());
+        if (optionalState.isPresent()) {
+            State state = optionalState.get();
+            StateMapper.INSTANCE.updateStateFromDto(stateDto, state);
+            State stateSaved = stateRepository.save(state);
+            return StateMapper.INSTANCE.stateToStateDto(stateSaved);
+        } else {
+            throw new EntityNotFoundException("STATE with ID : '" + stateDto.getId() + "' not found.");
+        }
     }
 
     @Override
-    public void delete(StateDto stateDto) {
-        State state = StateMapper.INSTANCE.stateDtoToState(stateDto);
+    public void delete(Long id) {
+        State state = stateRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         stateRepository.delete(state);
     }
 }
