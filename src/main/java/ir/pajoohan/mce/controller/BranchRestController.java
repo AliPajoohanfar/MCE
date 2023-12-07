@@ -28,6 +28,9 @@ public class BranchRestController {
 
     BranchService branchService;
 
+    /**
+     * Setters
+     */
     @Autowired
     public void setBranchService(BranchServiceImpl branchServiceImpl) {
         this.branchService = branchServiceImpl;
@@ -35,6 +38,9 @@ public class BranchRestController {
 
     /*----------------------------------------------------------------------------------------------------------------*/
 
+    /**
+     * Methods
+     */
     @GetMapping
     @ResponseBody
     public ResponseEntity<List<BranchDto>> getAll() {

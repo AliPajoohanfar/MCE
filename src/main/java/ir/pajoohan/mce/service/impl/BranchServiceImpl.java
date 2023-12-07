@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -77,10 +78,6 @@ public class BranchServiceImpl implements BranchService {
 
         Branch branch = BranchMapper.INSTANCE.branchDtoToBranch(branchDto);
         branch.setId(null);
-        if (branchDto.getParentId() == null) {
-            branch.setParent(null);
-        }
-
         Branch branchSaved = branchRepository.save(branch);
         return BranchMapper.INSTANCE.branchToBranchDto(branchSaved);
     }
@@ -88,8 +85,8 @@ public class BranchServiceImpl implements BranchService {
     @Override
     public BranchDto update(BranchDto branchDto) {
 
-        if (branchDto.getId() != null && branchRepository.existsById(branchDto.getId())) {
-
+        Optional<Branch> optionalBranch = branchRepository.findById(branchDto.getId());
+        if (optionalBranch.isPresent()) {
             if (!stateRepository.existsById(branchDto.getStateId())) {
                 throw new EntityNotFoundException("STATE with ID : '" + branchDto.getStateId() + "' not found.");
             }
@@ -100,11 +97,8 @@ public class BranchServiceImpl implements BranchService {
                 throw new EntityNotFoundException("PARENT with ID : '" + branchDto.getParentId() + "' not found.");
             }
 
-            Branch branch = BranchMapper.INSTANCE.branchDtoToBranch(branchDto);
-            if (branchDto.getParentId() == null) {
-                branch.setParent(null);
-            }
-
+            Branch branch = optionalBranch.get();
+            BranchMapper.INSTANCE.updateBranchFromDto(branchDto, branch);
             Branch branchSaved = branchRepository.save(branch);
             return BranchMapper.INSTANCE.branchToBranchDto(branchSaved);
         } else {
