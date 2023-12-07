@@ -1,12 +1,17 @@
 package ir.pajoohan.mce.dto;
 
 import ir.pajoohan.mce.dto.baseDto.AddEffectiveMapping;
+import ir.pajoohan.mce.dto.baseDto.AddUpdateMapping;
 import ir.pajoohan.mce.entity.AftersalesService;
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
+
+@Mapper(componentModel = "spring")
 public interface AftersalesServiceMapper {
 
     AftersalesServiceMapper INSTANCE = Mappers.getMapper(AftersalesServiceMapper.class);
@@ -23,4 +28,7 @@ public interface AftersalesServiceMapper {
     @Mapping(target = "branch.id", source = "aftersalesServiceDto.branchId")
     AftersalesService AftersalesServiceDtoToAftersalesService(AftersalesServiceDto aftersalesServiceDto);
 
+    @AddUpdateMapping
+    @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
+    void updateAftersalesServiceFromDto(AftersalesServiceDto aftersalesServiceDto, @MappingTarget AftersalesService aftersalesService);
 }

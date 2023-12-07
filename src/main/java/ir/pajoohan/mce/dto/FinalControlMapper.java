@@ -1,12 +1,17 @@
 package ir.pajoohan.mce.dto;
 
 import ir.pajoohan.mce.dto.baseDto.AddEffectiveMapping;
+import ir.pajoohan.mce.dto.baseDto.AddUpdateMapping;
 import ir.pajoohan.mce.entity.FinalControl;
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
+
+@Mapper(componentModel = "spring")
 public interface FinalControlMapper {
 
     FinalControlMapper INSTANCE = Mappers.getMapper(FinalControlMapper.class);
@@ -23,4 +28,7 @@ public interface FinalControlMapper {
     @Mapping(target = "motorcycle.id", source = "motorcycleId")
     FinalControl FinalControlDtoToFinalControl(FinalControlDto finalControlDto);
 
+    @AddUpdateMapping
+    @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
+    void updateFinalControlFromDto(FinalControlDto finalControlDto, @MappingTarget FinalControl finalControl);
 }

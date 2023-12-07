@@ -1,12 +1,17 @@
 package ir.pajoohan.mce.dto;
 
 import ir.pajoohan.mce.dto.baseDto.AddEffectiveMapping;
+import ir.pajoohan.mce.dto.baseDto.AddUpdateMapping;
 import ir.pajoohan.mce.entity.WarehouseInput;
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
+
+@Mapper(componentModel = "spring")
 public interface WarehouseInputMapper {
 
     WarehouseInputMapper INSTANCE = Mappers.getMapper(WarehouseInputMapper.class);
@@ -28,4 +33,8 @@ public interface WarehouseInputMapper {
     @Mapping(target = "prodPermissionPerson.id", source = "warehouseInputDto.prodPermissionPersonId")
     @Mapping(target = "engineType.id", source = "warehouseInputDto.engineTypeId")
     WarehouseInput warehouseInputDtoToWarehouseInput(WarehouseInputDto warehouseInputDto);
+
+    @AddUpdateMapping
+    @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
+    void updateWarehouseInputFromDto(WarehouseInputDto warehouseInputDto, @MappingTarget WarehouseInput warehouseInput);
 }
