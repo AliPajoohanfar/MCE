@@ -94,7 +94,7 @@ public class Attachment extends Effective {
     @Column(name = "ATTACH_FILE_6", nullable = false)
     private Blob attachFile6;
 
-    @Column(name = "ATTACH_DESC_6) ")
+    @Column(name = "ATTACH_DESC_6")
     @Size(max = 200, message = "ATTACHMENT'S ATTACH_DESCs must be les than 200 characters.")
     private String attachDesc6;
 
