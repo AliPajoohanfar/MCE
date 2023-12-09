@@ -14,5 +14,5 @@ public interface ColorService {
 
     ColorDto update(ColorDto colorDto);
 
-    void delete(ColorDto colorDto);
+    void delete(Long id);
 }

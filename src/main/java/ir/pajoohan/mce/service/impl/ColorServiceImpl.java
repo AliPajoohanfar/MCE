@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -45,18 +46,27 @@ public class ColorServiceImpl implements ColorService {
     @Override
     public ColorDto save(ColorDto colorDto) {
         Color color = ColorMapper.INSTANCE.colorDtoToColor(colorDto);
-        return ColorMapper.INSTANCE.colorToColorDto(colorRepository.save(color));
+        color.setId(null);
+        Color colorSaved = colorRepository.save(color);
+        return ColorMapper.INSTANCE.colorToColorDto(colorSaved);
     }
 
     @Override
     public ColorDto update(ColorDto colorDto) {
-        Color color = ColorMapper.INSTANCE.colorDtoToColor(colorDto);
-        return ColorMapper.INSTANCE.colorToColorDto(colorRepository.save(color));
+        Optional<Color> optionalColor = colorRepository.findById(colorDto.getId());
+        if (optionalColor.isPresent()) {
+            Color color = optionalColor.get();
+            ColorMapper.INSTANCE.updateColorFromDto(colorDto, color);
+            Color colorSaved = colorRepository.save(color);
+            return ColorMapper.INSTANCE.colorToColorDto(colorSaved);
+        } else {
+            throw new EntityNotFoundException("COLOR with ID : '" + colorDto.getId() + "' not found.");
+        }
     }
 
     @Override
-    public void delete(ColorDto colorDto) {
-        Color color = ColorMapper.INSTANCE.colorDtoToColor(colorDto);
+    public void delete(Long id) {
+        Color color = colorRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         colorRepository.delete(color);
     }
 }
