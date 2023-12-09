@@ -2,7 +2,6 @@ package ir.pajoohan.mce.dto;
 
 import ir.pajoohan.mce.dto.baseDto.AddEffectiveMapping;
 import ir.pajoohan.mce.dto.baseDto.AddUpdateMapping;
-import ir.pajoohan.mce.entity.State;
 import ir.pajoohan.mce.entity.Status;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
@@ -21,7 +20,7 @@ public interface StatusMapper {
     StatusDto statusToStatusDto(Status status);
 
     @Mapping(target = "effectiveDate", source = "effectiveDate")
-    State statusDtoToStatus(StatusDto statusDto);
+    Status statusDtoToStatus(StatusDto statusDto);
 
     @AddUpdateMapping
     @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)

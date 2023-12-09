@@ -59,11 +59,11 @@ public class Status extends Effective {
     @Column(name = "CODE", length = 5, nullable = false)
     private String code;
 
-    @Size(min = 2, max = 10, message = "STATUS'S DESC_PERSIAN must be between 2 to 100 characters.")
+    @Size(min = 2, max = 100, message = "STATUS'S DESC_PERSIAN must be between 2 to 100 characters.")
     @Column(name = "DESC_PERSIAN", length = 100)
     private String descPersian;
 
-    @Size(min = 2, max = 10, message = "STATUS'S DESC_ENGLISH must be between 2 to 100 characters.")
+    @Size(min = 2, max = 100, message = "STATUS'S DESC_ENGLISH must be between 2 to 100 characters.")
     @Column(name = "DESC_ENGLISH", length = 100)
     private String descEnglish;
 

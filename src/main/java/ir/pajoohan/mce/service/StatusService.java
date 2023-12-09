@@ -10,9 +10,9 @@ public interface StatusService {
 
     StatusDto get(Long id);
 
-    StatusDto save(StatusDto stateDto);
+    StatusDto save(StatusDto statusDto);
 
-    StatusDto update(StatusDto stateDto);
+    StatusDto update(StatusDto statusDto);
 
     void delete(Long id);
 }
