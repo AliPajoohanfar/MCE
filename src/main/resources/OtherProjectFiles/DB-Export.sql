@@ -1,5 +1,5 @@
 ﻿prompt PL/SQL Developer Export User Objects for user MCE@XE
-prompt Created by Ali on پنجشنبه, 7 دسامبر 2023
+prompt Created by Ali on شنبه, 9 دسامبر 2023
 set define off
 spool DB-Export.log
 
@@ -555,11 +555,11 @@ prompt
 create table MCE.STATUS
 (
   id                 NUMBER(20) not null,
-  status_flow        VARCHAR2(4) not null,
+  status_flow        VARCHAR2(4 CHAR) not null,
   order_num          NUMBER(3),
-  code               VARCHAR2(5) not null,
-  desc_persian       VARCHAR2(100),
-  desc_english       VARCHAR2(10 CHAR),
+  code               VARCHAR2(5 CHAR) not null,
+  desc_persian       VARCHAR2(100 CHAR),
+  desc_english       VARCHAR2(100 CHAR),
   created_by         VARCHAR2(255 CHAR) not null,
   created_date       TIMESTAMP(6) not null,
   last_modified_by   VARCHAR2(255 CHAR) not null,
