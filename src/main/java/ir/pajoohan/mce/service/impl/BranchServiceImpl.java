@@ -96,33 +96,29 @@ public class BranchServiceImpl implements BranchService {
         BranchMapper.INSTANCE.updateBranchFromDto(branchDto, branch);
 
         Optional<State> optionalState = stateRepository.findById(branchDto.getStateId());
-        if (optionalState.isPresent()) {
-            branch.setState(optionalState.get());
-        } else {
+        if (optionalState.isEmpty()) {
             throw new EntityNotFoundException("STATE with ID : '" + branchDto.getStateId() + "' not found.");
         }
+        branch.setState(optionalState.get());
 
         Optional<Person> optionalPerson = personRepository.findById(branchDto.getPersonId());
-        if (optionalPerson.isPresent()) {
-            branch.setPerson(optionalPerson.get());
-        } else {
+        if (optionalPerson.isEmpty()) {
             throw new EntityNotFoundException("PERSON with ID : '" + branchDto.getStateId() + "' not found.");
         }
+        branch.setPerson(optionalPerson.get());
 
         if (branchDto.getParentId() == null) {
             branch.setParent(null);
         } else {
             Optional<Branch> optionalParentBranch = branchRepository.findById(branchDto.getParentId());
-            if (optionalParentBranch.isPresent()) {
-                branch.setParent(optionalParentBranch.get());
-            } else {
+            if (optionalParentBranch.isEmpty()) {
                 throw new EntityNotFoundException("PARENT with ID : '" + branchDto.getStateId() + "' not found.");
             }
+            branch.setParent(optionalParentBranch.get());
         }
 
         Branch branchSaved = branchRepository.save(branch);
         return BranchMapper.INSTANCE.branchToBranchDto(branchSaved);
-
     }
 
     @Override
