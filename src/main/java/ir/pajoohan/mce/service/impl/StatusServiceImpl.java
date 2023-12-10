@@ -60,14 +60,14 @@ public class StatusServiceImpl implements StatusService {
     @Override
     public StatusDto update(StatusDto statusDto) {
         Optional<Status> optionalStatus = statusRepository.findById(statusDto.getId());
-        if (optionalStatus.isPresent()) {
-            Status status = optionalStatus.get();
-            StatusMapper.INSTANCE.updateStatusFromDto(statusDto, status);
-            Status statusSaved = statusRepository.save(status);
-            return StatusMapper.INSTANCE.statusToStatusDto(statusSaved);
-        } else {
+        if (optionalStatus.isEmpty()) {
             throw new EntityNotFoundException("STATUS with ID : '" + statusDto.getId() + "' not found.");
         }
+
+        Status status = optionalStatus.get();
+        StatusMapper.INSTANCE.updateStatusFromDto(statusDto, status);
+        Status statusSaved = statusRepository.save(status);
+        return StatusMapper.INSTANCE.statusToStatusDto(statusSaved);
     }
 
     @Override

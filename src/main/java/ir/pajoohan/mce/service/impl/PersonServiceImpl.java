@@ -60,14 +60,14 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public PersonDto update(PersonDto personDto) {
         Optional<Person> optionalPerson = personRepository.findById(personDto.getId());
-        if (optionalPerson.isPresent()) {
-            Person person = optionalPerson.get();
-            PersonMapper.INSTANCE.updatePersonFromDto(personDto, person);
-            Person personSaved = personRepository.save(person);
-            return PersonMapper.INSTANCE.personToPersonDto(personSaved);
-        } else {
+        if (optionalPerson.isEmpty()) {
             throw new EntityNotFoundException("PERSON with ID : '" + personDto.getId() + "' not found.");
         }
+
+        Person person = optionalPerson.get();
+        PersonMapper.INSTANCE.updatePersonFromDto(personDto, person);
+        Person personSaved = personRepository.save(person);
+        return PersonMapper.INSTANCE.personToPersonDto(personSaved);
     }
 
     @Override

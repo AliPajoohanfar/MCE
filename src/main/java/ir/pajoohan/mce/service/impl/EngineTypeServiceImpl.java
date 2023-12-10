@@ -60,14 +60,13 @@ public class EngineTypeServiceImpl implements EngineTypeService {
     @Override
     public EngineTypeDto update(EngineTypeDto engineTypeDto) {
         Optional<EngineType> optionalEngineType = engineTypeRepository.findById(engineTypeDto.getId());
-        if (optionalEngineType.isPresent()) {
-            EngineType engineType = optionalEngineType.get();
-            EngineTypeMapper.INSTANCE.updateEngineTypeFromDto(engineTypeDto, engineType);
-            EngineType engineTypeSaved = engineTypeRepository.save(engineType);
-            return EngineTypeMapper.INSTANCE.engineTypeToEngineTypeDto(engineTypeSaved);
-        } else {
+        if (optionalEngineType.isEmpty()) {
             throw new EntityNotFoundException("ENGINE_TYPE with ID : '" + engineTypeDto.getId() + "' not found.");
         }
+        EngineType engineType = optionalEngineType.get();
+        EngineTypeMapper.INSTANCE.updateEngineTypeFromDto(engineTypeDto, engineType);
+        EngineType engineTypeSaved = engineTypeRepository.save(engineType);
+        return EngineTypeMapper.INSTANCE.engineTypeToEngineTypeDto(engineTypeSaved);
     }
 
     @Override

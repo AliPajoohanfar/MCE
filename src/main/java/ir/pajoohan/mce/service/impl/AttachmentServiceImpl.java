@@ -61,14 +61,14 @@ public class AttachmentServiceImpl implements AttachmentService {
     @Override
     public AttachmentDto update(AttachmentDto attachmentDto) {
         Optional<Attachment> optionalAttachment = attachmentRepository.findById(attachmentDto.getId());
-        if (optionalAttachment.isPresent()) {
-            Attachment attachment = optionalAttachment.get();
-            AttachmentMapper.INSTANCE.updateAttachmentFromDto(attachmentDto, attachment);
-            Attachment attachmentSaved = attachmentRepository.save(attachment);
-            return AttachmentMapper.INSTANCE.attchmentoToattachmentDto(attachmentSaved);
-        } else {
+
+        if (optionalAttachment.isEmpty()) {
             throw new EntityNotFoundException("ATTACHMENT with ID : '" + attachmentDto.getId() + "' not found.");
         }
+        Attachment attachment = optionalAttachment.get();
+        AttachmentMapper.INSTANCE.updateAttachmentFromDto(attachmentDto, attachment);
+        Attachment attachmentSaved = attachmentRepository.save(attachment);
+        return AttachmentMapper.INSTANCE.attchmentoToattachmentDto(attachmentSaved);
     }
 
     @Override

@@ -20,6 +20,9 @@ public class ColorServiceImpl implements ColorService {
 
     ColorRepository colorRepository;
 
+    /**
+     * Setters
+     */
     @Autowired
     public void setColorRepository(ColorRepository colorRepository) {
         this.colorRepository = colorRepository;
@@ -27,6 +30,9 @@ public class ColorServiceImpl implements ColorService {
 
     /*----------------------------------------------------------------------------------------------------------------*/
 
+    /**
+     * Methods
+     */
     @Override
     public List<ColorDto> getAll() {
         List<Color> colorList = colorRepository.findAll();
@@ -54,14 +60,14 @@ public class ColorServiceImpl implements ColorService {
     @Override
     public ColorDto update(ColorDto colorDto) {
         Optional<Color> optionalColor = colorRepository.findById(colorDto.getId());
-        if (optionalColor.isPresent()) {
-            Color color = optionalColor.get();
-            ColorMapper.INSTANCE.updateColorFromDto(colorDto, color);
-            Color colorSaved = colorRepository.save(color);
-            return ColorMapper.INSTANCE.colorToColorDto(colorSaved);
-        } else {
+
+        if (optionalColor.isEmpty()) {
             throw new EntityNotFoundException("COLOR with ID : '" + colorDto.getId() + "' not found.");
         }
+        Color color = optionalColor.get();
+        ColorMapper.INSTANCE.updateColorFromDto(colorDto, color);
+        Color colorSaved = colorRepository.save(color);
+        return ColorMapper.INSTANCE.colorToColorDto(colorSaved);
     }
 
     @Override

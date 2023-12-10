@@ -60,14 +60,14 @@ public class StateServiceImpl implements StateService {
     @Override
     public StateDto update(StateDto stateDto) {
         Optional<State> optionalState = stateRepository.findById(stateDto.getId());
-        if (optionalState.isPresent()) {
-            State state = optionalState.get();
-            StateMapper.INSTANCE.updateStateFromDto(stateDto, state);
-            State stateSaved = stateRepository.save(state);
-            return StateMapper.INSTANCE.stateToStateDto(stateSaved);
-        } else {
+        if (optionalState.isEmpty()) {
             throw new EntityNotFoundException("STATE with ID : '" + stateDto.getId() + "' not found.");
         }
+
+        State state = optionalState.get();
+        StateMapper.INSTANCE.updateStateFromDto(stateDto, state);
+        State stateSaved = stateRepository.save(state);
+        return StateMapper.INSTANCE.stateToStateDto(stateSaved);
     }
 
     @Override
