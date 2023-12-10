@@ -88,40 +88,41 @@ public class BranchServiceImpl implements BranchService {
     public BranchDto update(BranchDto branchDto) {
 
         Optional<Branch> optionalBranch = branchRepository.findById(branchDto.getId());
-        if (optionalBranch.isPresent()) {
-            Branch branch = optionalBranch.get();
-            BranchMapper.INSTANCE.updateBranchFromDto(branchDto, branch);
-
-            Optional<State> optionalState = stateRepository.findById(branchDto.getStateId());
-            if (optionalState.isPresent()) {
-                branch.setState(optionalState.get());
-            } else {
-                throw new EntityNotFoundException("STATE with ID : '" + branchDto.getStateId() + "' not found.");
-            }
-
-            Optional<Person> optionalPerson = personRepository.findById(branchDto.getPersonId());
-            if (optionalPerson.isPresent()) {
-                branch.setPerson(optionalPerson.get());
-            } else {
-                throw new EntityNotFoundException("PERSON with ID : '" + branchDto.getStateId() + "' not found.");
-            }
-
-            if (branchDto.getParentId() == null) {
-                branch.setParent(null);
-            } else {
-                Optional<Branch> optionalParentBranch = branchRepository.findById(branchDto.getParentId());
-                if (optionalParentBranch.isPresent()) {
-                    branch.setParent(optionalParentBranch.get());
-                } else {
-                    throw new EntityNotFoundException("PARENT with ID : '" + branchDto.getStateId() + "' not found.");
-                }
-            }
-
-            Branch branchSaved = branchRepository.save(branch);
-            return BranchMapper.INSTANCE.branchToBranchDto(branchSaved);
-        } else {
+        if (optionalBranch.isEmpty()) {
             throw new EntityNotFoundException("BRANCH with ID : '" + branchDto.getId() + "' not found.");
         }
+
+        Branch branch = optionalBranch.get();
+        BranchMapper.INSTANCE.updateBranchFromDto(branchDto, branch);
+
+        Optional<State> optionalState = stateRepository.findById(branchDto.getStateId());
+        if (optionalState.isPresent()) {
+            branch.setState(optionalState.get());
+        } else {
+            throw new EntityNotFoundException("STATE with ID : '" + branchDto.getStateId() + "' not found.");
+        }
+
+        Optional<Person> optionalPerson = personRepository.findById(branchDto.getPersonId());
+        if (optionalPerson.isPresent()) {
+            branch.setPerson(optionalPerson.get());
+        } else {
+            throw new EntityNotFoundException("PERSON with ID : '" + branchDto.getStateId() + "' not found.");
+        }
+
+        if (branchDto.getParentId() == null) {
+            branch.setParent(null);
+        } else {
+            Optional<Branch> optionalParentBranch = branchRepository.findById(branchDto.getParentId());
+            if (optionalParentBranch.isPresent()) {
+                branch.setParent(optionalParentBranch.get());
+            } else {
+                throw new EntityNotFoundException("PARENT with ID : '" + branchDto.getStateId() + "' not found.");
+            }
+        }
+
+        Branch branchSaved = branchRepository.save(branch);
+        return BranchMapper.INSTANCE.branchToBranchDto(branchSaved);
+
     }
 
     @Override
