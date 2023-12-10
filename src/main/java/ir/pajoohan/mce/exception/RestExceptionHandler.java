@@ -162,9 +162,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(SQLException.class)
     protected ResponseEntity<Object> handleSQLException(SQLException ex,
                                                         WebRequest request) {
-        ApiError apiError = new ApiError(INTERNAL_SERVER_ERROR);
-        apiError.setMessage(ex.getMessage());
-        return buildResponseEntity(apiError);
+        return buildResponseEntity(new ApiError(INTERNAL_SERVER_ERROR, ex));
     }
 
     private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
