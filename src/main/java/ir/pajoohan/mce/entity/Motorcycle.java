@@ -103,11 +103,6 @@ public class Motorcycle extends Effective {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SUB_BRANCH_ID")
-    private Branch subBranch;
-
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STATE_ID")
     private State state;
 

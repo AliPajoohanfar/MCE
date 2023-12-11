@@ -27,7 +27,6 @@ public class MotorcycleDto extends EffectiveDto {
     private Long warehouseInputId;
     private Long colorId;
     private Long statusId;
-    private Long subBranchId;
     private Long stateId;
     private Long attachmentId;
 }

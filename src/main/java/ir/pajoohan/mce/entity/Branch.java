@@ -97,10 +97,6 @@ public class Branch extends Effective {
     private List<Motorcycle> branchMotorcycleList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "subBranch", fetch = FetchType.LAZY)
-    private List<Motorcycle> subBranchMotorcycleList;
-
-    @JsonIgnore
     @OneToMany(mappedBy = "branch", fetch = FetchType.LAZY)
     private List<AftersalesService> aftersalesServiceList;
 }
