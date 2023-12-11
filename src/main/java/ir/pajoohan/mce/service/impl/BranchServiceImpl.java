@@ -68,10 +68,10 @@ public class BranchServiceImpl implements BranchService {
     @Override
     public BranchDto save(BranchDto branchDto) {
 
-        if (!stateRepository.existsById(branchDto.getStateId())) {
+        if (branchDto.getStateId() == null || !stateRepository.existsById(branchDto.getStateId())) {
             throw new EntityNotFoundException("STATE with ID : '" + branchDto.getStateId() + "' not found.");
         }
-        if (!personRepository.existsById(branchDto.getPersonId())) {
+        if (branchDto.getPersonId() == null || !personRepository.existsById(branchDto.getPersonId())) {
             throw new EntityNotFoundException("PERSON with ID : '" + branchDto.getPersonId() + "' not found.");
         }
         if (branchDto.getParentId() != null && !branchRepository.existsById(branchDto.getParentId())) {
@@ -98,15 +98,16 @@ public class BranchServiceImpl implements BranchService {
         if (branchDto.getStateId() == null) {
             throw new EntityNotFoundException("STATE ID can't be null");
         }
+        if (branchDto.getPersonId() == null) {
+            throw new EntityNotFoundException("PERSON ID can't be null");
+        }
+
         Optional<State> optionalState = stateRepository.findById(branchDto.getStateId());
         if (optionalState.isEmpty()) {
             throw new EntityNotFoundException("STATE with ID : '" + branchDto.getStateId() + "' not found.");
         }
         branch.setState(optionalState.get());
 
-        if (branchDto.getPersonId() == null) {
-            throw new EntityNotFoundException("PERSON ID can't be null");
-        }
         Optional<Person> optionalPerson = personRepository.findById(branchDto.getPersonId());
         if (optionalPerson.isEmpty()) {
             throw new EntityNotFoundException("PERSON with ID : '" + branchDto.getStateId() + "' not found.");
