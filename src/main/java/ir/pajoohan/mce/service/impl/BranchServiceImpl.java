@@ -95,12 +95,18 @@ public class BranchServiceImpl implements BranchService {
         Branch branch = optionalBranch.get();
         BranchMapper.INSTANCE.updateBranchFromDto(branchDto, branch);
 
+        if (branchDto.getStateId() == null) {
+            throw new EntityNotFoundException("STATE ID can't be null");
+        }
         Optional<State> optionalState = stateRepository.findById(branchDto.getStateId());
         if (optionalState.isEmpty()) {
             throw new EntityNotFoundException("STATE with ID : '" + branchDto.getStateId() + "' not found.");
         }
         branch.setState(optionalState.get());
 
+        if (branchDto.getPersonId() == null) {
+            throw new EntityNotFoundException("PERSON ID can't be null");
+        }
         Optional<Person> optionalPerson = personRepository.findById(branchDto.getPersonId());
         if (optionalPerson.isEmpty()) {
             throw new EntityNotFoundException("PERSON with ID : '" + branchDto.getStateId() + "' not found.");
