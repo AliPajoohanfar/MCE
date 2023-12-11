@@ -110,7 +110,7 @@ public class BranchServiceImpl implements BranchService {
 
         Optional<Person> optionalPerson = personRepository.findById(branchDto.getPersonId());
         if (optionalPerson.isEmpty()) {
-            throw new EntityNotFoundException("PERSON with ID : '" + branchDto.getStateId() + "' not found.");
+            throw new EntityNotFoundException("PERSON with ID : '" + branchDto.getPersonId() + "' not found.");
         }
         branch.setPerson(optionalPerson.get());
 
@@ -119,7 +119,7 @@ public class BranchServiceImpl implements BranchService {
         } else {
             Optional<Branch> optionalParentBranch = branchRepository.findById(branchDto.getParentId());
             if (optionalParentBranch.isEmpty()) {
-                throw new EntityNotFoundException("PARENT with ID : '" + branchDto.getStateId() + "' not found.");
+                throw new EntityNotFoundException("PARENT with ID : '" + branchDto.getParentId() + "' not found.");
             }
             branch.setParent(optionalParentBranch.get());
         }
