@@ -37,23 +37,23 @@ public class CustomerSupport extends Effective {
     private Long id;
 
     @Column(name = "CUSTOMER_CRITICISM")
-    @Size(min = 2, max = 2000, message = "CUSTOMER_SUPPORT'S CUSTOMER_CRITICISM must be between 2 to 2000 characters.")
+    @Size(max = 2000, message = "CUSTOMER_SUPPORT'S CUSTOMER_CRITICISM must less than 2000 characters.")
     private String customerCriticism;
 
     @Column(name = "CUSTOMER_SUGGESTION")
-    @Size(min = 2, max = 2000, message = "CUSTOMER_SUPPORT'S CUSTOMER_SUGGESTION must be between 2 to 2000 characters.")
+    @Size(max = 2000, message = "CUSTOMER_SUPPORT'S CUSTOMER_SUGGESTION must less than 2000 characters.")
     private String customerSuggestion;
 
     @Column(name = "CUSTOMER_COMPLAINT")
-    @Size(min = 2, max = 2000, message = "CUSTOMER_SUPPORT'S CUSTOMER_COMPLAINT must be between 2 to 2000 characters.")
+    @Size(max = 2000, message = "CUSTOMER_SUPPORT'S CUSTOMER_COMPLAINT must less than 2000 characters.")
     private String customerComplaint;
 
     @Column(name = "RESPONSE")
-    @Size(min = 2, max = 2000, message = "CUSTOMER_SUPPORT'S RESPONSE must be between 2 to 2000 characters.")
+    @Size(max = 2000, message = "CUSTOMER_SUPPORT'S RESPONSE must less than 2000 characters.")
     private String response;
 
     @Column(name = "CUSTOMER_POL")
-    @Size(min = 2, max = 2000, message = "CUSTOMER_SUPPORT'S CUSTOMER_POL must be between 2 to 2000 characters.")
+    @Size(max = 2000, message = "CUSTOMER_SUPPORT'S CUSTOMER_POL must less than 2000 characters.")
     private String customerPol;
 
     /*----------------------------------------------------------------------------------------------------------------*/
