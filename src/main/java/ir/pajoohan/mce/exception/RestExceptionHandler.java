@@ -165,6 +165,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return buildResponseEntity(new ApiError(INTERNAL_SERVER_ERROR, ex));
     }
 
+    /**
+     * IllegalArgumentException Exceptions
+     */
+    @ExceptionHandler(IllegalArgumentException.class)
+    protected ResponseEntity<Object> handleSQLException(IllegalArgumentException ex,
+                                                        WebRequest request) {
+        return buildResponseEntity(new ApiError(INTERNAL_SERVER_ERROR, ex));
+    }
+
     private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
         return new ResponseEntity<>(apiError, apiError.getStatus());
     }
