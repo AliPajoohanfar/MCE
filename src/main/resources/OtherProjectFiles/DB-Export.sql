@@ -1,5 +1,5 @@
 ﻿prompt PL/SQL Developer Export User Objects for user MCE@XE
-prompt Created by Ali on شنبه, 9 دسامبر 2023
+prompt Created by Ali on دوشنبه, 11 دسامبر 2023
 set define off
 spool DB-Export.log
 
@@ -982,7 +982,6 @@ create table MCE.MOTORCYCLE
   exit_date          DATE,
   license_plate      VARCHAR2(10),
   waybill_num        VARCHAR2(10),
-  sub_branch_id      NUMBER(20),
   state_id           NUMBER(20),
   customer_buy_date  DATE,
   mc_docs_attach_id  NUMBER(20),
@@ -1012,7 +1011,7 @@ comment on column MCE.MOTORCYCLE.id
 comment on column MCE.MOTORCYCLE.mc_type_id
   is 'کلید خارجی - نوع موتورسیکلت';
 comment on column MCE.MOTORCYCLE.branch_id
-  is 'کلید خارجی - نمایندگی فروش اصلی';
+  is 'کلید خارجی - نمایندگی فروش ';
 comment on column MCE.MOTORCYCLE.customer_id
   is 'کلید خارجی - خریدار نهایی';
 comment on column MCE.MOTORCYCLE.wh_input_id
@@ -1033,8 +1032,6 @@ comment on column MCE.MOTORCYCLE.license_plate
   is 'شماره پلاک';
 comment on column MCE.MOTORCYCLE.waybill_num
   is 'شماره بارنامه';
-comment on column MCE.MOTORCYCLE.sub_branch_id
-  is 'کلید خارجی - زیر نمایندگی فروش';
 comment on column MCE.MOTORCYCLE.state_id
   is 'کلید خارجی - استان تحویل شده';
 comment on column MCE.MOTORCYCLE.customer_buy_date
@@ -1102,10 +1099,7 @@ alter table MCE.MOTORCYCLE
   add constraint MC_ATTACH_FK foreign key (MC_DOCS_ATTACH_ID)
   references MCE.ATTACHMENT (ID);
 alter table MCE.MOTORCYCLE
-  add constraint MC_BRNCH_1_FK foreign key (BRANCH_ID)
-  references MCE.BRANCH (ID);
-alter table MCE.MOTORCYCLE
-  add constraint MC_BRNCH_2_FK foreign key (SUB_BRANCH_ID)
+  add constraint MC_BRNCH_FK foreign key (BRANCH_ID)
   references MCE.BRANCH (ID);
 alter table MCE.MOTORCYCLE
   add constraint MC_COLOR_FK foreign key (COLOR_ID)
