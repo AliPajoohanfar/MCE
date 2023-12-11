@@ -78,7 +78,7 @@ public class WarehouseInputServiceImpl implements WarehouseInputService {
     @Override
     public WarehouseInputDto save(WarehouseInputDto warehouseInputDto) {
 
-        if (!engineTypeRepository.existsById(warehouseInputDto.getEngineTypeId())) {
+        if (warehouseInputDto.getEngineTypeId() == null || !engineTypeRepository.existsById(warehouseInputDto.getEngineTypeId())) {
             throw new EntityNotFoundException("ENGINE_TYPE with ID : '" + warehouseInputDto.getEngineTypeId() + "' not found.");
         }
 
