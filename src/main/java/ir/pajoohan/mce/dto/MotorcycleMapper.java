@@ -3,6 +3,7 @@ package ir.pajoohan.mce.dto;
 import ir.pajoohan.mce.dto.baseDto.AddEffectiveMapping;
 import ir.pajoohan.mce.dto.baseDto.AddUpdateMapping;
 import ir.pajoohan.mce.entity.Motorcycle;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,9 +13,9 @@ import org.mapstruct.factory.Mappers;
 import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 
 @Mapper(componentModel = "spring")
-public interface MotorcycleMapper {
+public abstract class MotorcycleMapper {
 
-    MotorcycleMapper INSTANCE = Mappers.getMapper(MotorcycleMapper.class);
+    public static MotorcycleMapper INSTANCE = Mappers.getMapper(MotorcycleMapper.class);
 
     @AddEffectiveMapping
     @Mapping(target = "motorcycleTypeId", source = "motorcycle.motorcycleType.id")
@@ -25,7 +26,7 @@ public interface MotorcycleMapper {
     @Mapping(target = "statusId", source = "motorcycle.status.id")
     @Mapping(target = "stateId", source = "motorcycle.state.id")
     @Mapping(target = "attachmentId", source = "motorcycle.attachment.id")
-    MotorcycleDto MotorcycleToMotorcycleDto(Motorcycle motorcycle);
+    public abstract MotorcycleDto motorcycleToMotorcycleDto(Motorcycle motorcycle);
 
     @Mapping(target = "effectiveDate", source = "effectiveDate")
     @Mapping(target = "motorcycleType.id", source = "motorcycleTypeId")
@@ -36,9 +37,28 @@ public interface MotorcycleMapper {
     @Mapping(target = "status.id", source = "statusId")
     @Mapping(target = "state.id", source = "stateId")
     @Mapping(target = "attachment.id", source = "attachmentId")
-    Motorcycle MotorcycleDtoToMotorcycle(MotorcycleDto motorcycleDto);
+    public abstract Motorcycle motorcycleDtoToMotorcycle(MotorcycleDto motorcycleDto);
 
     @AddUpdateMapping
     @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
-    void updateMotorcycleFromDto(MotorcycleDto motorcycleDto, @MappingTarget Motorcycle motorcycle);
+    public abstract void updateMotorcycleFromDto(MotorcycleDto motorcycleDto, @MappingTarget Motorcycle motorcycle);
+
+    @AfterMapping
+    protected Motorcycle doAfterMapping(@MappingTarget Motorcycle motorcycle) {
+        if (motorcycle != null) {
+            if (motorcycle.getBranch() != null && motorcycle.getBranch().getId() == null) {
+                motorcycle.setBranch(null);
+            }
+            if (motorcycle.getCustomer() != null && motorcycle.getCustomer().getId() == null) {
+                motorcycle.setCustomer(null);
+            }
+            if (motorcycle.getState() != null && motorcycle.getState().getId() == null) {
+                motorcycle.setState(null);
+            }
+            if (motorcycle.getAttachment() != null && motorcycle.getAttachment().getId() == null) {
+                motorcycle.setAttachment(null);
+            }
+        }
+        return motorcycle;
+    }
 }
