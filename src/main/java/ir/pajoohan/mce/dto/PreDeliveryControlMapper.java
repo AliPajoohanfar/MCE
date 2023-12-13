@@ -20,13 +20,13 @@ public interface PreDeliveryControlMapper {
     @Mapping(target = "personId", source = "person.id")
     @Mapping(target = "statusId", source = "status.id")
     @Mapping(target = "motorcycleId", source = "motorcycle.id")
-    PreDeliveryControlDto PreDeliveryControlToPreDeliveryControlDto(PreDeliveryControl preDeliveryControl);
+    PreDeliveryControlDto preDeliveryControlToPreDeliveryControlDto(PreDeliveryControl preDeliveryControl);
 
     @Mapping(target = "effectiveDate", source = "effectiveDate")
     @Mapping(target = "person.id", source = "personId")
     @Mapping(target = "status.id", source = "statusId")
     @Mapping(target = "motorcycle.id", source = "motorcycleId")
-    PreDeliveryControl PreDeliveryControlDtoToPreDeliveryControl(PreDeliveryControlDto preDeliveryControlDto);
+    PreDeliveryControl preDeliveryControlDtoToPreDeliveryControl(PreDeliveryControlDto preDeliveryControlDto);
 
     @AddUpdateMapping
     @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
