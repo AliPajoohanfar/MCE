@@ -44,12 +44,12 @@ public class Motorcycle extends Effective {
 
     @NotBlank(message = "Enter MOTORCYCLE'S ENGINE_NUM.")
     @Size(min = 20, max = 20, message = "MOTORCYCLE'S ENGINE_NUM must be 20 characters.")
-    @Column(name = "ENGINE_NUM", nullable = false, length = 20)
+    @Column(name = "ENGINE_NUM", unique = true, nullable = false, length = 20)
     private String engineMum;
 
     @NotBlank(message = "Enter MOTORCYCLE'S CHASSIS_NUM.")
     @Size(min = 20, max = 20, message = "MOTORCYCLE'S CHASSIS_NUM must be 20 characters.")
-    @Column(name = "CHASSIS_NUM", nullable = false, length = 20)
+    @Column(name = "CHASSIS_NUM", unique = true, nullable = false, length = 20)
     private String chassisNum;
 
     @Column(name = "NUMBERING_DATE")

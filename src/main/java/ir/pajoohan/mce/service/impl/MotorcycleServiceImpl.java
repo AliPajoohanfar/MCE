@@ -161,16 +161,16 @@ public class MotorcycleServiceImpl implements MotorcycleService {
         MotorcycleMapper.INSTANCE.updateMotorcycleFromDto(motorcycleDto, motorcycle);
 
         if (motorcycleDto.getMotorcycleTypeId() == null) {
-            throw new EntityNotFoundException("MOTORCYCLE_TYPE with ID : '" + motorcycleDto.getMotorcycleTypeId() + "' not found.");
+            throw new EntityNotFoundException("MOTORCYCLE_TYPE ID can't be null");
         }
         if (motorcycleDto.getWarehouseInputId() == null) {
-            throw new EntityNotFoundException("WAREHOUSE_INPUT with ID : '" + motorcycleDto.getWarehouseInputId() + "' not found.");
+            throw new EntityNotFoundException("WAREHOUSE_INPUT ID can't be null");
         }
         if (motorcycleDto.getColorId() == null) {
-            throw new EntityNotFoundException("COLOR with ID : '" + motorcycleDto.getColorId() + "' not found.");
+            throw new EntityNotFoundException("COLOR ID can't be null");
         }
         if (motorcycleDto.getStatusId() == null) {
-            throw new EntityNotFoundException("STATUS with ID : '" + motorcycleDto.getStatusId() + "' not found.");
+            throw new EntityNotFoundException("STATUS ID can't be null");
         }
 
         Optional<MotorcycleType> optionalMotorcycleType = motorcycleTypeRepository.findById(motorcycleDto.getMotorcycleTypeId());
