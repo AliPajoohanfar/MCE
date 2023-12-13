@@ -43,12 +43,10 @@ public class QualityControl extends Effective {
     @Column(name = "QC_1_COMMENT", length = 2000)
     private String qc1Comment;
 
-    @NotBlank(message = "Enter QUALITY_CONTROL'S QC_2_COMMENT.")
     @Size(min = 2, max = 2000, message = "QUALITY_CONTROL'S QC_2_COMMENT must be 2000 characters.")
     @Column(name = "QC_2_COMMENT", length = 2000)
     private String qc2Comment;
 
-    @NotBlank(message = "Enter QUALITY_CONTROL'S QC_3_COMMENT.")
     @Size(min = 2, max = 2000, message = "QUALITY_CONTROL'S QC_3_COMMENT must be 2000 characters.")
     @Column(name = "QC_3_COMMENT", length = 2000)
     private String qc3Comment;
