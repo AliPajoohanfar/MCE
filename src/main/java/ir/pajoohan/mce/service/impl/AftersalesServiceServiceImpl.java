@@ -102,9 +102,6 @@ public class AftersalesServiceServiceImpl implements AftersalesServiceService {
             throw new EntityNotFoundException("AFTERSALES_SERVICE with ID : '" + aftersalesServiceDto.getId() + "' not found.");
         }
 
-        AftersalesService aftersalesService = optionalAftersalesService.get();
-        AftersalesServiceMapper.INSTANCE.updateAftersalesServiceFromDto(aftersalesServiceDto, aftersalesService);
-
         if (aftersalesServiceDto.getBranchId() == null) {
             throw new EntityNotFoundException("BRANCH ID can't be null");
         }
@@ -114,6 +111,9 @@ public class AftersalesServiceServiceImpl implements AftersalesServiceService {
         if (aftersalesServiceDto.getMotorcycleId() == null) {
             throw new EntityNotFoundException("MOTORCYCLE ID can't be null");
         }
+
+        AftersalesService aftersalesService = optionalAftersalesService.get();
+        AftersalesServiceMapper.INSTANCE.updateAftersalesServiceFromDto(aftersalesServiceDto, aftersalesService);
 
         Optional<Branch> optionalBranch = branchRepository.findById(aftersalesServiceDto.getBranchId());
         if (optionalBranch.isEmpty()) {

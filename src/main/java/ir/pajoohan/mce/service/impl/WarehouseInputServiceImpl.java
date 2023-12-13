@@ -112,12 +112,13 @@ public class WarehouseInputServiceImpl implements WarehouseInputService {
             throw new EntityNotFoundException("WAREHOUSE_INPUT with ID : '" + warehouseInputDto.getId() + "' not found.");
         }
 
-        WarehouseInput warehouseInput = optionalWarehouseInput.get();
-        WarehouseInputMapper.INSTANCE.updateWarehouseInputFromDto(warehouseInputDto, warehouseInput);
-
         if (warehouseInputDto.getEngineTypeId() == null) {
             throw new EntityNotFoundException("ENGINE_TYPE ID can't be null");
         }
+
+        WarehouseInput warehouseInput = optionalWarehouseInput.get();
+        WarehouseInputMapper.INSTANCE.updateWarehouseInputFromDto(warehouseInputDto, warehouseInput);
+
         Optional<EngineType> optionalEngineType = engineTypeRepository.findById(warehouseInputDto.getEngineTypeId());
         if (optionalEngineType.isEmpty()) {
             throw new EntityNotFoundException("ENGINE_TYPE with ID : '" + warehouseInputDto.getEngineTypeId() + "' not found.");

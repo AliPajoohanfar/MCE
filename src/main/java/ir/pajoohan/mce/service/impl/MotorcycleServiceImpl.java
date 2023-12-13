@@ -157,9 +157,6 @@ public class MotorcycleServiceImpl implements MotorcycleService {
             throw new EntityNotFoundException("MOTORCYCLE with ID : '" + motorcycleDto.getId() + "' not found.");
         }
 
-        Motorcycle motorcycle = optionalMotorcycle.get();
-        MotorcycleMapper.INSTANCE.updateMotorcycleFromDto(motorcycleDto, motorcycle);
-
         if (motorcycleDto.getMotorcycleTypeId() == null) {
             throw new EntityNotFoundException("MOTORCYCLE_TYPE ID can't be null");
         }
@@ -172,6 +169,9 @@ public class MotorcycleServiceImpl implements MotorcycleService {
         if (motorcycleDto.getStatusId() == null) {
             throw new EntityNotFoundException("STATUS ID can't be null");
         }
+
+        Motorcycle motorcycle = optionalMotorcycle.get();
+        MotorcycleMapper.INSTANCE.updateMotorcycleFromDto(motorcycleDto, motorcycle);
 
         Optional<MotorcycleType> optionalMotorcycleType = motorcycleTypeRepository.findById(motorcycleDto.getMotorcycleTypeId());
         if (optionalMotorcycleType.isEmpty()) {

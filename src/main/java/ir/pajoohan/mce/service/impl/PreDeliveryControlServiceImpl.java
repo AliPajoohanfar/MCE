@@ -86,7 +86,6 @@ public class PreDeliveryControlServiceImpl implements PreDeliveryControlService 
             throw new EntityNotFoundException("MOTORCYCLE with ID : '" + preDeliveryControlDto.getMotorcycleId() + "' not found.");
         }
 
-
         PreDeliveryControl preDeliveryControl = PreDeliveryControlMapper.INSTANCE.preDeliveryControlDtoToPreDeliveryControl(preDeliveryControlDto);
         preDeliveryControl.setId(null);
         PreDeliveryControl preDeliveryControlSaved = preDeliveryControlRepository.save(preDeliveryControl);
@@ -99,7 +98,6 @@ public class PreDeliveryControlServiceImpl implements PreDeliveryControlService 
         if (optionalPreDeliveryControl.isEmpty()) {
             throw new EntityNotFoundException("PRE_DELIVERY_CONTROL with ID : '" + preDeliveryControlDto.getId() + "' not found.");
         }
-
 
         if (preDeliveryControlDto.getPersonId() == null) {
             throw new EntityNotFoundException("PERSON ID can't be null");
