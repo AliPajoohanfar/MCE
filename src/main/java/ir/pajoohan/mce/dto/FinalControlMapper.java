@@ -20,13 +20,13 @@ public interface FinalControlMapper {
     @Mapping(target = "personId", source = "person.id")
     @Mapping(target = "statusId", source = "status.id")
     @Mapping(target = "motorcycleId", source = "motorcycle.id")
-    FinalControlDto FinalControlToFinalControlDto(FinalControl finalControl);
+    FinalControlDto finalControlToFinalControlDto(FinalControl finalControl);
 
     @Mapping(target = "effectiveDate", source = "effectiveDate")
     @Mapping(target = "person.id", source = "personId")
     @Mapping(target = "status.id", source = "statusId")
     @Mapping(target = "motorcycle.id", source = "motorcycleId")
-    FinalControl FinalControlDtoToFinalControl(FinalControlDto finalControlDto);
+    FinalControl finalControlDtoToFinalControl(FinalControlDto finalControlDto);
 
     @AddUpdateMapping
     @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)
