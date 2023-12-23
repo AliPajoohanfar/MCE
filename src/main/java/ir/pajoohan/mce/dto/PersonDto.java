@@ -1,5 +1,6 @@
 package ir.pajoohan.mce.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import ir.pajoohan.mce.dto.baseDto.EffectiveDto;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,10 @@ public class PersonDto extends EffectiveDto {
     private String name;
     private String family;
     private String fatherName;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date birthDate;
+
     private String identifierNumb;
     private String issuancePlace;
     private String postalCode;
