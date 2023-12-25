@@ -1,12 +1,11 @@
 package ir.pajoohan.mce.service;
 
 import ir.pajoohan.mce.dto.AftersalesServiceDto;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface AftersalesServiceService {
 
-    List<AftersalesServiceDto> getAll();
+    Page<AftersalesServiceDto> getAll(Integer page, Integer size, String sort);
 
     AftersalesServiceDto get(Long id);
 

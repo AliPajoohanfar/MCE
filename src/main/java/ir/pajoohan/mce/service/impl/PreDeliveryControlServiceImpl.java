@@ -13,6 +13,11 @@ import ir.pajoohan.mce.repository.StatusRepository;
 import ir.pajoohan.mce.service.PreDeliveryControlService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,13 +63,19 @@ public class PreDeliveryControlServiceImpl implements PreDeliveryControlService 
      * Methods
      */
     @Override
-    public List<PreDeliveryControlDto> getAll() {
-        List<PreDeliveryControl> preDeliveryControlList = preDeliveryControlRepository.findAll();
+    public Page<PreDeliveryControlDto> getAll(Integer page, Integer size, String sort) {
+
+        Pageable pageable = PageRequest.of(page, size).withSort(Sort.Direction.ASC, sort);
+        Page<PreDeliveryControl> preDeliveryControlPage = preDeliveryControlRepository.findAll(pageable);
+        List<PreDeliveryControl> preDeliveryControlList = preDeliveryControlPage.stream().toList();
+
         List<PreDeliveryControlDto> preDeliveryControlDtoList = new ArrayList<>();
         for (PreDeliveryControl s : preDeliveryControlList) {
             preDeliveryControlDtoList.add(PreDeliveryControlMapper.INSTANCE.preDeliveryControlToPreDeliveryControlDto(s));
         }
-        return preDeliveryControlDtoList;
+        Page<PreDeliveryControlDto> preDeliveryControlDtoPage = new PageImpl<>(preDeliveryControlDtoList, pageable, preDeliveryControlPage.getTotalElements());
+
+        return preDeliveryControlDtoPage;
     }
 
     @Override

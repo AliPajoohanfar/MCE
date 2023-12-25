@@ -13,6 +13,11 @@ import ir.pajoohan.mce.repository.WarehouseInputRepository;
 import ir.pajoohan.mce.service.WarehouseInputService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,13 +65,19 @@ public class WarehouseInputServiceImpl implements WarehouseInputService {
      * Methods
      */
     @Override
-    public List<WarehouseInputDto> getAll() {
-        List<WarehouseInput> warehouseInputList = warehouseInputRepository.findAll();
+    public Page<WarehouseInputDto> getAll(Integer page, Integer size, String sort) {
+
+        Pageable pageable = PageRequest.of(page, size).withSort(Sort.Direction.ASC, sort);
+        Page<WarehouseInput> warehouseInputPage = warehouseInputRepository.findAll(pageable);
+        List<WarehouseInput> warehouseInputList = warehouseInputPage.stream().toList();
+
         List<WarehouseInputDto> warehouseInputDtoList = new ArrayList<>();
         for (WarehouseInput s : warehouseInputList) {
             warehouseInputDtoList.add(WarehouseInputMapper.INSTANCE.warehouseInputToWarehouseInputDto(s));
         }
-        return warehouseInputDtoList;
+        Page<WarehouseInputDto> warehouseInputDtoPage = new PageImpl<>(warehouseInputDtoList, pageable, warehouseInputPage.getTotalElements());
+
+        return warehouseInputDtoPage;
     }
 
     @Override

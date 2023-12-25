@@ -1,12 +1,11 @@
 package ir.pajoohan.mce.service;
 
 import ir.pajoohan.mce.dto.BranchDto;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface BranchService {
 
-    List<BranchDto> getAll();
+    Page<BranchDto> getAll(Integer page, Integer size, String sort);
 
     BranchDto get(Long id);
 

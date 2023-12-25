@@ -51,7 +51,7 @@ public interface AttachmentMapper {
     @Mapping(source = "attachFile8", target = "attachFile8", qualifiedByName = "blobToBase64String")
     @Mapping(source = "attachFile9", target = "attachFile9", qualifiedByName = "blobToBase64String")
     @Mapping(source = "attachFile10", target = "attachFile10", qualifiedByName = "blobToBase64String")
-    AttachmentDto attchmentoToattachmentDto(Attachment attachment);
+    AttachmentDto attachmentToAttachmentDto(Attachment attachment);
 
     @Mapping(target = "effectiveDate", source = "effectiveDate")
     @Mapping(source = "attachFile1", target = "attachFile1", qualifiedByName = "base64StringToBlob")
@@ -64,7 +64,7 @@ public interface AttachmentMapper {
     @Mapping(source = "attachFile8", target = "attachFile8", qualifiedByName = "base64StringToBlob")
     @Mapping(source = "attachFile9", target = "attachFile9", qualifiedByName = "base64StringToBlob")
     @Mapping(source = "attachFile10", target = "attachFile10", qualifiedByName = "base64StringToBlob")
-    Attachment attchamentDtoToattachment(AttachmentDto attachmentDto);
+    Attachment attachmentDtoToAttachment(AttachmentDto attachmentDto);
 
     @AddUpdateMapping
     @BeanMapping(nullValuePropertyMappingStrategy = IGNORE)

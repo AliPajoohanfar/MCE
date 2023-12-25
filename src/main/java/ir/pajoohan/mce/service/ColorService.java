@@ -1,12 +1,11 @@
 package ir.pajoohan.mce.service;
 
 import ir.pajoohan.mce.dto.ColorDto;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface ColorService {
 
-    List<ColorDto> getAll();
+    Page<ColorDto> getAll(Integer page, Integer size, String sort);
 
     ColorDto get(Long id);
 

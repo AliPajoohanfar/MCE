@@ -13,6 +13,11 @@ import ir.pajoohan.mce.repository.StatusRepository;
 import ir.pajoohan.mce.service.QualityControlService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,13 +63,19 @@ public class QualityControlServiceImpl implements QualityControlService {
      * Methods
      */
     @Override
-    public List<QualityControlDto> getAll() {
-        List<QualityControl> qualityControlList = qualityControlRepository.findAll();
+    public Page<QualityControlDto> getAll(Integer page, Integer size, String sort) {
+
+        Pageable pageable = PageRequest.of(page, size).withSort(Sort.Direction.ASC, sort);
+        Page<QualityControl> qualityControlPage = qualityControlRepository.findAll(pageable);
+        List<QualityControl> qualityControlList = qualityControlPage.stream().toList();
+
         List<QualityControlDto> qualityControlDtoList = new ArrayList<>();
         for (QualityControl s : qualityControlList) {
             qualityControlDtoList.add(QualityControlMapper.INSTANCE.qualityControlToQualityControlDto(s));
         }
-        return qualityControlDtoList;
+        Page<QualityControlDto> qualityControlDtoPage = new PageImpl<>(qualityControlDtoList, pageable, qualityControlPage.getTotalElements());
+
+        return qualityControlDtoPage;
     }
 
     @Override

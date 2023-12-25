@@ -1,13 +1,13 @@
 package ir.pajoohan.mce.service;
 
 import ir.pajoohan.mce.dto.AttachmentDto;
+import org.springframework.data.domain.Page;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public interface AttachmentService {
 
-    List<AttachmentDto> getAll();
+    Page<AttachmentDto> getAll(Integer page, Integer size, String sort);
 
     AttachmentDto get(Long id) throws SQLException;
 

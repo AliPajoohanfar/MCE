@@ -7,6 +7,11 @@ import ir.pajoohan.mce.repository.EngineTypeRepository;
 import ir.pajoohan.mce.service.EngineTypeService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,13 +39,19 @@ public class EngineTypeServiceImpl implements EngineTypeService {
      * Methods
      */
     @Override
-    public List<EngineTypeDto> getAll() {
-        List<EngineType> engineTypeList = engineTypeRepository.findAll();
+    public Page<EngineTypeDto> getAll(Integer page, Integer size, String sort) {
+
+        Pageable pageable = PageRequest.of(page, size).withSort(Sort.Direction.ASC, sort);
+        Page<EngineType> engineTypePage = engineTypeRepository.findAll(pageable);
+        List<EngineType> engineTypeList = engineTypePage.stream().toList();
+
         List<EngineTypeDto> engineTypeDtoList = new ArrayList<>();
         for (EngineType e : engineTypeList) {
             engineTypeDtoList.add(EngineTypeMapper.INSTANCE.engineTypeToEngineTypeDto(e));
         }
-        return engineTypeDtoList;
+        Page<EngineTypeDto> engineTypeDtoPage = new PageImpl<>(engineTypeDtoList, pageable, engineTypePage.getTotalElements());
+
+        return engineTypeDtoPage;
     }
 
     @Override

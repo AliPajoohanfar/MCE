@@ -1,12 +1,11 @@
 package ir.pajoohan.mce.service;
 
 import ir.pajoohan.mce.dto.StateDto;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface StateService {
 
-    List<StateDto> getAll();
+    Page<StateDto> getAll(Integer page, Integer size, String sort);
 
     StateDto get(Long id);
 

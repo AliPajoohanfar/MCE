@@ -1,12 +1,11 @@
 package ir.pajoohan.mce.service;
 
 import ir.pajoohan.mce.dto.PersonDto;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface PersonService {
 
-    List<PersonDto> getAll();
+    Page<PersonDto> getAll(Integer page, Integer size, String sort);
 
     PersonDto get(Long id);
 

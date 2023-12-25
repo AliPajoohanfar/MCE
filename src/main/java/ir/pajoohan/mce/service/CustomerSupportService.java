@@ -1,12 +1,11 @@
 package ir.pajoohan.mce.service;
 
 import ir.pajoohan.mce.dto.CustomerSupportDto;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface CustomerSupportService {
 
-    List<CustomerSupportDto> getAll();
+    Page<CustomerSupportDto> getAll(Integer page, Integer size, String sort);
 
     CustomerSupportDto get(Long id);
 

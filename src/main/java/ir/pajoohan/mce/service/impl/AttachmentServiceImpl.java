@@ -7,6 +7,11 @@ import ir.pajoohan.mce.repository.AttachmentRepository;
 import ir.pajoohan.mce.service.AttachmentService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,27 +40,33 @@ public class AttachmentServiceImpl implements AttachmentService {
      * Methods
      */
     @Override
-    public List<AttachmentDto> getAll() {
-        List<Attachment> attachmentList = attachmentRepository.findAll();
+    public Page<AttachmentDto> getAll(Integer page, Integer size, String sort) {
+
+        Pageable pageable = PageRequest.of(page, size).withSort(Sort.Direction.ASC, sort);
+        Page<Attachment> attachmentPage = attachmentRepository.findAll(pageable);
+        List<Attachment> attachmentList = attachmentPage.stream().toList();
+
         List<AttachmentDto> attachmentDtoList = new ArrayList<>();
-        for (Attachment a : attachmentList) {
-            attachmentDtoList.add(AttachmentMapper.INSTANCE.attchmentoToattachmentDto(a));
+        for (Attachment s : attachmentList) {
+            attachmentDtoList.add(AttachmentMapper.INSTANCE.attachmentToAttachmentDto(s));
         }
-        return attachmentDtoList;
+        Page<AttachmentDto> attachmentDtoPage = new PageImpl<>(attachmentDtoList, pageable, attachmentPage.getTotalElements());
+
+        return attachmentDtoPage;
     }
 
     @Override
     public AttachmentDto get(Long id) throws SQLException {
         Attachment attachment = attachmentRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        return AttachmentMapper.INSTANCE.attchmentoToattachmentDto(attachment);
+        return AttachmentMapper.INSTANCE.attachmentToAttachmentDto(attachment);
     }
 
     @Override
     public AttachmentDto save(AttachmentDto attachmentDto) {
-        Attachment attachment = AttachmentMapper.INSTANCE.attchamentDtoToattachment(attachmentDto);
+        Attachment attachment = AttachmentMapper.INSTANCE.attachmentDtoToAttachment(attachmentDto);
         attachment.setId(null);
         Attachment attachmentSaved = attachmentRepository.save(attachment);
-        return AttachmentMapper.INSTANCE.attchmentoToattachmentDto(attachmentSaved);
+        return AttachmentMapper.INSTANCE.attachmentToAttachmentDto(attachmentSaved);
     }
 
     @Override
@@ -68,7 +79,7 @@ public class AttachmentServiceImpl implements AttachmentService {
         Attachment attachment = optionalAttachment.get();
         AttachmentMapper.INSTANCE.updateAttachmentFromDto(attachmentDto, attachment);
         Attachment attachmentSaved = attachmentRepository.save(attachment);
-        return AttachmentMapper.INSTANCE.attchmentoToattachmentDto(attachmentSaved);
+        return AttachmentMapper.INSTANCE.attachmentToAttachmentDto(attachmentSaved);
     }
 
     @Override

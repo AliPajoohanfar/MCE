@@ -1,12 +1,11 @@
 package ir.pajoohan.mce.service;
 
 import ir.pajoohan.mce.dto.PreDeliveryControlDto;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface PreDeliveryControlService {
 
-    List<PreDeliveryControlDto> getAll();
+    Page<PreDeliveryControlDto> getAll(Integer page, Integer size, String sort);
 
     PreDeliveryControlDto get(Long id);
 

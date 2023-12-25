@@ -13,6 +13,11 @@ import ir.pajoohan.mce.repository.MotorcycleRepository;
 import ir.pajoohan.mce.service.AftersalesServiceService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,13 +66,19 @@ public class AftersalesServiceServiceImpl implements AftersalesServiceService {
      * Methods
      */
     @Override
-    public List<AftersalesServiceDto> getAll() {
-        List<AftersalesService> aftersalesServiceList = aftersalesServiceRepository.findAll();
+    public Page<AftersalesServiceDto> getAll(Integer page, Integer size, String sort) {
+
+        Pageable pageable = PageRequest.of(page, size).withSort(Sort.Direction.ASC, sort);
+        Page<AftersalesService> aftersalesServicePage = aftersalesServiceRepository.findAll(pageable);
+        List<AftersalesService> aftersalesServiceList = aftersalesServicePage.stream().toList();
+
         List<AftersalesServiceDto> aftersalesServiceDtoList = new ArrayList<>();
         for (AftersalesService s : aftersalesServiceList) {
             aftersalesServiceDtoList.add(AftersalesServiceMapper.INSTANCE.aftersalesServiceToAftersalesServiceDto(s));
         }
-        return aftersalesServiceDtoList;
+        Page<AftersalesServiceDto> aftersalesServiceDtoPage = new PageImpl<>(aftersalesServiceDtoList, pageable, aftersalesServicePage.getTotalElements());
+
+        return aftersalesServiceDtoPage;
     }
 
     @Override

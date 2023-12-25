@@ -7,6 +7,11 @@ import ir.pajoohan.mce.repository.StatusRepository;
 import ir.pajoohan.mce.service.StatusService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,13 +39,19 @@ public class StatusServiceImpl implements StatusService {
      * Methods
      */
     @Override
-    public List<StatusDto> getAll() {
-        List<Status> statusList = statusRepository.findAll();
+    public Page<StatusDto> getAll(Integer page, Integer size, String sort) {
+
+        Pageable pageable = PageRequest.of(page, size).withSort(Sort.Direction.ASC, sort);
+        Page<Status> statusPage = statusRepository.findAll(pageable);
+        List<Status> statusList = statusPage.stream().toList();
+
         List<StatusDto> statusDtoList = new ArrayList<>();
         for (Status s : statusList) {
             statusDtoList.add(StatusMapper.INSTANCE.statusToStatusDto(s));
         }
-        return statusDtoList;
+        Page<StatusDto> statusDtoPage = new PageImpl<>(statusDtoList, pageable, statusPage.getTotalElements());
+
+        return statusDtoPage;
     }
 
     @Override

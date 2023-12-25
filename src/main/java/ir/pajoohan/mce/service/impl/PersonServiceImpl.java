@@ -7,6 +7,11 @@ import ir.pajoohan.mce.repository.PersonRepository;
 import ir.pajoohan.mce.service.PersonService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,13 +39,19 @@ public class PersonServiceImpl implements PersonService {
      * Methods
      */
     @Override
-    public List<PersonDto> getAll() {
-        List<Person> personList = personRepository.findAll();
+    public Page<PersonDto> getAll(Integer page, Integer size, String sort) {
+
+        Pageable pageable = PageRequest.of(page, size).withSort(Sort.Direction.ASC, sort);
+        Page<Person> personPage = personRepository.findAll(pageable);
+        List<Person> personList = personPage.stream().toList();
+
         List<PersonDto> personDtoList = new ArrayList<>();
         for (Person s : personList) {
             personDtoList.add(PersonMapper.INSTANCE.personToPersonDto(s));
         }
-        return personDtoList;
+        Page<PersonDto> personDtoPage = new PageImpl<>(personDtoList, pageable, personPage.getTotalElements());
+
+        return personDtoPage;
     }
 
     @Override

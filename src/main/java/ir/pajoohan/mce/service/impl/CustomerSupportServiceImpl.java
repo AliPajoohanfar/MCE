@@ -7,6 +7,11 @@ import ir.pajoohan.mce.repository.CustomerSupportRepository;
 import ir.pajoohan.mce.service.CustomerSupportService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,13 +39,19 @@ public class CustomerSupportServiceImpl implements CustomerSupportService {
      * Methods
      */
     @Override
-    public List<CustomerSupportDto> getAll() {
-        List<CustomerSupport> customerSupportList = customerSupportRepository.findAll();
+    public Page<CustomerSupportDto> getAll(Integer page, Integer size, String sort) {
+
+        Pageable pageable = PageRequest.of(page, size).withSort(Sort.Direction.ASC, sort);
+        Page<CustomerSupport> customerSupportPage = customerSupportRepository.findAll(pageable);
+        List<CustomerSupport> customerSupportList = customerSupportPage.stream().toList();
+
         List<CustomerSupportDto> customerSupportDtoList = new ArrayList<>();
         for (CustomerSupport s : customerSupportList) {
             customerSupportDtoList.add(CustomerSupportMapper.INSTANCE.customerSupportToCustomerSupportDto(s));
         }
-        return customerSupportDtoList;
+        Page<CustomerSupportDto> customerSupportDtoPage = new PageImpl<>(customerSupportDtoList, pageable, customerSupportPage.getTotalElements());
+
+        return customerSupportDtoPage;
     }
 
     @Override

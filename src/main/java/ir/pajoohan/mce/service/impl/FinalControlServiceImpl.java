@@ -13,6 +13,11 @@ import ir.pajoohan.mce.repository.StatusRepository;
 import ir.pajoohan.mce.service.FinalControlService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,13 +62,19 @@ public class FinalControlServiceImpl implements FinalControlService {
      * Methods
      */
     @Override
-    public List<FinalControlDto> getAll() {
-        List<FinalControl> finalControlList = finalControlRepository.findAll();
+    public Page<FinalControlDto> getAll(Integer page, Integer size, String sort) {
+
+        Pageable pageable = PageRequest.of(page, size).withSort(Sort.Direction.ASC, sort);
+        Page<FinalControl> finalControlPage = finalControlRepository.findAll(pageable);
+        List<FinalControl> finalControlList = finalControlPage.stream().toList();
+
         List<FinalControlDto> finalControlDtoList = new ArrayList<>();
         for (FinalControl s : finalControlList) {
             finalControlDtoList.add(FinalControlMapper.INSTANCE.finalControlToFinalControlDto(s));
         }
-        return finalControlDtoList;
+        Page<FinalControlDto> finalControlDtoPage = new PageImpl<>(finalControlDtoList, pageable, finalControlPage.getTotalElements());
+
+        return finalControlDtoPage;
     }
 
     @Override

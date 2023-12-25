@@ -7,6 +7,11 @@ import ir.pajoohan.mce.repository.CustomerRepository;
 import ir.pajoohan.mce.service.CustomerService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,13 +39,19 @@ public class CustomerServiceImpl implements CustomerService {
      * Methods
      */
     @Override
-    public List<CustomerDto> getAll() {
-        List<Customer> customerList = customerRepository.findAll();
+    public Page<CustomerDto> getAll(Integer page, Integer size, String sort) {
+
+        Pageable pageable = PageRequest.of(page, size).withSort(Sort.Direction.ASC, sort);
+        Page<Customer> customerPage = customerRepository.findAll(pageable);
+        List<Customer> customerList = customerPage.stream().toList();
+
         List<CustomerDto> customerDtoList = new ArrayList<>();
         for (Customer c : customerList) {
             customerDtoList.add(CustomerMapper.INSTANCE.customerToCustomerDto(c));
         }
-        return customerDtoList;
+        Page<CustomerDto> customerDtoPage = new PageImpl<>(customerDtoList, pageable, customerPage.getTotalElements());
+
+        return customerDtoPage;
     }
 
     @Override

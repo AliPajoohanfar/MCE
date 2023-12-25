@@ -7,6 +7,11 @@ import ir.pajoohan.mce.repository.StateRepository;
 import ir.pajoohan.mce.service.StateService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,13 +39,19 @@ public class StateServiceImpl implements StateService {
      * Methods
      */
     @Override
-    public List<StateDto> getAll() {
-        List<State> stateList = stateRepository.findAll();
+    public Page<StateDto> getAll(Integer page, Integer size, String sort) {
+
+        Pageable pageable = PageRequest.of(page, size).withSort(Sort.Direction.ASC, sort);
+        Page<State> statePage = stateRepository.findAll(pageable);
+        List<State> stateList = statePage.stream().toList();
+
         List<StateDto> stateDtoList = new ArrayList<>();
         for (State s : stateList) {
             stateDtoList.add(StateMapper.INSTANCE.stateToStateDto(s));
         }
-        return stateDtoList;
+        Page<StateDto> stateDtoPage = new PageImpl<>(stateDtoList, pageable, statePage.getTotalElements());
+
+        return stateDtoPage;
     }
 
     @Override

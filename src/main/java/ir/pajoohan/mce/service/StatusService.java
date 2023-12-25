@@ -1,12 +1,11 @@
 package ir.pajoohan.mce.service;
 
 import ir.pajoohan.mce.dto.StatusDto;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface StatusService {
 
-    List<StatusDto> getAll();
+    Page<StatusDto> getAll(Integer page, Integer size, String sort);
 
     StatusDto get(Long id);
 

@@ -7,6 +7,11 @@ import ir.pajoohan.mce.repository.ColorRepository;
 import ir.pajoohan.mce.service.ColorService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,13 +39,19 @@ public class ColorServiceImpl implements ColorService {
      * Methods
      */
     @Override
-    public List<ColorDto> getAll() {
-        List<Color> colorList = colorRepository.findAll();
+    public Page<ColorDto> getAll(Integer page, Integer size, String sort) {
+
+        Pageable pageable = PageRequest.of(page, size).withSort(Sort.Direction.ASC, sort);
+        Page<Color> colorPage = colorRepository.findAll(pageable);
+        List<Color> colorList = colorPage.stream().toList();
+
         List<ColorDto> colorDtoList = new ArrayList<>();
         for (Color c : colorList) {
             colorDtoList.add(ColorMapper.INSTANCE.colorToColorDto(c));
         }
-        return colorDtoList;
+        Page<ColorDto> colorDtoPage = new PageImpl<>(colorDtoList, pageable, colorPage.getTotalElements());
+
+        return colorDtoPage;
     }
 
     @Override

@@ -1,12 +1,11 @@
 package ir.pajoohan.mce.service;
 
 import ir.pajoohan.mce.dto.EngineTypeDto;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface EngineTypeService {
 
-    List<EngineTypeDto> getAll();
+    Page<EngineTypeDto> getAll(Integer page, Integer size, String sort);
 
     EngineTypeDto get(Long id);
 

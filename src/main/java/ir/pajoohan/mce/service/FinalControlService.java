@@ -1,12 +1,11 @@
 package ir.pajoohan.mce.service;
 
 import ir.pajoohan.mce.dto.FinalControlDto;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface FinalControlService {
 
-    List<FinalControlDto> getAll();
+    Page<FinalControlDto> getAll(Integer page, Integer size, String sort);
 
     FinalControlDto get(Long id);
 

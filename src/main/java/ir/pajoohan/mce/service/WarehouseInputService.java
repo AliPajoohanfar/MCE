@@ -1,12 +1,11 @@
 package ir.pajoohan.mce.service;
 
 import ir.pajoohan.mce.dto.WarehouseInputDto;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface WarehouseInputService {
 
-    List<WarehouseInputDto> getAll();
+    Page<WarehouseInputDto> getAll(Integer page, Integer size, String sort);
 
     WarehouseInputDto get(Long id);
 

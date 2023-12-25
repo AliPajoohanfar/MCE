@@ -11,6 +11,11 @@ import ir.pajoohan.mce.repository.StateRepository;
 import ir.pajoohan.mce.service.BranchService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,13 +55,19 @@ public class BranchServiceImpl implements BranchService {
      * Methods
      */
     @Override
-    public List<BranchDto> getAll() {
-        List<Branch> branchList = branchRepository.findAll();
+    public Page<BranchDto> getAll(Integer page, Integer size, String sort) {
+
+        Pageable pageable = PageRequest.of(page, size).withSort(Sort.Direction.ASC, sort);
+        Page<Branch> branchPage = branchRepository.findAll(pageable);
+        List<Branch> branchList = branchPage.stream().toList();
+
         List<BranchDto> branchDtoList = new ArrayList<>();
         for (Branch b : branchList) {
             branchDtoList.add(BranchMapper.INSTANCE.branchToBranchDto(b));
         }
-        return branchDtoList;
+        Page<BranchDto> branchDtoPage = new PageImpl<>(branchDtoList, pageable, branchPage.getTotalElements());
+
+        return branchDtoPage;
     }
 
     @Override

@@ -9,6 +9,11 @@ import ir.pajoohan.mce.repository.MotorcycleTypeRepository;
 import ir.pajoohan.mce.service.MotorcycleTypeService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,13 +47,19 @@ public class MotorcycleTypeServiceImpl implements MotorcycleTypeService {
      * Methods
      */
     @Override
-    public List<MotorcycleTypeDto> getAll() {
-        List<MotorcycleType> motorcycleTypeList = motorcycleTypeRepository.findAll();
+    public Page<MotorcycleTypeDto> getAll(Integer page, Integer size, String sort) {
+
+        Pageable pageable = PageRequest.of(page, size).withSort(Sort.Direction.ASC, sort);
+        Page<MotorcycleType> motorcycleTypePage = motorcycleTypeRepository.findAll(pageable);
+        List<MotorcycleType> motorcycleTypeList = motorcycleTypePage.stream().toList();
+
         List<MotorcycleTypeDto> motorcycleTypeDtoList = new ArrayList<>();
         for (MotorcycleType s : motorcycleTypeList) {
             motorcycleTypeDtoList.add(MotorcycleTypeMapper.INSTANCE.motorcycleTypeToMotorcycleTypeDto(s));
         }
-        return motorcycleTypeDtoList;
+        Page<MotorcycleTypeDto> motorcycleTypeDtoPage = new PageImpl<>(motorcycleTypeDtoList, pageable, motorcycleTypePage.getTotalElements());
+
+        return motorcycleTypeDtoPage;
     }
 
     @Override

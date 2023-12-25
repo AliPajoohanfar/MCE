@@ -5,6 +5,7 @@ import ir.pajoohan.mce.service.CustomerSupportService;
 import ir.pajoohan.mce.service.impl.CustomerSupportServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,11 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/customersupport")
@@ -43,8 +45,11 @@ public class CustomerSupportRestController {
      */
     @GetMapping
     @ResponseBody
-    public ResponseEntity<List<CustomerSupportDto>> getAll() {
-        return ResponseEntity.ok().body(customerSupportService.getAll());
+    public ResponseEntity<Page<CustomerSupportDto>> getAll(@RequestParam("page") Optional<Integer> page,
+                                                           @RequestParam("size") Optional<Integer> size,
+                                                           @RequestParam("sort") Optional<String> sort) {
+
+        return ResponseEntity.ok().body(customerSupportService.getAll(page.orElse(0), size.orElse(10), sort.orElse("id")));
     }
 
     @GetMapping("/{customerSupportId}")

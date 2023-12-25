@@ -1,12 +1,11 @@
 package ir.pajoohan.mce.service;
 
 import ir.pajoohan.mce.dto.MotorcycleDto;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface MotorcycleService {
 
-    List<MotorcycleDto> getAll();
+    Page<MotorcycleDto> getAll(Integer page, Integer size, String sort);
 
     MotorcycleDto get(Long id);
 
