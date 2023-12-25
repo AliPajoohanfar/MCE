@@ -13,10 +13,10 @@ import java.util.Date;
 @Component
 public class WarehouseInputDto extends EffectiveDto {
 
+    private Long id;
     private String bomLinkUrl;
     private Integer year;
     private String kootajNum;
-    private Long id;
     private Integer num;
     private Long engineNumStart;
     private Long engineNumEnd;
