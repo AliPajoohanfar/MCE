@@ -1,5 +1,6 @@
 package ir.pajoohan.mce.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import ir.pajoohan.mce.dto.CustomerSupportDto;
 import ir.pajoohan.mce.service.CustomerSupportService;
 import ir.pajoohan.mce.service.impl.CustomerSupportServiceImpl;
@@ -45,6 +46,7 @@ public class CustomerSupportRestController {
      */
     @GetMapping
     @ResponseBody
+    @Operation(summary = "Get all customer supports by pagination and sort options.")
     public ResponseEntity<Page<CustomerSupportDto>> getAll(@RequestParam("page") Optional<Integer> page,
                                                            @RequestParam("size") Optional<Integer> size,
                                                            @RequestParam("sort") Optional<String> sort) {
@@ -54,6 +56,7 @@ public class CustomerSupportRestController {
 
     @GetMapping("/{customerSupportId}")
     @ResponseBody
+    @Operation(summary = "Get a specific customer support by id.")
     public ResponseEntity<CustomerSupportDto> get(@PathVariable("customerSupportId") Long customerSupportId) {
         return ResponseEntity.ok().body(
                 customerSupportService.get(customerSupportId));
@@ -61,18 +64,21 @@ public class CustomerSupportRestController {
 
     @PostMapping
     @ResponseBody
+    @Operation(summary = "Add a new customer support.")
     public ResponseEntity<CustomerSupportDto> insert(@RequestBody @Valid CustomerSupportDto customerSupportDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(customerSupportService.save(customerSupportDto));
     }
 
     @PutMapping
     @ResponseBody
+    @Operation(summary = "Update a specific customer support by id.")
     public ResponseEntity<CustomerSupportDto> update(@RequestBody @Valid CustomerSupportDto customerSupportDto) {
         return ResponseEntity.ok().body(customerSupportService.update(customerSupportDto));
     }
 
     @DeleteMapping("/{customerSupportId}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Soft delete a specific customer support by id.")
     public void delete(@PathVariable("customerSupportId") Long customerSupportId) {
         customerSupportService.delete(customerSupportId);
     }

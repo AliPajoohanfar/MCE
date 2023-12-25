@@ -1,5 +1,6 @@
 package ir.pajoohan.mce.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import ir.pajoohan.mce.dto.AftersalesServiceDto;
 import ir.pajoohan.mce.service.AftersalesServiceService;
 import ir.pajoohan.mce.service.impl.AftersalesServiceServiceImpl;
@@ -45,6 +46,7 @@ public class AftersalesServiceRestController {
      */
     @GetMapping
     @ResponseBody
+    @Operation(summary = "Get all after sale services by pagination and sort options.")
     public ResponseEntity<Page<AftersalesServiceDto>> getAll(@RequestParam("page") Optional<Integer> page,
                                                              @RequestParam("size") Optional<Integer> size,
                                                              @RequestParam("sort") Optional<String> sort) {
@@ -54,6 +56,7 @@ public class AftersalesServiceRestController {
 
     @GetMapping("/{aftersalesServiceId}")
     @ResponseBody
+    @Operation(summary = "Get a specific after sale service by id.")
     public ResponseEntity<AftersalesServiceDto> get(@PathVariable("aftersalesServiceId") Long aftersalesServiceId) {
         return ResponseEntity.ok().body(
                 aftersalesServiceService.get(aftersalesServiceId));
@@ -61,18 +64,21 @@ public class AftersalesServiceRestController {
 
     @PostMapping
     @ResponseBody
+    @Operation(summary = "Add a new after sale service.")
     public ResponseEntity<AftersalesServiceDto> insert(@RequestBody @Valid AftersalesServiceDto aftersalesServiceDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(aftersalesServiceService.save(aftersalesServiceDto));
     }
 
     @PutMapping
     @ResponseBody
+    @Operation(summary = "Update a specific after sale service by id.")
     public ResponseEntity<AftersalesServiceDto> update(@RequestBody @Valid AftersalesServiceDto aftersalesServiceDto) {
         return ResponseEntity.ok().body(aftersalesServiceService.update(aftersalesServiceDto));
     }
 
     @DeleteMapping("/{aftersalesServiceId}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Soft delete a specific after sale service by id.")
     public void delete(@PathVariable("aftersalesServiceId") Long aftersalesServiceId) {
         aftersalesServiceService.delete(aftersalesServiceId);
     }

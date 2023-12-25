@@ -1,5 +1,6 @@
 package ir.pajoohan.mce.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import ir.pajoohan.mce.dto.QualityControlDto;
 import ir.pajoohan.mce.service.QualityControlService;
 import ir.pajoohan.mce.service.impl.QualityControlServiceImpl;
@@ -45,6 +46,7 @@ public class QualityControlRestController {
      */
     @GetMapping
     @ResponseBody
+    @Operation(summary = "Get all quality controls by pagination and sort options.")
     public ResponseEntity<Page<QualityControlDto>> getAll(@RequestParam("page") Optional<Integer> page,
                                                           @RequestParam("size") Optional<Integer> size,
                                                           @RequestParam("sort") Optional<String> sort) {
@@ -54,6 +56,7 @@ public class QualityControlRestController {
 
     @GetMapping("/{qualityControlId}")
     @ResponseBody
+    @Operation(summary = "Get a specific quality control by id.")
     public ResponseEntity<QualityControlDto> get(@PathVariable("qualityControlId") Long qualityControlId) {
         return ResponseEntity.ok().body(
                 qualityControlService.get(qualityControlId));
@@ -61,18 +64,21 @@ public class QualityControlRestController {
 
     @PostMapping
     @ResponseBody
+    @Operation(summary = "Add a new quality control.")
     public ResponseEntity<QualityControlDto> insert(@RequestBody @Valid QualityControlDto qualityControlDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(qualityControlService.save(qualityControlDto));
     }
 
     @PutMapping
     @ResponseBody
+    @Operation(summary = "Update a specific quality control by id.")
     public ResponseEntity<QualityControlDto> update(@RequestBody @Valid QualityControlDto qualityControlDto) {
         return ResponseEntity.ok().body(qualityControlService.update(qualityControlDto));
     }
 
     @DeleteMapping("/{qualityControlId}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Soft delete a specific quality control by id.")
     public void delete(@PathVariable("qualityControlId") Long qualityControlId) {
         qualityControlService.delete(qualityControlId);
     }

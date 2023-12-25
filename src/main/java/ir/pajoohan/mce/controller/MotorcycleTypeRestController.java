@@ -1,5 +1,6 @@
 package ir.pajoohan.mce.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import ir.pajoohan.mce.dto.MotorcycleTypeDto;
 import ir.pajoohan.mce.service.MotorcycleTypeService;
 import ir.pajoohan.mce.service.impl.MotorcycleTypeServiceImpl;
@@ -45,6 +46,7 @@ public class MotorcycleTypeRestController {
      */
     @GetMapping
     @ResponseBody
+    @Operation(summary = "Get all motorcycle types by pagination and sort options.")
     public ResponseEntity<Page<MotorcycleTypeDto>> getAll(@RequestParam("page") Optional<Integer> page,
                                                           @RequestParam("size") Optional<Integer> size,
                                                           @RequestParam("sort") Optional<String> sort) {
@@ -54,6 +56,7 @@ public class MotorcycleTypeRestController {
 
     @GetMapping("/{motorcycleTypeId}")
     @ResponseBody
+    @Operation(summary = "Get a specific motorcycle type by id.")
     public ResponseEntity<MotorcycleTypeDto> get(@PathVariable("motorcycleTypeId") Long motorcycleTypeId) {
         return ResponseEntity.ok().body(
                 motorcycleTypeService.get(motorcycleTypeId));
@@ -61,18 +64,21 @@ public class MotorcycleTypeRestController {
 
     @PostMapping
     @ResponseBody
+    @Operation(summary = "Add a new motorcycle type.")
     public ResponseEntity<MotorcycleTypeDto> insert(@RequestBody @Valid MotorcycleTypeDto motorcycleTypeDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(motorcycleTypeService.save(motorcycleTypeDto));
     }
 
     @PutMapping
     @ResponseBody
+    @Operation(summary = "Update a specific motorcycle type by id.")
     public ResponseEntity<MotorcycleTypeDto> update(@RequestBody @Valid MotorcycleTypeDto motorcycleTypeDto) {
         return ResponseEntity.ok().body(motorcycleTypeService.update(motorcycleTypeDto));
     }
 
     @DeleteMapping("/{motorcycleTypeId}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Soft delete a specific motorcycle type by id.")
     public void delete(@PathVariable("motorcycleTypeId") Long motorcycleTypeId) {
         motorcycleTypeService.delete(motorcycleTypeId);
     }

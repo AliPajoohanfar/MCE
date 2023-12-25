@@ -1,5 +1,6 @@
 package ir.pajoohan.mce.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import ir.pajoohan.mce.dto.WarehouseInputDto;
 import ir.pajoohan.mce.service.WarehouseInputService;
 import ir.pajoohan.mce.service.impl.WarehouseInputServiceImpl;
@@ -45,6 +46,7 @@ public class WarehouseInputRestController {
      */
     @GetMapping
     @ResponseBody
+    @Operation(summary = "Get all warehouse inputs by pagination and sort options.")
     public ResponseEntity<Page<WarehouseInputDto>> getAll(@RequestParam("page") Optional<Integer> page,
                                                           @RequestParam("size") Optional<Integer> size,
                                                           @RequestParam("sort") Optional<String> sort) {
@@ -54,6 +56,7 @@ public class WarehouseInputRestController {
 
     @GetMapping("/{warehouseInputId}")
     @ResponseBody
+    @Operation(summary = "Get a specific warehouse input by id.")
     public ResponseEntity<WarehouseInputDto> get(@PathVariable("warehouseInputId") Long warehouseInputId) {
         return ResponseEntity.ok().body(
                 warehouseInputService.get(warehouseInputId));
@@ -61,18 +64,21 @@ public class WarehouseInputRestController {
 
     @PostMapping
     @ResponseBody
+    @Operation(summary = "Add a new warehouse input.")
     public ResponseEntity<WarehouseInputDto> insert(@RequestBody @Valid WarehouseInputDto warehouseInputDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(warehouseInputService.save(warehouseInputDto));
     }
 
     @PutMapping
     @ResponseBody
+    @Operation(summary = "Update a specific warehouse input by id.")
     public ResponseEntity<WarehouseInputDto> update(@RequestBody @Valid WarehouseInputDto warehouseInputDto) {
         return ResponseEntity.ok().body(warehouseInputService.update(warehouseInputDto));
     }
 
     @DeleteMapping("/{warehouseInputId}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Soft delete a specific warehouse input by id.")
     public void delete(@PathVariable("warehouseInputId") Long warehouseInputId) {
         warehouseInputService.delete(warehouseInputId);
     }

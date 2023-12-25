@@ -1,5 +1,6 @@
 package ir.pajoohan.mce.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import ir.pajoohan.mce.dto.StateDto;
 import ir.pajoohan.mce.service.StateService;
 import ir.pajoohan.mce.service.impl.StateServiceImpl;
@@ -45,6 +46,7 @@ public class StateRestController {
      */
     @GetMapping
     @ResponseBody
+    @Operation(summary = "Get all states by pagination and sort options.")
     public ResponseEntity<Page<StateDto>> getAll(@RequestParam("page") Optional<Integer> page,
                                                  @RequestParam("size") Optional<Integer> size,
                                                  @RequestParam("sort") Optional<String> sort) {
@@ -54,6 +56,7 @@ public class StateRestController {
 
     @GetMapping("/{stateId}")
     @ResponseBody
+    @Operation(summary = "Get a specific state by id.")
     public ResponseEntity<StateDto> get(@PathVariable("stateId") Long stateId) {
         return ResponseEntity.ok().body(
                 stateService.get(stateId));
@@ -61,18 +64,21 @@ public class StateRestController {
 
     @PostMapping
     @ResponseBody
+    @Operation(summary = "Add a new state.")
     public ResponseEntity<StateDto> insert(@RequestBody @Valid StateDto stateDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(stateService.save(stateDto));
     }
 
     @PutMapping
     @ResponseBody
+    @Operation(summary = "Update a specific state by id.")
     public ResponseEntity<StateDto> update(@RequestBody @Valid StateDto stateDto) {
         return ResponseEntity.ok().body(stateService.update(stateDto));
     }
 
     @DeleteMapping("/{stateId}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Soft delete a specific state by id.")
     public void delete(@PathVariable("stateId") Long stateId) {
         stateService.delete(stateId);
     }

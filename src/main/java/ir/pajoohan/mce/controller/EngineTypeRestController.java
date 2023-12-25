@@ -1,5 +1,6 @@
 package ir.pajoohan.mce.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import ir.pajoohan.mce.dto.EngineTypeDto;
 import ir.pajoohan.mce.service.EngineTypeService;
 import ir.pajoohan.mce.service.impl.EngineTypeServiceImpl;
@@ -45,6 +46,7 @@ public class EngineTypeRestController {
      */
     @GetMapping
     @ResponseBody
+    @Operation(summary = "Get all engine types by pagination and sort options.")
     public ResponseEntity<Page<EngineTypeDto>> getAll(@RequestParam("page") Optional<Integer> page,
                                                       @RequestParam("size") Optional<Integer> size,
                                                       @RequestParam("sort") Optional<String> sort) {
@@ -54,6 +56,7 @@ public class EngineTypeRestController {
 
     @GetMapping("/{engineTypeId}")
     @ResponseBody
+    @Operation(summary = "Get a engine type attachment by id.")
     public ResponseEntity<EngineTypeDto> get(@PathVariable("engineTypeId") Long engineTypeId) {
         return ResponseEntity.ok().body(
                 engineTypeService.get(engineTypeId));
@@ -61,18 +64,21 @@ public class EngineTypeRestController {
 
     @PostMapping
     @ResponseBody
+    @Operation(summary = "Add a new engine type.")
     public ResponseEntity<EngineTypeDto> insert(@RequestBody @Valid EngineTypeDto engineTypeDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(engineTypeService.save(engineTypeDto));
     }
 
     @PutMapping
     @ResponseBody
+    @Operation(summary = "Update a specific engine type by id.")
     public ResponseEntity<EngineTypeDto> update(@RequestBody @Valid EngineTypeDto engineTypeDto) {
         return ResponseEntity.ok().body(engineTypeService.update(engineTypeDto));
     }
 
     @DeleteMapping("/{engineTypeId}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Soft delete a specific engine type by id.")
     public void delete(@PathVariable("engineTypeId") Long engineTypeId) {
         engineTypeService.delete(engineTypeId);
     }

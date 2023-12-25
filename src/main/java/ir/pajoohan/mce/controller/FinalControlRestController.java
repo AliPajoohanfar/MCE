@@ -1,5 +1,6 @@
 package ir.pajoohan.mce.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import ir.pajoohan.mce.dto.FinalControlDto;
 import ir.pajoohan.mce.service.FinalControlService;
 import ir.pajoohan.mce.service.impl.FinalControlServiceImpl;
@@ -45,6 +46,7 @@ public class FinalControlRestController {
      */
     @GetMapping
     @ResponseBody
+    @Operation(summary = "Get all final controls by pagination and sort options.")
     public ResponseEntity<Page<FinalControlDto>> getAll(@RequestParam("page") Optional<Integer> page,
                                                         @RequestParam("size") Optional<Integer> size,
                                                         @RequestParam("sort") Optional<String> sort) {
@@ -54,6 +56,7 @@ public class FinalControlRestController {
 
     @GetMapping("/{finalControlId}")
     @ResponseBody
+    @Operation(summary = "Get a specific final control by id.")
     public ResponseEntity<FinalControlDto> get(@PathVariable("finalControlId") Long finalControlId) {
         return ResponseEntity.ok().body(
                 finalControlService.get(finalControlId));
@@ -61,18 +64,21 @@ public class FinalControlRestController {
 
     @PostMapping
     @ResponseBody
+    @Operation(summary = "Add a new final control.")
     public ResponseEntity<FinalControlDto> insert(@RequestBody @Valid FinalControlDto finalControlDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(finalControlService.save(finalControlDto));
     }
 
     @PutMapping
     @ResponseBody
+    @Operation(summary = "Update a specific final control by id.")
     public ResponseEntity<FinalControlDto> update(@RequestBody @Valid FinalControlDto finalControlDto) {
         return ResponseEntity.ok().body(finalControlService.update(finalControlDto));
     }
 
     @DeleteMapping("/{finalControlId}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Soft delete a specific final control by id.")
     public void delete(@PathVariable("finalControlId") Long finalControlId) {
         finalControlService.delete(finalControlId);
     }

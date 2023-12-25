@@ -1,5 +1,6 @@
 package ir.pajoohan.mce.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import ir.pajoohan.mce.dto.AttachmentDto;
 import ir.pajoohan.mce.service.AttachmentService;
 import jakarta.validation.Valid;
@@ -45,6 +46,7 @@ public class AttachmentRestController {
      */
     @GetMapping
     @ResponseBody
+    @Operation(summary = "Get all attachments by pagination and sort options.")
     public ResponseEntity<Page<AttachmentDto>> getAll(@RequestParam("page") Optional<Integer> page,
                                                       @RequestParam("size") Optional<Integer> size,
                                                       @RequestParam("sort") Optional<String> sort) {
@@ -54,6 +56,7 @@ public class AttachmentRestController {
 
     @GetMapping("/{attachmentId}")
     @ResponseBody
+    @Operation(summary = "Get a specific attachment by id.")
     public ResponseEntity<AttachmentDto> get(@PathVariable("attachmentId") Long attachmentId) throws SQLException {
         return ResponseEntity.ok().body(
                 attachmentService.get(attachmentId));
@@ -61,18 +64,21 @@ public class AttachmentRestController {
 
     @PostMapping
     @ResponseBody
+    @Operation(summary = "Add a new attachment.")
     public ResponseEntity<AttachmentDto> insert(@RequestBody @Valid AttachmentDto attachmentDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(attachmentService.save(attachmentDto));
     }
 
     @PutMapping
     @ResponseBody
+    @Operation(summary = "Update a specific attachment by id.")
     public ResponseEntity<AttachmentDto> update(@RequestBody @Valid AttachmentDto attachmentDto) {
         return ResponseEntity.ok().body(attachmentService.update(attachmentDto));
     }
 
     @DeleteMapping("/{attachmentId}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Soft delete a specific attachment by id.")
     public void delete(@PathVariable("attachmentId") Long attachmentId) {
         attachmentService.delete(attachmentId);
     }

@@ -1,5 +1,6 @@
 package ir.pajoohan.mce.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import ir.pajoohan.mce.dto.BranchDto;
 import ir.pajoohan.mce.service.BranchService;
 import ir.pajoohan.mce.service.impl.BranchServiceImpl;
@@ -45,6 +46,7 @@ public class BranchRestController {
      */
     @GetMapping
     @ResponseBody
+    @Operation(summary = "Get all branches by pagination and sort options.")
     public ResponseEntity<Page<BranchDto>> getAll(@RequestParam("page") Optional<Integer> page,
                                                   @RequestParam("size") Optional<Integer> size,
                                                   @RequestParam("sort") Optional<String> sort) {
@@ -54,24 +56,28 @@ public class BranchRestController {
 
     @GetMapping("/{branchId}")
     @ResponseBody
+    @Operation(summary = "Get a branch attachment by id.")
     public ResponseEntity<BranchDto> get(@PathVariable("branchId") Long branchId) {
         return ResponseEntity.ok().body(branchService.get(branchId));
     }
 
     @PostMapping
     @ResponseBody
+    @Operation(summary = "Add a new branch.")
     public ResponseEntity<BranchDto> insert(@RequestBody @Valid BranchDto branchDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(branchService.save(branchDto));
     }
 
     @PutMapping
     @ResponseBody
+    @Operation(summary = "Update a specific branch by id.")
     public ResponseEntity<BranchDto> update(@RequestBody @Valid BranchDto branchDto) {
         return ResponseEntity.ok().body(branchService.update(branchDto));
     }
 
     @DeleteMapping("/{branchId}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Soft delete a specific branch by id.")
     public void delete(@PathVariable("branchId") Long branchId) {
         branchService.delete(branchId);
     }

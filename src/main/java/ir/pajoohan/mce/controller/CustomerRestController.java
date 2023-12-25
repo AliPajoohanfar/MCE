@@ -1,5 +1,6 @@
 package ir.pajoohan.mce.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import ir.pajoohan.mce.dto.CustomerDto;
 import ir.pajoohan.mce.service.CustomerService;
 import ir.pajoohan.mce.service.impl.CustomerServiceImpl;
@@ -46,6 +47,7 @@ public class CustomerRestController {
      */
     @GetMapping
     @ResponseBody
+    @Operation(summary = "Get all customers by pagination and sort options.")
     public ResponseEntity<Page<CustomerDto>> getAll(@RequestParam("page") Optional<Integer> page,
                                                     @RequestParam("size") Optional<Integer> size,
                                                     @RequestParam("sort") Optional<String> sort) {
@@ -55,6 +57,7 @@ public class CustomerRestController {
 
     @GetMapping("/{customerId}")
     @ResponseBody
+    @Operation(summary = "Get a specific customer by id.")
     public ResponseEntity<CustomerDto> get(@PathVariable("customerId") Long customerId) {
         return ResponseEntity.ok().body(
                 customerService.get(customerId));
@@ -62,18 +65,21 @@ public class CustomerRestController {
 
     @PostMapping
     @ResponseBody
+    @Operation(summary = "Add a new customer.")
     public ResponseEntity<CustomerDto> insert(@RequestBody @Valid CustomerDto customerDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(customerService.save(customerDto));
     }
 
     @PutMapping
     @ResponseBody
+    @Operation(summary = "Update a specific customer by id.")
     public ResponseEntity<CustomerDto> update(@RequestBody @Valid CustomerDto customerDto) {
         return ResponseEntity.ok().body(customerService.update(customerDto));
     }
 
     @DeleteMapping("/{customerId}")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Soft delete a specific customer by id.")
     public void delete(@PathVariable("customerId") Long customerId) {
         customerService.delete(customerId);
     }
